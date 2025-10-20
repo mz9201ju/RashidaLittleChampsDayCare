@@ -1,0 +1,406 @@
+/* Import storybook-style fonts */
+@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Poppins:wght@400;500;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================
+   Responsive
+   ============================ */
+@media (max-width: 768px) {
+  .book-page {
+    width: 95%;
+    height: 90vh;
+  }
+
+  .click-zone {
+    font-size: 2.5rem;
+  }
+}
+
+/* ===========================================================
+   🧸 Kids Storybook Dynamic Background — Toys, Balloons, Stars
+   =========================================================== */
+
+.kids-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+/* 🌈 Soft pastel animated gradient */
+.animated-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #ffdce3, #eaf8ff, #fff8d8, #e7ffe6);
+  background-size: 400% 400%;
+  animation: gradientShift 30s ease infinite;
+  z-index: 0;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 🌟 Stars twinkling softly */
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+}
+
+/* ☁️ Clouds drifting */
+.cloud {
+  position: absolute;
+  width: 160px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  filter: blur(8px);
+  animation: cloudDrift linear infinite;
+  opacity: 0.8;
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: rgba(255, 255, 255, 0.9);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.cloud::before {
+  top: -20px;
+  left: 30px;
+}
+
+.cloud::after {
+  top: -10px;
+  right: 40px;
+}
+
+@keyframes cloudDrift {
+  0% {
+    transform: translateX(-200px);
+  }
+
+  100% {
+    transform: translateX(120vw);
+  }
+}
+
+/* 🎈 Balloons + Toys floating upward */
+.toy {
+  position: absolute;
+  bottom: -80px;
+  border-radius: 50%;
+  opacity: 0.85;
+  animation: floatToy ease-in-out infinite;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes floatToy {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(-110vh) rotate(360deg);
+  }
+}
+
+/* Variants */
+.toy.balloon {
+  border-radius: 50% 50% 45% 45%;
+  position: relative;
+}
+
+.toy.balloon::after {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  width: 2px;
+  height: 25px;
+  background: rgba(0, 0, 0, 0.2);
+  transform: translateX(-50%);
+}
+
+/* Cube toy */
+.toy.cube {
+  border-radius: 6px;
+  transform: rotate(15deg);
+  box-shadow: inset -3px -3px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Teddy toy (represented by bear-like color blob) */
+.toy.teddy {
+  border-radius: 50%;
+  background: #ffb6b6 !important;
+  position: relative;
+}
+
+.toy.teddy::before,
+.toy.teddy::after {
+  content: "";
+  position: absolute;
+  width: 40%;
+  height: 40%;
+  background: #ffb6b6;
+  border-radius: 50%;
+  top: -20%;
+}
+
+.toy.teddy::before {
+  left: -10%;
+}
+
+.toy.teddy::after {
+  right: -10%;
+}
+
+/* Ball toy (gradient sports ball style) */
+.toy.ball {
+  background: radial-gradient(circle at 30% 30%, white, var(--color, #ffca6c));
+  border: 3px solid rgba(255, 255, 255, 0.7);
+}
+
+/* ===========================================================
+   📖 Shared Background Fading Style for Pages
+   =========================================================== */
+
+.page-fade-bg {
+  @apply absolute inset-0 bg-cover bg-center opacity-30;
+  filter: blur(3px) brightness(1.05);
+}
+
+/* 📚 Storybook Typography Tuning */
+p {
+  line-height: 1.75;
+  letter-spacing: 0.3px;
+}
+
+@media (max-width: 640px) {
+  .page-footer {
+    margin-top: 2rem;
+    opacity: 0.8;
+  }
+}
+
+/* ===========================================================
+   📚 Storybook Look & Feel
+   =========================================================== */
+
+.font-chewy {
+  font-family: 'Chewy', cursive;
+}
+
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Floating toy animation */
+@keyframes float-slow {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-float-slow.delay-1000 {
+  animation-delay: 1s;
+}
+
+.animate-float-slow.delay-1500 {
+  animation-delay: 1.5s;
+}
+
+.animate-float-slow.delay-2000 {
+  animation-delay: 2s;
+}
+
+.animate-float-slow.delay-3000 {
+  animation-delay: 3s;
+}
+
+/* Paper texture overlay */
+.story-page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+  opacity: 0.1;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  border-radius: 24px;
+}
+
+@keyframes float-sway {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+}
+
+.animate-float-sway {
+  animation: float-sway 12s ease-in-out infinite;
+}
+
+/* ✨ Enhanced Glowing Animation for Navigation Arrows */
+@keyframes glowPulse {
+
+  0%,
+  100% {
+    opacity: 0.7;
+    text-shadow:
+      0 0 8px rgba(255, 255, 255, 0.8),
+      0 0 18px rgba(255, 182, 193, 0.9),
+      0 0 30px rgba(255, 105, 180, 0.8),
+      0 0 45px rgba(255, 20, 147, 0.7);
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    text-shadow:
+      0 0 12px rgba(255, 255, 255, 1),
+      0 0 25px rgba(255, 182, 193, 1),
+      0 0 45px rgba(255, 105, 180, 0.9),
+      0 0 65px rgba(255, 20, 147, 0.8);
+    transform: scale(1.15);
+  }
+}
+
+/* Arrow animation class */
+.animate-glow {
+  animation: glowPulse 2s ease-in-out infinite;
+  color: #ff1493;
+  /* deep pink for max contrast */
+  font-size: 3rem;
+  font-weight: bold;
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.9),
+    0 0 25px rgba(255, 105, 180, 0.8),
+    0 0 45px rgba(255, 20, 147, 0.6);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover interaction for desktop */
+.animate-glow:hover {
+  transform: scale(1.25);
+  text-shadow:
+    0 0 15px rgba(255, 255, 255, 1),
+    0 0 35px rgba(255, 182, 193, 1),
+    0 0 55px rgba(255, 105, 180, 0.9),
+    0 0 80px rgba(255, 20, 147, 0.9);
+}
+
+/* Mobile tap feedback */
+@media (max-width: 768px) {
+  .animate-glow {
+    font-size: 2.8rem;
+    text-shadow:
+      0 0 10px rgba(255, 255, 255, 0.9),
+      0 0 25px rgba(255, 105, 180, 0.9),
+      0 0 40px rgba(255, 20, 147, 0.8);
+  }
+}
+
+/* ✨ Enhanced Darker Glowing Animation for Navigation Arrows */
+@keyframes glowPulseDark {
+  0%, 100% {
+    opacity: 0.8;
+    text-shadow:
+      0 0 6px rgba(120, 0, 120, 0.6),
+      0 0 16px rgba(180, 0, 180, 0.6),
+      0 0 28px rgba(200, 0, 180, 0.5),
+      0 0 40px rgba(180, 0, 160, 0.4);
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    text-shadow:
+      0 0 10px rgba(140, 0, 150, 0.9),
+      0 0 24px rgba(200, 0, 180, 0.8),
+      0 0 38px rgba(255, 0, 220, 0.7),
+      0 0 60px rgba(220, 0, 180, 0.6);
+    transform: scale(1.15);
+  }
+}
+
+.animate-glow {
+  animation: glowPulseDark 2.3s ease-in-out infinite;
+  color: #8a0068; /* 💜 deep magenta */
+  font-size: 3.2rem;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.animate-glow:hover {
+  transform: scale(1.2);
+  color: #b3008c;
+  text-shadow:
+    0 0 12px rgba(255, 255, 255, 0.8),
+    0 0 30px rgba(200, 0, 180, 0.8),
+    0 0 50px rgba(255, 0, 220, 0.6);
+}
+
+/* Mobile variant */
+@media (max-width: 768px) {
+  .animate-glow {
+    font-size: 2.8rem;
+    color: #7a0070;
+    text-shadow:
+      0 0 8px rgba(150, 0, 130, 0.8),
+      0 0 18px rgba(220, 0, 190, 0.6),
+      0 0 28px rgba(255, 0, 230, 0.4);
+  }
+}

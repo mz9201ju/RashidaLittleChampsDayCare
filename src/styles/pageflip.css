@@ -1,0 +1,267 @@
+/* ============================
+   🌈 Rashida Little Champs — Real Page Flip
+   ============================ */
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #fffafc;
+}
+
+
+body {
+  background: linear-gradient(to bottom, #fffafc, #fdf8f3);
+}
+
+h1 {
+  @apply text-4xl sm:text-5xl font-bold text-pink-600 mb-4;
+  text-align: center;
+}
+
+.btn {
+  @apply bg-pink-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-pink-600 active:bg-pink-700 transition;
+}
+
+
+.book-page:hover::before {
+  opacity: 0.25;
+}
+
+.left-hint {
+  left: 0;
+}
+
+.right-hint {
+  right: 0;
+}
+
+/* 🧼 Remove any solid backgrounds or gradients from all containers */
+body,
+html,
+.storybook-wrapper,
+.book-page,
+.page-content {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Ensure the page fills the viewport but stays see-through */
+.storybook-wrapper {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Text readable but clean — no background block */
+.page-content {
+    color: #222;
+    font-family: "Poppins", sans-serif;
+    text-align: left;
+    line-height: 1.6;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+    z-index: 20;
+}
+
+/* Decorations remain behind */
+.decoration {
+  filter: brightness(0.95) saturate(1.1);
+  opacity: 0.8;
+  z-index: 5;
+}
+
+
+/* Keep the arrows glowing and visible */
+.nav-btn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9999;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    user-select: none;
+    text-shadow:
+        0 0 10px #fff,
+        0 0 20px #ffd166,
+        0 0 30px #ffcc00,
+        0 0 40px #ffae00;
+    opacity: 0.9;
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.nav-btn:hover {
+    transform: translateY(-50%) scale(1.15);
+    text-shadow:
+        0 0 15px #fff,
+        0 0 30px #ffe066,
+        0 0 45px #ffd000,
+        0 0 60px #ffae00;
+}
+
+/* Arrows positioning */
+.nav-btn.left {
+    left: 10px;
+}
+
+.nav-btn.right {
+    right: 10px;
+}
+
+/* 📱 Mobile scaling */
+@media (max-width: 768px) {
+    .nav-btn {
+        font-size: 2rem;
+    }
+}
+
+/* ==========================================================
+   🧭 Enable Scrolling — Fix for Mobile & Desktop
+   ========================================================== */
+
+/* Allow body to scroll normally */
+html,
+body {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    height: auto !important;
+    touch-action: pan-y !important;
+    /* allows vertical swipe scrolling */
+}
+
+/* Storybook wrapper now scrollable */
+.storybook-wrapper {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    position: relative;
+    height: auto !important;
+}
+
+/* Book page should not trap scroll */
+.book-page {
+    overflow: visible !important;
+    height: auto !important;
+}
+
+/* Page content remains scrollable if long */
+.page-content {
+    overflow-y: visible !important;
+    max-height: none !important;
+}
+
+/* ==========================================================
+   🎬 Smooth Page Flip Motion — Keep Transparency
+   ========================================================== */
+
+/* Perspective container — controls 3D depth */
+.storybook-wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: visible;
+    perspective: 1600px;
+    /* 👈 required for 3D look */
+    background: transparent;
+}
+
+/* Flip wrapper */
+.book-page {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+    background: transparent;
+}
+
+/* Triggered states */
+.flip-right {
+    transform: rotateY(-180deg);
+}
+
+.flip-left {
+    transform: rotateY(180deg);
+}
+
+/* Smooth backface visibility */
+.book-page,
+.page-content {
+    backface-visibility: hidden;
+}
+
+/* Make sure text is visible after flip */
+.page-content {
+    z-index: 5;
+    position: relative;
+    transition: opacity 0.8s ease;
+}
+
+.flip-right .page-content,
+.flip-left .page-content {
+    opacity: 0.7;
+}
+
+/* ==========================================================
+   🎬 Smooth Page Flip Motion — Keep Transparency
+   ========================================================== */
+
+/* Perspective container — controls 3D depth */
+.storybook-wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: visible;
+    perspective: 1600px;
+    /* 👈 required for 3D look */
+    background: transparent;
+}
+
+/* Flip wrapper */
+.book-page {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+    background: transparent;
+}
+
+/* Triggered states */
+.flip-right {
+    transform: rotateY(-180deg);
+}
+
+.flip-left {
+    transform: rotateY(180deg);
+}
+
+/* Smooth backface visibility */
+.book-page,
+.page-content {
+    backface-visibility: hidden;
+}
+
+/* Make sure text is visible after flip */
+.page-content {
+    z-index: 5;
+    position: relative;
+    transition: opacity 0.8s ease;
+}
+
+.flip-right .page-content,
+.flip-left .page-content {
+    opacity: 0.7;
+}
