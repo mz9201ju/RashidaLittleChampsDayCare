@@ -215,3 +215,122 @@ body {
 .nav-btn.right {
     right: 1.5rem;
 }
+
+/* ================================
+   🍔 Mobile Burger Menu Styles
+   ================================ */
+
+.burger-wrapper {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+/* ================================
+   🍔 Perfectly Centered Burger Fix
+   ================================ */
+.burger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, #ff80c0, #ff4da6);
+    box-shadow: 0 0 18px rgba(255, 100, 180, 0.8);
+    border: 2px solid white;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.burger-btn span {
+    display: block;
+    width: 22px;
+    height: 3px;
+    background: #fff;
+    border-radius: 3px;
+    margin: 2px 0;
+    transition: transform 0.35s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+        opacity 0.25s ease;
+    transform-origin: center center;
+}
+
+/* ✨ Hover Glow */
+.burger-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px rgba(255, 150, 220, 1);
+}
+
+/* ✖️ Clean, Centered “X” Animation */
+.burger-btn.open span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.burger-btn.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.burger-btn.open span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+
+.burger-btn span {
+    display: block;
+    transition: transform 0.35s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+        opacity 0.3s ease;
+    transform-origin: center;
+}
+
+
+
+
+/* 🌈 Dropdown menu */
+.burger-menu {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px;
+    gap: 10px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.burger-menu a {
+    text-decoration: none;
+    color: #ff4da6;
+    font-weight: 600;
+    text-align: center;
+    transition: color 0.2s;
+}
+
+.burger-menu a:hover {
+    color: #d63384;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* 📱 Show burger only on mobile */
+@media (max-width: 768px) {
+    .burger-btn {
+        display: flex;
+    }
+}
