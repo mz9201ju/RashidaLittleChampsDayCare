@@ -1,108 +1,63 @@
-import { useEffect } from "react";
+import React from "react";
 
 /**
- * 🏠 Services Page — Clean Fullscreen Centered Layout
- * - Always visible, even if global CSS conflicts
- * - Transparent overlay card
- * - Floating decorations work
+ * 🏠 Contact Us Page — Clean Fullscreen Centered Layout
+ * - Footer visually pinned to bottom of viewport
+ * - Works even inside 3D book/page flip containers
  */
 export default function AboutUs() {
     const siteData = {
         siteName: "About Us",
-        service1: "",
-        service2: "",
-        service3: "",
-        backgroundImage:
-            "https://cdn.pixabay.com/photo/2017/02/12/14/45/kids-2062436_1280.jpg",
-        footerText: "Page 5 • Welcome to our about us 🌷",
-        decorations: [
-            "https://cdn-icons-png.flaticon.com/512/477/477406.png",   // ⭐ Cute star (rounded edges)
-            "https://cdn-icons-png.flaticon.com/512/616/616408.png",   // 🌍 Smiling earth (friendly global feel)
-            "https://cdn-icons-png.flaticon.com/512/616/616510.png",   // 🦋 Butterfly (spring vibe)
-            "https://cdn-icons-png.flaticon.com/512/616/616408.png",   // ☀️ Sun/star variation
-        ]
-        ,
+        description: `IN MAINTENANCE`,
+        footerText: "Page 4 • About Us 🌷",
     };
 
-    const { siteName, service1, service2, service3, backgroundImage, decorations, footerText } = siteData;
-
-    const randomizedDecorations = decorations.map((src, i) => ({
-        src,
-        alt: `decoration-${i}`,
-        style: {
-            position: "absolute",
-            top: `${Math.random() * 80 + 5}%`,
-            left: `${Math.random() * 80 + 5}%`,
-            width: `${Math.random() * 50 + 40}px`,
-            opacity: 0.6,
-            transform: `rotate(${Math.random() * 30 - 15}deg)`,
-            animation: `float ${10 + i * 2}s ease-in-out infinite alternate`,
-        },
-    }));
-
-    useEffect(() => {
-        const handleMouseMove = (e) => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 10;
-            const y = (e.clientY / window.innerHeight - 0.5) * 10;
-            document.querySelectorAll(".decoration").forEach((el, i) => {
-                const baseRotate = el.dataset.rotate || 0;
-                el.style.transform = `translate(${x * (i + 1)}px, ${y * (i + 1)}px) rotate(${baseRotate}deg)`;
-            });
-        };
-        window.addEventListener("mousemove", handleMouseMove);
-        return () => window.removeEventListener("mousemove", handleMouseMove);
-    }, []);
+    const { siteName, description, footerText } = siteData;
 
     return (
-        <div className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-x-hidden bg-[#fffafc]">
-            {/* 🔹 Background */}
-            <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{
-                    backgroundImage: `url(${backgroundImage})`,
-                    filter: "blur(6px) brightness(1.05)",
-                    transform: "scale(1.03)",
-                    opacity: 0.35,
-                    zIndex: 0,
-                }}
-            />
-
-            {/* ✨ Decorations */}
-            {randomizedDecorations.map((d, i) => (
-                <img
-                    key={i}
-                    src={d.src}
-                    alt={d.alt}
-                    style={d.style}
-                    className="decoration select-none pointer-events-none z-10"
-                    data-rotate={d.style.transform.match(/-?\\d+/)?.[0] ?? 0}
-                />
-            ))}
-
+        <div
+            className="relative w-full overflow-x-hidden bg-[#fffafc]"
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "100vh",
+                justifyContent: "center",
+                alignItems: "center",
+                position: "relative",
+                zIndex: 0,
+            }}
+        >
             {/* 💖 Content Card */}
-            <main className="relative z-20 w-full max-w-5xl bg-white/70 backdrop-blur-xl rounded-2xl shadow-lg p-10 sm:p-14 border border-white/40 text-center">
-                <h1 className="font-chewy text-4xl sm:text-6xl text-gray-900 mb-6">
+            <main className="relative z-10 w-full max-w-5xl bg-white/70 backdrop-blur-xl rounded-2xl shadow-lg p-10 sm:p-14 border border-white/40 text-center">
+                <h1 className="font-chewy text-4xl sm:text-6xl home-page-h1 text-gray-900 mb-6">
                     {siteName}
                 </h1>
 
                 <p
-                    className="text-base sm:text-lg leading-relaxed font-medium text-gray-800"
-                    dangerouslySetInnerHTML={{ __html: service1 }}
+                    className="relative text-center max-w-3xl mx-auto text-gray-700/95 leading-relaxed sm:leading-loose text-lg sm:text-xl font-medium tracking-wide px-6 sm:px-10 mt-6 sm:mt-8 bg-white/60 backdrop-blur-md rounded-2xl shadow-sm border border-white/30 py-6 sm:py-8 animate-fadeIn"
+                    dangerouslySetInnerHTML={{ __html: description }}
                 />
             </main>
 
-            {/* 📄 Footer */}
-            <footer className="relative z-20 text-gray-700 text-sm italic mt-8 mb-6">
+            {/* 📄 Footer — Forced to stay at bottom */}
+            <div
+                style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    width: "100%",
+                    textAlign: "center",
+                    padding: "1rem 0",
+                    background: "rgba(255,255,255,0.7)",
+                    backdropFilter: "blur(6px)",
+                    borderTop: "1px solid rgba(255,255,255,0.4)",
+                    fontStyle: "italic",
+                    color: "#444",
+                    zIndex: 9999,
+                }}
+            >
                 {footerText}
-            </footer>
-
-            {/* 🎈 Float Animation */}
-            <style>{`
-        @keyframes float {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(-20px); }
-        }
-      `}</style>
+            </div>
         </div>
     );
 }

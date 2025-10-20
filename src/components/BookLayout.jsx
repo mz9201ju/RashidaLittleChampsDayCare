@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import PlayfulBackground from "./PlayfulBackground";
 import { AnimatePresence } from "framer-motion";
+import PlayfulBackground from "./PlayfulBackground";
 
 import Home from "../pages/Home";
 import Services from "../pages/Services";
@@ -12,6 +12,12 @@ import PageTransition from "../components/PageTransition";
 
 import "../styles/pageflip.css";
 
+/**
+ * 📖 BookLayout — Fullscreen 3D Page Flip
+ * - Each page fills the screen (not half)
+ * - Flips from the center using 3D transform
+ * - Fully mobile-responsive
+ */
 export default function BookLayout() {
     const navigate = useNavigate();
     const location = useLocation();
@@ -40,7 +46,7 @@ export default function BookLayout() {
                     navigate("/");
             }
             setIsFlipping(false);
-        }, 1000);
+        }, 900);
     };
 
     const goBack = () => {
@@ -65,29 +71,15 @@ export default function BookLayout() {
                     navigate("/");
             }
             setIsFlipping(false);
-        }, 1000);
+        }, 900);
     };
 
     return (
-        <div className="storybook-wrapper">
+        <div className="storybook-container">
             <PlayfulBackground />
 
-            {/* LEFT PAGE (static) */}
-            <div className="half-page left-page">
-                <AnimatePresence mode="wait">
-                    <Routes location={location}>
-                        <Route path="/" element={<PageTransition><Home /></PageTransition>} />
-                        <Route path="/services" element={<PageTransition><Home /></PageTransition>} />
-                        <Route path="/gallery" element={<PageTransition><Services /></PageTransition>} />
-                        <Route path="/about" element={<PageTransition><Gallery /></PageTransition>} />
-                        <Route path="/contact" element={<PageTransition><AboutUs /></PageTransition>} />
-                    </Routes>
-                </AnimatePresence>
-            </div>
-
-            {/* RIGHT PAGE (flipping) */}
-            <div className={`half-page right-page ${isFlipping ? `flip-${direction}` : ""}`}>
-                <div className="page-content">
+            <div className={`page ${isFlipping ? `flip-${direction}` : ""}`}>
+                <div className="page-front">
                     <AnimatePresence mode="wait">
                         <Routes location={location}>
                             <Route path="/" element={<PageTransition><Home /></PageTransition>} />
@@ -98,10 +90,8 @@ export default function BookLayout() {
                         </Routes>
                     </AnimatePresence>
                 </div>
-                <div className="page-back" />
             </div>
 
-            {/* NAVIGATION BUTTONS */}
             <button className="nav-btn left" onClick={goBack}>←</button>
             <button className="nav-btn right" onClick={goNext}>→</button>
         </div>

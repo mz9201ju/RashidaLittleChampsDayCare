@@ -2,8 +2,8 @@ import React from "react";
 
 /**
  * 🏠 Home Page — Clean Fullscreen Centered Layout
- * - Transparent overlay card on blurred background
- * - Fully responsive & mobile friendly
+ * - Footer visually pinned to bottom of viewport
+ * - Works even inside 3D book/page flip containers
  */
 export default function Home() {
   const siteData = {
@@ -16,43 +16,55 @@ export default function Home() {
       If you are looking for a Fun Play Day Care, Preschool or After School Program, then Rashida Little Champs DayCare is the smart choice.
       We will treat your children as if they are our own. Call us today to inquire about our programs and to schedule a tour of our facility.
     `,
-    backgroundImage:
-      "https://cdn.pixabay.com/photo/2017/02/12/14/45/kids-2062436_1280.jpg",
     footerText: "Page 1 • Welcome to our storybook 🌷",
   };
 
-  const { siteName, description, backgroundImage, footerText } = siteData;
+  const { siteName, description, footerText } = siteData;
 
   return (
-    <div className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-x-hidden bg-[#fffafc]">
-      {/* 🔹 Background */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${backgroundImage})`,
-          filter: "blur(6px) brightness(1.05)",
-          transform: "scale(1.03)",
-          opacity: 0.35,
-          zIndex: 0,
-        }}
-      />
-
+    <div
+      className="relative w-full overflow-x-hidden bg-[#fffafc]"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        justifyContent: "center",
+        alignItems: "center",
+        position: "relative",
+        zIndex: 0,
+      }}
+    >
       {/* 💖 Content Card */}
       <main className="relative z-10 w-full max-w-5xl bg-white/70 backdrop-blur-xl rounded-2xl shadow-lg p-10 sm:p-14 border border-white/40 text-center">
-        <h1 className="font-chewy text-4xl sm:text-6xl text-gray-900 mb-6">
+        <h1 className="font-chewy text-4xl sm:text-6xl home-page-h1 text-gray-900 mb-6">
           {siteName}
         </h1>
 
         <p
-          className="text-base sm:text-lg leading-relaxed font-medium text-gray-800"
+          className="relative text-center max-w-3xl mx-auto text-gray-700/95 leading-relaxed sm:leading-loose text-lg sm:text-xl font-medium tracking-wide px-6 sm:px-10 mt-6 sm:mt-8 bg-white/60 backdrop-blur-md rounded-2xl shadow-sm border border-white/30 py-6 sm:py-8 animate-fadeIn"
           dangerouslySetInnerHTML={{ __html: description }}
         />
       </main>
 
-      {/* 📄 Footer */}
-      <footer className="relative z-10 text-gray-700 text-sm italic mt-8 mb-6">
+      {/* 📄 Footer — Forced to stay at bottom */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          width: "100%",
+          textAlign: "center",
+          padding: "1rem 0",
+          background: "rgba(255,255,255,0.7)",
+          backdropFilter: "blur(6px)",
+          borderTop: "1px solid rgba(255,255,255,0.4)",
+          fontStyle: "italic",
+          color: "#444",
+          zIndex: 9999,
+        }}
+      >
         {footerText}
-      </footer>
+      </div>
     </div>
   );
 }
