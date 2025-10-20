@@ -26,8 +26,11 @@ export default function BookLayout() {
 
     const goNext = () => {
         if (isFlipping) return;
+        if (location.pathname === "/contact") return; // ⛔ stop at the end
+
         setDirection("right");
         setIsFlipping(true);
+
         setTimeout(() => {
             switch (location.pathname) {
                 case "/":
@@ -43,7 +46,7 @@ export default function BookLayout() {
                     navigate("/contact");
                     break;
                 default:
-                    navigate("/");
+                    break; // 🚫 no looping
             }
             setIsFlipping(false);
         }, 900);
@@ -51,8 +54,11 @@ export default function BookLayout() {
 
     const goBack = () => {
         if (isFlipping) return;
+        if (location.pathname === "/") return; // ⛔ Do nothing on home
+
         setDirection("left");
         setIsFlipping(true);
+
         setTimeout(() => {
             switch (location.pathname) {
                 case "/services":
@@ -68,7 +74,7 @@ export default function BookLayout() {
                     navigate("/about");
                     break;
                 default:
-                    navigate("/");
+                    break; // 🚫 No default navigation
             }
             setIsFlipping(false);
         }, 900);
