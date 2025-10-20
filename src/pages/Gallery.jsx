@@ -20,7 +20,6 @@ export default function Gallery() {
             "https://cdn-icons-png.flaticon.com/512/616/616408.png",   // 🌍 Smiling earth (friendly global feel)
             "https://cdn-icons-png.flaticon.com/512/616/616510.png",   // 🦋 Butterfly (spring vibe)
             "https://cdn-icons-png.flaticon.com/512/616/616408.png",   // ☀️ Sun/star variation
-            "https://cdn-icons-png.flaticon.com/512/3076/3076049.png", // 🏡 Small house (home daycare reference)
         ]
         ,
     };

@@ -1,30 +1,23 @@
 import { useState } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import PlayfulBackground from "./PlayfulBackground";
-import "../styles/pageflip.css";
+import { AnimatePresence } from "framer-motion";
 
-// ✅ Import all your pages
 import Home from "../pages/Home";
 import Services from "../pages/Services";
 import Gallery from "../pages/Gallery";
 import AboutUs from "../pages/AboutUs";
 import ContactUs from "../pages/ContactUs";
+import PageTransition from "../components/PageTransition";
 
-/**
- * 📖 BookLayout — Transparent Storybook
- * - Background stays visible
- * - Transparent pages
- * - Arrows on both sides
- * - Fully mobile-friendly
- */
+import "../styles/pageflip.css";
+
 export default function BookLayout() {
     const navigate = useNavigate();
     const location = useLocation();
-
     const [isFlipping, setIsFlipping] = useState(false);
     const [direction, setDirection] = useState("right");
 
-    // ➡️ Next page
     const goNext = () => {
         if (isFlipping) return;
         setDirection("right");
@@ -47,10 +40,9 @@ export default function BookLayout() {
                     navigate("/");
             }
             setIsFlipping(false);
-        }, 700);
+        }, 1000);
     };
 
-    // ⬅️ Previous page
     const goBack = () => {
         if (isFlipping) return;
         setDirection("left");
@@ -73,35 +65,45 @@ export default function BookLayout() {
                     navigate("/");
             }
             setIsFlipping(false);
-        }, 700);
+        }, 1000);
     };
 
     return (
         <div className="storybook-wrapper">
-            {/* 🌈 Animated background */}
             <PlayfulBackground />
 
-            {/* 📖 Flip animation */}
-            <div className={`book-page ${isFlipping ? `flip-${direction}` : ""}`}>
-                <div className="page-content">
+            {/* LEFT PAGE (static) */}
+            <div className="half-page left-page">
+                <AnimatePresence mode="wait">
                     <Routes location={location}>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/services" element={<Services />} />
-                        <Route path="/gallery" element={<Gallery />} />
-                        <Route path="/about" element={<AboutUs />} />
-                        <Route path="/contact" element={<ContactUs />} />
+                        <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+                        <Route path="/services" element={<PageTransition><Home /></PageTransition>} />
+                        <Route path="/gallery" element={<PageTransition><Services /></PageTransition>} />
+                        <Route path="/about" element={<PageTransition><Gallery /></PageTransition>} />
+                        <Route path="/contact" element={<PageTransition><AboutUs /></PageTransition>} />
                     </Routes>
-                </div>
+                </AnimatePresence>
             </div>
 
+            {/* RIGHT PAGE (flipping) */}
+            <div className={`half-page right-page ${isFlipping ? `flip-${direction}` : ""}`}>
+                <div className="page-content">
+                    <AnimatePresence mode="wait">
+                        <Routes location={location}>
+                            <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+                            <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
+                            <Route path="/gallery" element={<PageTransition><Gallery /></PageTransition>} />
+                            <Route path="/about" element={<PageTransition><AboutUs /></PageTransition>} />
+                            <Route path="/contact" element={<PageTransition><ContactUs /></PageTransition>} />
+                        </Routes>
+                    </AnimatePresence>
+                </div>
+                <div className="page-back" />
+            </div>
 
-            {/* 🧭 Navigation Arrows */}
-            <button className="nav-btn left animate-glow" onClick={goBack}>
-                ←
-            </button>
-            <button className="nav-btn right animate-glow" onClick={goNext}>
-                →
-            </button>
+            {/* NAVIGATION BUTTONS */}
+            <button className="nav-btn left" onClick={goBack}>←</button>
+            <button className="nav-btn right" onClick={goNext}>→</button>
         </div>
     );
 }

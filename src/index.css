@@ -40,16 +40,14 @@
 }
 
 @keyframes gradientShift {
-  0% {
+
+  0%,
+  100% {
     background-position: 0% 50%;
   }
 
   50% {
     background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
   }
 }
 
@@ -140,7 +138,6 @@
   }
 }
 
-/* Variants */
 .toy.balloon {
   border-radius: 50% 50% 45% 45%;
   position: relative;
@@ -157,14 +154,12 @@
   transform: translateX(-50%);
 }
 
-/* Cube toy */
 .toy.cube {
   border-radius: 6px;
   transform: rotate(15deg);
   box-shadow: inset -3px -3px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Teddy toy (represented by bear-like color blob) */
 .toy.teddy {
   border-radius: 50%;
   background: #ffb6b6 !important;
@@ -190,22 +185,19 @@
   right: -10%;
 }
 
-/* Ball toy (gradient sports ball style) */
 .toy.ball {
   background: radial-gradient(circle at 30% 30%, white, var(--color, #ffca6c));
   border: 3px solid rgba(255, 255, 255, 0.7);
 }
 
 /* ===========================================================
-   📖 Shared Background Fading Style for Pages
+   📖 Shared Background & Typography
    =========================================================== */
-
 .page-fade-bg {
   @apply absolute inset-0 bg-cover bg-center opacity-30;
   filter: blur(3px) brightness(1.05);
 }
 
-/* 📚 Storybook Typography Tuning */
 p {
   line-height: 1.75;
   letter-spacing: 0.3px;
@@ -221,7 +213,6 @@ p {
 /* ===========================================================
    📚 Storybook Look & Feel
    =========================================================== */
-
 .font-chewy {
   font-family: 'Chewy', cursive;
 }
@@ -230,7 +221,7 @@ p {
   font-family: 'Poppins', sans-serif;
 }
 
-/* Floating toy animation */
+/* Floating toy slow sway */
 @keyframes float-slow {
 
   0%,
@@ -245,34 +236,6 @@ p {
 
 .animate-float-slow {
   animation: float-slow 6s ease-in-out infinite;
-}
-
-.animate-float-slow.delay-1000 {
-  animation-delay: 1s;
-}
-
-.animate-float-slow.delay-1500 {
-  animation-delay: 1.5s;
-}
-
-.animate-float-slow.delay-2000 {
-  animation-delay: 2s;
-}
-
-.animate-float-slow.delay-3000 {
-  animation-delay: 3s;
-}
-
-/* Paper texture overlay */
-.story-page::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
-  opacity: 0.1;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-  border-radius: 24px;
 }
 
 @keyframes float-sway {
@@ -293,69 +256,25 @@ p {
   animation: float-sway 12s ease-in-out infinite;
 }
 
-/* ✨ Enhanced Glowing Animation for Navigation Arrows */
-@keyframes glowPulse {
+/* Paper texture overlay */
+.story-page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+  opacity: 0.1;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  border-radius: 24px;
+}
+
+/* ===========================================================
+   ✨ Navigation Arrows — Glow + Fade
+   =========================================================== */
+@keyframes glowPulseDark {
 
   0%,
   100% {
-    opacity: 0.7;
-    text-shadow:
-      0 0 8px rgba(255, 255, 255, 0.8),
-      0 0 18px rgba(255, 182, 193, 0.9),
-      0 0 30px rgba(255, 105, 180, 0.8),
-      0 0 45px rgba(255, 20, 147, 0.7);
-    transform: scale(1);
-  }
-
-  50% {
-    opacity: 1;
-    text-shadow:
-      0 0 12px rgba(255, 255, 255, 1),
-      0 0 25px rgba(255, 182, 193, 1),
-      0 0 45px rgba(255, 105, 180, 0.9),
-      0 0 65px rgba(255, 20, 147, 0.8);
-    transform: scale(1.15);
-  }
-}
-
-/* Arrow animation class */
-.animate-glow {
-  animation: glowPulse 2s ease-in-out infinite;
-  color: #ff1493;
-  /* deep pink for max contrast */
-  font-size: 3rem;
-  font-weight: bold;
-  text-shadow:
-    0 0 10px rgba(255, 255, 255, 0.9),
-    0 0 25px rgba(255, 105, 180, 0.8),
-    0 0 45px rgba(255, 20, 147, 0.6);
-  transition: all 0.3s ease-in-out;
-}
-
-/* Hover interaction for desktop */
-.animate-glow:hover {
-  transform: scale(1.25);
-  text-shadow:
-    0 0 15px rgba(255, 255, 255, 1),
-    0 0 35px rgba(255, 182, 193, 1),
-    0 0 55px rgba(255, 105, 180, 0.9),
-    0 0 80px rgba(255, 20, 147, 0.9);
-}
-
-/* Mobile tap feedback */
-@media (max-width: 768px) {
-  .animate-glow {
-    font-size: 2.8rem;
-    text-shadow:
-      0 0 10px rgba(255, 255, 255, 0.9),
-      0 0 25px rgba(255, 105, 180, 0.9),
-      0 0 40px rgba(255, 20, 147, 0.8);
-  }
-}
-
-/* ✨ Enhanced Darker Glowing Animation for Navigation Arrows */
-@keyframes glowPulseDark {
-  0%, 100% {
     opacity: 0.8;
     text-shadow:
       0 0 6px rgba(120, 0, 120, 0.6),
@@ -376,31 +295,51 @@ p {
   }
 }
 
-.animate-glow {
-  animation: glowPulseDark 2.3s ease-in-out infinite;
-  color: #8a0068; /* 💜 deep magenta */
-  font-size: 3.2rem;
-  font-weight: bold;
-  transition: all 0.3s ease-in-out;
+/* 🔹 Arrow Base (barely visible idle) */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: none;
+  font-size: 2rem;
+  color: white;
+  background: radial-gradient(circle, #ff33aa 0%, #ff66cc 80%);
+  box-shadow: 0 0 20px rgba(255, 51, 170, 0.8);
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0.15;
+  /* 👈 faded down by default */
+  transition: opacity 0.4s ease, transform 0.3s ease;
 }
 
-.animate-glow:hover {
-  transform: scale(1.2);
-  color: #b3008c;
-  text-shadow:
-    0 0 12px rgba(255, 255, 255, 0.8),
-    0 0 30px rgba(200, 0, 180, 0.8),
-    0 0 50px rgba(255, 0, 220, 0.6);
+.nav-btn:hover {
+  opacity: 1;
+  /* 👈 fully visible on hover */
+  transform: translateY(-50%) scale(1.1);
 }
 
-/* Mobile variant */
+.nav-btn.left {
+  left: 1.5rem;
+}
+
+.nav-btn.right {
+  right: 1.5rem;
+}
+
+/* Mobile adjustments */
 @media (max-width: 768px) {
-  .animate-glow {
-    font-size: 2.8rem;
-    color: #7a0070;
-    text-shadow:
-      0 0 8px rgba(150, 0, 130, 0.8),
-      0 0 18px rgba(220, 0, 190, 0.6),
-      0 0 28px rgba(255, 0, 230, 0.4);
+  .nav-btn {
+    width: 46px;
+    height: 46px;
+    opacity: 0.25;
+    /* slightly more visible for tap targets */
+  }
+
+  .nav-btn:active {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.05);
   }
 }

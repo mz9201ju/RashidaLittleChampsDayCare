@@ -1,0 +1,46 @@
+.book-page {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    top: 0;
+    transform-style: preserve-3d;
+    perspective: 2000px;
+    transition: transform 1s ease-in-out;
+    transform-origin: left center;
+    z-index: 2;
+}
+
+.book-page.right {
+    left: 50%;
+    transform-origin: left center;
+}
+
+.book-page.left {
+    left: 0;
+    transform-origin: right center;
+}
+
+.book-page .page-content {
+    width: 100%;
+    height: 100%;
+    background: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    backface-visibility: hidden;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+/* ✨ The Flip Animation */
+.book-page.right.flipped {
+    transform: rotateY(-180deg);
+}
+
+.book-page.left.flipped {
+    transform: rotateY(180deg);
+}
+
+/* Optional: add subtle bending illusion */
+.book-page.right.flipped .page-content,
+.book-page.left.flipped .page-content {
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.2);
+}
