@@ -1,5 +1,4 @@
 import HTMLFlipBook from "react-pageflip";
-import "./book.css";
 import { useState, useEffect, useRef } from "react";
 
 export default function Book() {
@@ -8,6 +7,18 @@ export default function Book() {
     const bookRef = useRef(null);
     const flipInstance = useRef(null);
     const totalPagesRef = useRef(0);
+
+    useEffect(() => {
+        const loadCSS = async () => {
+            if (window.innerWidth <= 768) {
+                await import("./book-mobile.css");
+            } else {
+                await import("./book-desktop.css");
+            }
+        };
+        loadCSS();
+    }, []);
+
 
     // 📏 Responsive sizing
     useEffect(() => {
