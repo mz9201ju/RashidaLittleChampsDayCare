@@ -1,11 +1,5 @@
-// src/App.jsx
-import { BrowserRouter } from "react-router-dom";
-import BookLayout from "./components/BookLayout";
+import Book from "../src/website/Book";
 
 export default function App() {
-  return (
-    <BrowserRouter basename="/RashidaLittleChampsDayCare/">
-      <BookLayout />
-    </BrowserRouter>
-  );
+  return <Book />;
 }
