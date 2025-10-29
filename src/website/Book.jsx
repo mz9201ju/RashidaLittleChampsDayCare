@@ -27,6 +27,14 @@ export default function Book() {
         return () => window.removeEventListener("resize", updateSize);
     }, []);
 
+    // 🧩 Detect 3D support and set fallback class
+    useEffect(() => {
+        const supports3D = CSS.supports("transform-style", "preserve-3d");
+        document.body.classList.toggle("no-3d", !supports3D);
+        console.log(supports3D ? "✅ 3D flip supported" : "⚠️ 3D disabled, using 2D fold");
+    }, []);
+
+
     // ✅ Fired once flipbook fully initialized
     const handleInit = (instance) => {
         flipInstance.current = instance;

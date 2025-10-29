@@ -12,6 +12,8 @@
     perspective: 2000px;
     transition: background 1s ease-in-out;
     touch-action: manipulation;
+    -webkit-overflow-scrolling: touch;
+    /* ✅ smoother scroll on iOS */
 }
 
 /* ☁️ Floating Clouds */
@@ -23,6 +25,8 @@
     animation: floatClouds 120s linear infinite;
     will-change: transform;
     pointer-events: none;
+    -webkit-transform: translateZ(0);
+    /* ✅ GPU hint */
 }
 
 .cloud::before,
@@ -33,6 +37,7 @@
     border-radius: 50%;
 }
 
+/* Base positions */
 .cloud1 {
     width: 200px;
     height: 80px;
@@ -71,6 +76,7 @@
     right: 15%;
 }
 
+/* ➡️ Default rightward float */
 @keyframes floatClouds {
     0% {
         transform: translateX(0);
@@ -81,6 +87,30 @@
     }
 }
 
+/* ⬅️ Leftward float */
+@keyframes floatCloudsLeft {
+    0% {
+        transform: translateX(130vw);
+    }
+
+    100% {
+        transform: translateX(-130vw);
+    }
+}
+
+/* 🎞️ Alternate directions for realism */
+.cloud1 {
+    animation: floatClouds 120s linear infinite;
+}
+
+.cloud2 {
+    animation: floatCloudsLeft 150s linear infinite;
+}
+
+.cloud3 {
+    animation: floatClouds 180s linear infinite;
+}
+
 /* 📖 Flipbook Container */
 .storybook {
     transform-style: preserve-3d;
@@ -88,9 +118,11 @@
     z-index: 3;
     overflow: visible !important;
     -webkit-tap-highlight-color: transparent;
+    -webkit-transform: translateZ(0);
+    /* ✅ fix for iOS flicker */
 }
 
-/* 📘 Page Styling (Soft for all pages) */
+/* 📘 Page Styling */
 .page,
 .cover {
     border-radius: 35px;
@@ -98,15 +130,16 @@
     background: white;
     border: 1px solid rgba(255, 255, 255, 0.4);
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* ✅ iOS fix */
     transform: translateZ(0);
     position: relative;
     z-index: 1;
     will-change: transform;
     touch-action: manipulation;
-    -webkit-transform: translateZ(0);
 }
 
-/* ✨ Cover visual distinction (soft gradient) */
+/* ✨ Cover visual distinction */
 .cover {
     background: linear-gradient(145deg, #ff9eb3, #ff6b81);
     color: white;
@@ -118,12 +151,14 @@
     color: #333;
 }
 
-/* ✅ Keep text visible on all devices (GPU fix) */
+/* ✅ Ensure text stays crisp */
 .page * {
     transform: translateZ(1px);
     position: relative;
     z-index: 2;
     user-select: none;
+    -webkit-user-select: none;
+    /* ✅ iOS text selection fix */
 }
 
 /* 📘 Inner Text */
@@ -133,7 +168,7 @@
     text-align: center;
 }
 
-/* 🖱️ Hover effect (desktop only) */
+/* 🖱️ Hover (desktop only) */
 @media (hover: hover) {
     .page:hover {
         box-shadow: 0 10px 40px rgba(255, 180, 180, 0.5);
@@ -165,9 +200,15 @@
         transform: none;
         z-index: 2;
     }
+
+    /* ✅ smoother animations for mobile */
+    .page.turn-right,
+    .page.turn-left {
+        animation-duration: 1s;
+    }
 }
 
-/* 🧹 Remove built-in flip shadows */
+/* 🧹 Remove flip shadows */
 .html-flip-book .page .shadow,
 .page-shadow,
 .page-content-shadow {
@@ -176,9 +217,8 @@
     background: none !important;
 }
 
-/* 🎬 Smooth "Close" Animation (mobile-safe) */
+/* 🎬 Close Animation */
 .book-closed {
-    animation: softClose 1.5s ease-in-out forwards;
     transform-origin: center center;
     pointer-events: none;
 }
@@ -207,22 +247,179 @@
 .book-closed::after {
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: "Poppins", sans-serif;
-    font-size: 1.8rem;
     color: #2e7d32;
     text-shadow: 0 2px 6px rgba(255, 255, 255, 0.6);
-    opacity: 0;
 }
 
-@keyframes fadeInEnd {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -45%);
+/* 🎬 Page Flip Animations */
+.page.turn-right {
+    animation: flipRight 0.8s ease forwards;
+    transform-origin: left center;
+}
+
+.page.turn-left {
+    animation: flipLeft 0.8s ease forwards;
+    transform-origin: right center;
+}
+
+/* ✅ both directions with smooth 3D effect */
+@keyframes flipRight {
+    0% {
+        transform: rotateY(0deg);
     }
 
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
+    100% {
+        transform: rotateY(-180deg);
+    }
+}
+
+@keyframes flipLeft {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(180deg);
+    }
+}
+
+/* ✅ Force mobile Safari to render both flip directions properly */
+@supports (-webkit-overflow-scrolling: touch) {
+    .page {
+        transform-style: preserve-3d;
+        -webkit-transform-style: preserve-3d;
+        perspective: 1000px;
+        -webkit-perspective: 1000px;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+    }
+
+    .page.turn-left,
+    .page.turn-right {
+        will-change: transform;
+        transform-origin: center center !important;
+        transform: rotateY(0deg);
+    }
+
+    .page.turn-left {
+        animation: flipLeftMobile 0.9s ease forwards;
+    }
+
+    .page.turn-right {
+        animation: flipRightMobile 0.9s ease forwards;
+    }
+
+    @keyframes flipLeftMobile {
+        0% {
+            transform: rotateY(0deg);
+        }
+
+        50% {
+            transform: rotateY(90deg) translateZ(1px);
+        }
+
+        /* ✅ force depth */
+        100% {
+            transform: rotateY(180deg);
+        }
+    }
+
+    @keyframes flipRightMobile {
+        0% {
+            transform: rotateY(0deg);
+        }
+
+        50% {
+            transform: rotateY(-90deg) translateZ(1px);
+        }
+
+        /* ✅ force depth */
+        100% {
+            transform: rotateY(-180deg);
+        }
+    }
+}
+
+/* 🌍 MOBILE TRUE FLIP FIX */
+@media (max-width: 900px) {
+    .page {
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        perspective: 1200px;
+        -webkit-perspective: 1200px;
+        transform-origin: center center;
+        overflow: hidden;
+    }
+
+    /* ✅ Override left/right animation for mobile Safari */
+    .page.turn-left {
+        animation: mobileFlipLeft 1s ease-in-out forwards;
+        transform-origin: right center !important;
+    }
+
+    .page.turn-right {
+        animation: mobileFlipRight 1s ease-in-out forwards;
+        transform-origin: left center !important;
+    }
+
+    @keyframes mobileFlipLeft {
+        0% {
+            transform: perspective(1200px) rotateY(0deg) translate3d(0, 0, 0);
+        }
+
+        50% {
+            transform: perspective(1200px) rotateY(90deg) translate3d(0, 0, 5px);
+        }
+
+        100% {
+            transform: perspective(1200px) rotateY(180deg) translate3d(0, 0, 0);
+        }
+    }
+
+    @keyframes mobileFlipRight {
+        0% {
+            transform: perspective(1200px) rotateY(0deg) translate3d(0, 0, 0);
+        }
+
+        50% {
+            transform: perspective(1200px) rotateY(-90deg) translate3d(0, 0, 5px);
+        }
+
+        100% {
+            transform: perspective(1200px) rotateY(-180deg) translate3d(0, 0, 0);
+        }
+    }
+
+    /* 🧠 Bonus: Prevent Safari from flattening */
+    .storybook,
+    .book-wrapper {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* 🧠 Hybrid flip fallback (desktop → 3D, mobile → 2D fold) */
+.no-3d .page.turn-left,
+.no-3d .page.turn-right {
+    animation: sheetFold 0.9s ease forwards !important;
+    transform-origin: center !important;
+}
+
+@keyframes sheetFold {
+    0% {
+        transform: skewY(0deg) scaleX(1);
+        box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
+    }
+
+    50% {
+        transform: skewY(10deg) scaleX(0.95);
+        box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.15);
+    }
+
+    100% {
+        transform: skewY(0deg) scaleX(1);
+        box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
     }
 }
