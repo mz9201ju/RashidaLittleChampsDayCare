@@ -66,8 +66,13 @@ const Book = () => {
                     startZIndex={10}
                     mobileScrollSupport={false}
                     useMouseEvents={true}
+                    useTouchEvents={true}
+                    clickEventForward={true}         // ✅ Enables clicking anywhere, not just corners
+                    turnCorners={['bl', 'br', 'tl', 'tr']} // ✅ All 4 corners active
+                    swipeDistance={15}               // ✅ Makes left-edge swipes trigger flips too
+                    disableFlipByClick={false}       // ✅ Keeps both sides interactive
                     className="daycare-book"
-                    onFlip={handleFlip} // 🪄 this is the magic line
+                    onFlip={handleFlip}
                 >
                     {/* 🌈 FRONT COVER */}
                     <div className="book-page cover-front sparkle">
