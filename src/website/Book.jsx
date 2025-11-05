@@ -1,157 +1,158 @@
-import HTMLFlipBook from "react-pageflip";
 import { useState, useEffect, useRef } from "react";
+import HTMLFlipBook from "react-pageflip";
+import ToyLayer from "./ToyLayer";
 
-export default function Book() {
-    const [bookSize, setBookSize] = useState({ width: 600, height: 800 });
-    const [isClosed, setIsClosed] = useState(false);
-    const bookRef = useRef(null);
-    const flipInstance = useRef(null);
-    const totalPagesRef = useRef(0);
+const Book = () => {
+    const bookRef = useRef();
+    const [flipKey, setFlipKey] = useState(0); // 🔁 used to trigger toy re-randomization
+
+    const [size, setSize] = useState({
+        width: Math.min(window.innerWidth * 0.75, 1000),
+        height: Math.min(window.innerHeight * 0.8, 800),
+    });
 
     useEffect(() => {
-        const loadCSS = async () => {
-            if (window.innerWidth <= 768) {
-                await import("./book-mobile.css");
-            } else {
-                await import("./book-desktop.css");
-            }
+        const handleResize = () => {
+            setSize({
+                width: Math.min(window.innerWidth * 0.75, 1000),
+                height: Math.min(window.innerHeight * 0.8, 800),
+            });
+            bookRef.current?.pageFlip().update();
         };
-        loadCSS();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+    const nextPage = () => bookRef.current?.pageFlip().flipNext();
+    const prevPage = () => bookRef.current?.pageFlip().flipPrev();
 
-    // 📏 Responsive sizing
-    useEffect(() => {
-        const updateSize = () => {
-            const vw = window.innerWidth;
-            const vh = window.innerHeight;
-            let width = Math.min(vw * 0.9, 600);
-            let height = width * 1.33;
-            if (height > vh * 0.85) {
-                height = vh * 0.85;
-                width = height / 1.33;
-            }
-            setBookSize({ width, height });
-        };
-        updateSize();
-        window.addEventListener("resize", updateSize);
-        return () => window.removeEventListener("resize", updateSize);
-    }, []);
-
-    // 🧩 Detect 3D support and set fallback class
-    useEffect(() => {
-        const supports3D = CSS.supports("transform-style", "preserve-3d");
-        document.body.classList.toggle("no-3d", !supports3D);
-        console.log(supports3D ? "✅ 3D flip supported" : "⚠️ 3D disabled, using 2D fold");
-    }, []);
-
-
-    // ✅ Fired once flipbook fully initialized
-    const handleInit = (instance) => {
-        flipInstance.current = instance;
-        try {
-            totalPagesRef.current = instance.getPageCount() - 1; // ✅ actual last index
-        } catch {
-            totalPagesRef.current = 4; // fallback if API fails
-        }
-        console.log("Flipbook ready ✅ pages:", totalPagesRef.current + 1);
-    };
-
-    // 🧠 Flip event — stable even in prod
-    const handleFlip = (e) => {
-        const flipBook = flipInstance.current;
-        if (!flipBook) return;
-
-        const currentPage = e.data;
-        const totalPages = totalPagesRef.current;
-
-        console.log("Flip:", currentPage, "/", totalPages);
-
-        // ✅ reached end
-        if (currentPage >= totalPages && !isClosed) {
-            setTimeout(() => setIsClosed(true), 300);
-        }
-        // ✅ flip back
-        else if (isClosed && currentPage < totalPages) {
-            setIsClosed(false);
-        }
-    };
-
-    const handleClick = () => {
-        if (isClosed) setIsClosed(false);
+    // 🔄 Trigger toys to move when page flips
+    const handleFlip = () => {
+        setFlipKey((prev) => prev + 1); // re-render ToyLayer with new random positions
     };
 
     return (
-        <div className="book-wrapper" onClick={handleClick}>
-            <div className="cloud cloud1"></div>
-            <div className="cloud cloud2"></div>
-            <div className="cloud cloud3"></div>
+        <div className="daycare-scene">
+            {/* 🎠 Toys re-render on every flip */}
+            <ToyLayer key={flipKey} />
 
-            <HTMLFlipBook
-                ref={bookRef}
-                width={bookSize.width}
-                height={bookSize.height}
-                showCover={false}   // ⚡ make all pages soft, not hard
-                className={`storybook ${isClosed ? "book-closed" : ""}`}
-                style={{ borderRadius: "25px" }}
-                maxShadowOpacity={0.2}
-                usePortrait={true}  // 🧠 helps mobile / responsive
-                flippingTime={1000} // smooth transition
-                onFlip={handleFlip}
-                onInit={handleInit}
-                disableFlipByClick={isClosed}
+            <div className="moving-clouds"></div>
+
+            <div
+                className="book-wrapper"
+                onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+                    e.currentTarget.style.transform = `translate(-50%, -50%) rotateY(${x * 6
+                        }deg) rotateX(${y * -4}deg)`;
+                }}
+                onMouseLeave={(e) =>
+                    (e.currentTarget.style.transform = "translate(-50%, -50%)")
+                }
             >
-                {/* COVER */}
-                <div className="page cover flex justify-center items-center text-center text-white relative">
-                    <div className="cover-inner">
-                        <h1 className="text-4xl sm:text-6xl font-extrabold drop-shadow-lg">
-                            🌈 Little Champions
-                        </h1>
-                        <p className="text-xl sm:text-2xl mt-3 italic font-light">
-                            Daycare Storybook
-                        </p>
-                        <p className="text-md sm:text-lg mt-5 font-medium">by Omer Zahid</p>
+                <HTMLFlipBook
+                    ref={bookRef}
+                    width={size.width}
+                    height={size.height}
+                    size="fixed"
+                    minWidth={320}
+                    maxWidth={1000}
+                    minHeight={240}
+                    maxHeight={800}
+                    drawShadow={true}
+                    flippingTime={1000}
+                    showCover={true}
+                    startZIndex={10}
+                    mobileScrollSupport={false}
+                    useMouseEvents={true}
+                    className="daycare-book"
+                    onFlip={handleFlip} // 🪄 this is the magic line
+                >
+                    {/* 🌈 FRONT COVER */}
+                    <div className="book-page cover-front sparkle">
+                        <h3>🌈 Rashida’s Little Champs</h3>
+                        <p>Where every child shines bright ✨</p>
+                        <p className="tap-hint">Tap to open the story!</p>
                     </div>
-                </div>
 
-                {/* PAGE 1 */}
-                <div className="page bg-pink-50 text-gray-800 flex flex-col justify-center items-center p-6 text-center">
-                    <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-pink-500">
-                        Welcome!
-                    </h2>
-                    <p className="text-base sm:text-lg max-w-md">
-                        Hi there, little champion! 💫 Let’s explore a magical world full of
-                        colors, fun, and friends.
-                    </p>
-                </div>
+                    {/* PAGE 1 — Welcome */}
+                    <div className="book-page">
+                        <h2>Welcome 🧸</h2>
+                        <p>
+                            At <strong>Rashida’s Little Champs</strong>, we believe every child
+                            deserves a nurturing, creative, and joyful start in life.
+                        </p>
+                        <p>We’re more than daycare — we’re family 💖</p>
+                    </div>
 
-                {/* PAGE 2 */}
-                <div className="page bg-yellow-100 text-gray-800 flex flex-col justify-center items-center p-6 text-center">
-                    <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-yellow-600">
-                        Play Time!
-                    </h2>
-                    <p className="text-base sm:text-lg max-w-md">
-                        We build, paint, and dance — every day is a new adventure filled
-                        with smiles! 🎨✨
-                    </p>
-                </div>
+                    {/* PAGE 2 — Our Mission */}
+                    <div className="book-page">
+                        <h2>Our Mission 🌟</h2>
+                        <p>
+                            To inspire curiosity, kindness, and confidence through play,
+                            discovery, and love. Our educators guide each child’s journey with
+                            care and patience.
+                        </p>
+                    </div>
 
-                {/* PAGE 3 */}
-                <div className="page bg-blue-100 text-gray-800 flex flex-col justify-center items-center p-6 text-center">
-                    <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-blue-600">
-                        Learning Together
-                    </h2>
-                    <p className="text-base sm:text-lg max-w-md">
-                        We learn about shapes, colors, kindness, and teamwork while having
-                        tons of fun! 📚🧸
-                    </p>
-                </div>
+                    {/* PAGE 3 — Daily Activities */}
+                    <div className="book-page">
+                        <h2>Daily Fun 🎨</h2>
+                        <ul>
+                            <li>🌞 Morning circle time & songs</li>
+                            <li>🎨 Arts, crafts, and sensory play</li>
+                            <li>📚 Storytime adventures</li>
+                            <li>🍎 Healthy snacks & lunch</li>
+                            <li>🧩 Outdoor games and teamwork</li>
+                        </ul>
+                    </div>
 
-                {/* ✅ END PAGE */}
-                <div className="page cover bg-green-400 flex justify-center items-center text-white text-2xl sm:text-3xl font-semibold">
-                    <p>🌟 The End — Keep Shining, Little Champion!</p>
-                </div>
-            </HTMLFlipBook>
+                    {/* PAGE 4 — Learning */}
+                    <div className="book-page">
+                        <h2>Learning Through Play 🧠</h2>
+                        <p>
+                            We blend fun with learning — letters, colors, counting, and
+                            storytelling come alive through hands-on activities.
+                        </p>
+                    </div>
+
+                    {/* PAGE 5 — Parents */}
+                    <div className="book-page">
+                        <h2>Parents 🤝</h2>
+                        <p>
+                            We work closely with parents to ensure every child’s growth and
+                            happiness. Communication is open and daily reports are shared.
+                        </p>
+                    </div>
+
+                    {/* PAGE 6 — Contact */}
+                    <div className="book-page">
+                        <h2>Visit Us 🕒</h2>
+                        <p>
+                            <strong>Hours:</strong> Monday – Friday, 7:30 AM – 6:00 PM <br />
+                            <strong>Location:</strong> 123 Sunshine Avenue, Seattle, WA <br />
+                            <strong>Contact:</strong> (425) 555-1844 <br />
+                            <strong>Email:</strong> info@rashidaslittlechamps.com
+                        </p>
+                    </div>
+
+                    {/* 🌈 BACK COVER */}
+                    <div className="book-page cover-back sparkle">
+                        <h2>Thank You 💕</h2>
+                        <p>We can’t wait to welcome your little champ!</p>
+                    </div>
+                </HTMLFlipBook>
+
+                <button className="nav-arrow left" onClick={prevPage}>
+                    ‹
+                </button>
+                <button className="nav-arrow right" onClick={nextPage}>
+                    ›
+                </button>
+            </div>
         </div>
     );
-}
+};
+
+export default Book;
