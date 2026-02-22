@@ -1,0 +1,40 @@
+@media (min-width: 769px) {
+  .book-shell {
+    --book-lift: 6px;
+    transition: transform 140ms ease;
+  }
+
+  .daycare-book .stf__block {
+    transform-style: preserve-3d;
+  }
+
+  .daycare-book .stf__item {
+    box-shadow: 0 14px 28px rgba(84, 59, 20, 0.16);
+  }
+
+  .daycare-book .stf__item.--left,
+  .daycare-book .stf__item.--right {
+    border-radius: 20px;
+  }
+
+  .storybook-content {
+    padding: 24px 64px;
+  }
+
+  .book-spine {
+    width: 26px;
+  }
+
+  .book-spine::before,
+  .book-spine::after {
+    width: 40px;
+  }
+
+  .cloud-left {
+    animation-duration: 9s;
+  }
+
+  .cloud-right {
+    animation-duration: 11s;
+  }
+}

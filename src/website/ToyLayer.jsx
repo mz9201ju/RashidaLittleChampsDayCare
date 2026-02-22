@@ -1,34 +1,24 @@
-import React from "react";
-
-const random = (min, max) => Math.random() * (max - min) + min;
-
 export default function ToyLayer() {
-    const toys = [
-        { className: "toy sun" },
-        { className: "toy star-left" },
-        { className: "toy star-right" },
-        { className: "toy ball-left" },
-        { className: "toy ball-right" },
-        { className: "toy block-left", content: "A" },
-        { className: "toy block-right", content: "B" },
-        { className: "toy cloud-left" },
-        { className: "toy cloud-right" },
-    ];
-
     return (
-        <div className="toy-layer">
-            {toys.map((toy, i) => (
-                <div
-                    key={i}
-                    className={toy.className}
-                    style={{
-                        top: `${random(5, 80)}%`,
-                        left: `${random(5, 90)}%`,
-                    }}
-                >
-                    {toy.content || ""}
-                </div>
-            ))}
+        <div className="storybook-backdrop" aria-hidden="true">
+            <div className="sky-gradient" />
+            <div className="sun" />
+            <div className="cloud cloud-left" />
+            <div className="cloud cloud-right" />
+            <div className="hill hill-left" />
+            <div className="hill hill-right" />
+            <div className="tree tree-left">
+                <span className="trunk" />
+                <span className="canopy" />
+            </div>
+            <div className="tree tree-right">
+                <span className="trunk" />
+                <span className="canopy" />
+            </div>
+            <div className="toy-block toy-block-left">A</div>
+            <div className="toy-block toy-block-right">B</div>
+            <div className="toy-ball toy-ball-left" />
+            <div className="toy-ball toy-ball-right" />
         </div>
-    );
+    )
 }

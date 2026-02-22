@@ -1,0 +1,82 @@
+@media (max-width: 768px) {
+  .book-shell {
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
+  }
+
+  .storybook-content {
+    padding: 14px;
+  }
+
+  .book-page-content {
+    width: 92%;
+    gap: 10px;
+  }
+
+  .book-page-content h2 {
+    font-size: 1.3rem;
+  }
+
+  .book-page-content p,
+  .storybook-list li {
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  .nav-arrow {
+    display: none;
+  }
+
+  .book-spine {
+    top: 14px;
+    bottom: 14px;
+    width: 14px;
+  }
+
+  .book-spine::before,
+  .book-spine::after {
+    width: 18px;
+  }
+
+  .sun {
+    width: 94px;
+    height: 94px;
+    top: 5%;
+  }
+
+  .cloud {
+    width: 110px;
+    height: 46px;
+  }
+
+  .cloud-left {
+    top: 14%;
+    left: 3%;
+  }
+
+  .cloud-right {
+    top: 13%;
+    right: 3%;
+  }
+
+  .tree {
+    bottom: 118px;
+    width: 70px;
+    height: 130px;
+  }
+
+  .hill {
+    height: 180px;
+  }
+
+  .toy-block {
+    width: 56px;
+    height: 56px;
+    font-size: 1.5rem;
+  }
+
+  .toy-ball {
+    width: 42px;
+    height: 42px;
+  }
+}

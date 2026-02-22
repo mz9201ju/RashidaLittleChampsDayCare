@@ -1,16 +1,63 @@
-# React + Vite
+# Rashida Little Champs Daycare Storybook
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A kids-friendly daycare website built as an interactive storybook.
 
-Currently, two official plugins are available:
+## Vision
+- A 3D flipbook experience where pages turn left/right naturally.
+- Warm cartoon background with sun, clouds, hills, trees, and toys.
+- Clear structure so the project stays easy to maintain and debug.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- React + Vite
+- `react-pageflip` for the book page-turn interaction
+- Tailwind available (global directives kept), with custom feature CSS
 
-## React Compiler
+## Project Structure
+```
+src/
+	App.jsx
+	index.css
+	website/
+		StoryBookSite.jsx
+		Book.jsx
+		ToyLayer.jsx
+		data/
+			storyPages.js
+		hooks/
+			useBookSize.js
+		styles/
+			base.css
+			desktop.css
+			mobile.css
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Separation of Concerns
+- **Data only**: `src/website/data/storyPages.js`
+- **Behavior only**: `src/website/hooks/useBookSize.js`
+- **UI composition**:
+	- `src/website/StoryBookSite.jsx` (scene shell)
+	- `src/website/ToyLayer.jsx` (decorative background)
+	- `src/website/Book.jsx` (flipbook + page navigation)
+- **Styles**:
+	- Shared tokens/layout in `src/website/styles/base.css`
+	- Desktop overrides in `src/website/styles/desktop.css`
+	- Mobile overrides in `src/website/styles/mobile.css`
 
-## Expanding the ESLint configuration
+## Run Locally
+1. Install dependencies:
+	 ```bash
+	 npm install
+	 ```
+2. Start development server:
+	 ```bash
+	 npm run dev
+	 ```
+3. Build production bundle:
+	 ```bash
+	 npm run build
+	 ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Quality Guardrails
+- Global project agent rules are in `AGENT.md`.
+- Global Copilot instructions are in `.github/copilot-instructions.md`.
+- Together they enforce no duplication, clear separation of concerns, and isolated mobile/desktop styling.

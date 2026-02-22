@@ -1,8 +1,7 @@
-import Book from "../src/website/Book";
+import StoryBookSite from './website/StoryBookSite'
 
 export default function App() {
   return (
-    <>
-      <Book />
-    </>);
+    <StoryBookSite />
+  )
 }

@@ -1,163 +1,99 @@
-import { useState, useEffect, useRef } from "react";
-import HTMLFlipBook from "react-pageflip";
-import ToyLayer from "./ToyLayer";
+import { useRef } from 'react'
+import HTMLFlipBook from 'react-pageflip'
+import { BOOK_PAGES } from './data/storyPages'
+import { useBookSize } from './hooks/useBookSize'
 
-const Book = () => {
-    const bookRef = useRef();
-    const [flipKey, setFlipKey] = useState(0); // 🔁 used to trigger toy re-randomization
+const FLIP_CONFIG = {
+    size: 'fixed',
+    minWidth: 240,
+    maxWidth: 520,
+    minHeight: 320,
+    maxHeight: 760,
+    drawShadow: true,
+    flippingTime: 1000,
+    showCover: true,
+    usePortrait: false,
+    startPage: 0,
+    startZIndex: 10,
+    mobileScrollSupport: false,
+    useMouseEvents: true,
+    useTouchEvents: true,
+    clickEventForward: false,
+    swipeDistance: 20,
+    showPageCorners: true,
+    disableFlipByClick: false,
+}
 
-    const [size, setSize] = useState({
-        width: Math.min(window.innerWidth * 0.75, 1000),
-        height: Math.min(window.innerHeight * 0.8, 800),
-    });
+function renderPageContent(page) {
+    if (page.listItems) {
+        return (
+            <ul className="storybook-list">
+                {page.listItems.map((item) => (
+                    <li key={item}>{item}</li>
+                ))}
+            </ul>
+        )
+    }
 
-    useEffect(() => {
-        const handleResize = () => {
-            setSize({
-                width: Math.min(window.innerWidth * 0.75, 1000),
-                height: Math.min(window.innerHeight * 0.8, 800),
-            });
-            bookRef.current?.pageFlip().update();
-        };
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    if (page.paragraphs) {
+        return page.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)
+    }
 
-    const nextPage = () => bookRef.current?.pageFlip().flipNext();
-    const prevPage = () => bookRef.current?.pageFlip().flipPrev();
+    return null
+}
 
-    // 🔄 Trigger toys to move when page flips
-    const handleFlip = () => {
-        setFlipKey((prev) => prev + 1); // re-render ToyLayer with new random positions
-    };
+export default function Book() {
+    const bookRef = useRef(null)
+    const size = useBookSize(bookRef)
+
+    const nextPage = () => bookRef.current?.pageFlip().flipNext()
+    const previousPage = () => bookRef.current?.pageFlip().flipPrev()
+
+    const handleMouseMove = (event) => {
+        const element = event.currentTarget
+        const rect = element.getBoundingClientRect()
+        const centerX = rect.left + rect.width / 2
+        const centerY = rect.top + rect.height / 2
+        const rotateY = ((event.clientX - centerX) / rect.width) * 6
+        const rotateX = ((centerY - event.clientY) / rect.height) * 4
+
+        element.style.setProperty('--tilt-x', `${rotateX.toFixed(2)}deg`)
+        element.style.setProperty('--tilt-y', `${rotateY.toFixed(2)}deg`)
+    }
+
+    const resetTilt = (event) => {
+        event.currentTarget.style.setProperty('--tilt-x', '0deg')
+        event.currentTarget.style.setProperty('--tilt-y', '0deg')
+    }
 
     return (
-        <div className="daycare-scene">
-            {/* 🎠 Toys re-render on every flip */}
-            <ToyLayer key={flipKey} />
-
-            <div className="moving-clouds"></div>
-
-            <div
-                className="book-wrapper"
-                onMouseMove={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    const x = (e.clientX - rect.left) / rect.width - 0.5;
-                    const y = (e.clientY - rect.top) / rect.height - 0.5;
-                    e.currentTarget.style.transform = `translate(-50%, -50%) rotateY(${x * 6
-                        }deg) rotateX(${y * -4}deg)`;
-                }}
-                onMouseLeave={(e) =>
-                    (e.currentTarget.style.transform = "translate(-50%, -50%)")
-                }
+        <div className="book-shell" onMouseMove={handleMouseMove} onMouseLeave={resetTilt}>
+            <HTMLFlipBook
+                ref={bookRef}
+                width={size.width}
+                height={size.height}
+                className="daycare-book"
+                {...FLIP_CONFIG}
             >
-                <HTMLFlipBook
-                    ref={bookRef}
-                    width={size.width}
-                    height={size.height}
-                    size="fixed"
-                    minWidth={320}
-                    maxWidth={1000}
-                    minHeight={240}
-                    maxHeight={800}
-                    drawShadow={true}
-                    flippingTime={1000}
-                    showCover={true}
-                    startZIndex={10}
-                    mobileScrollSupport={false}
-                    useMouseEvents={true}
-                    useTouchEvents={true}
-                    clickEventForward={true}         // ✅ Enables clicking anywhere, not just corners
-                    turnCorners={['bl', 'br', 'tl', 'tr']} // ✅ All 4 corners active
-                    swipeDistance={15}               // ✅ Makes left-edge swipes trigger flips too
-                    disableFlipByClick={false}       // ✅ Keeps both sides interactive
-                    className="daycare-book"
-                    onFlip={handleFlip}
-                >
-                    {/* 🌈 FRONT COVER */}
-                    <div className="book-page cover-front sparkle">
-                        <h3>🌈 Rashida’s Little Champs</h3>
-                        <p>Where every child shines bright ✨</p>
-                        <p className="tap-hint">Tap to open the story!</p>
-                    </div>
+                {BOOK_PAGES.map((page) => (
+                    <article key={page.id} className={`book-page ${page.variant}`}>
+                        <div className="book-page-content">
+                            <h2>{page.title}</h2>
+                            {renderPageContent(page)}
+                            {page.hint && <p className="book-page-hint">{page.hint}</p>}
+                        </div>
+                    </article>
+                ))}
+            </HTMLFlipBook>
 
-                    {/* PAGE 1 — Welcome */}
-                    <div className="book-page">
-                        <h2>Welcome 🧸</h2>
-                        <p>
-                            At <strong>Rashida’s Little Champs</strong>, we believe every child
-                            deserves a nurturing, creative, and joyful start in life.
-                        </p>
-                        <p>We’re more than daycare — we’re family 💖</p>
-                    </div>
+            <div className="book-spine" aria-hidden="true" />
 
-                    {/* PAGE 2 — Our Mission */}
-                    <div className="book-page">
-                        <h2>Our Mission 🌟</h2>
-                        <p>
-                            To inspire curiosity, kindness, and confidence through play,
-                            discovery, and love. Our educators guide each child’s journey with
-                            care and patience.
-                        </p>
-                    </div>
-
-                    {/* PAGE 3 — Daily Activities */}
-                    <div className="book-page">
-                        <h2>Daily Fun 🎨</h2>
-                        <ul>
-                            <li>🌞 Morning circle time & songs</li>
-                            <li>🎨 Arts, crafts, and sensory play</li>
-                            <li>📚 Storytime adventures</li>
-                            <li>🍎 Healthy snacks & lunch</li>
-                            <li>🧩 Outdoor games and teamwork</li>
-                        </ul>
-                    </div>
-
-                    {/* PAGE 4 — Learning */}
-                    <div className="book-page">
-                        <h2>Learning Through Play 🧠</h2>
-                        <p>
-                            We blend fun with learning — letters, colors, counting, and
-                            storytelling come alive through hands-on activities.
-                        </p>
-                    </div>
-
-                    {/* PAGE 5 — Parents */}
-                    <div className="book-page">
-                        <h2>Parents 🤝</h2>
-                        <p>
-                            We work closely with parents to ensure every child’s growth and
-                            happiness. Communication is open and daily reports are shared.
-                        </p>
-                    </div>
-
-                    {/* PAGE 6 — Contact */}
-                    <div className="book-page">
-                        <h2>Visit Us 🕒</h2>
-                        <p>
-                            <strong>Hours:</strong> Monday – Friday, 7:30 AM – 6:00 PM <br />
-                            <strong>Location:</strong> 123 Sunshine Avenue, Seattle, WA <br />
-                            <strong>Contact:</strong> (425) 555-1844 <br />
-                            <strong>Email:</strong> info@rashidaslittlechamps.com
-                        </p>
-                    </div>
-
-                    {/* 🌈 BACK COVER */}
-                    <div className="book-page cover-back sparkle">
-                        <h2>Thank You 💕</h2>
-                        <p>We can’t wait to welcome your little champ!</p>
-                    </div>
-                </HTMLFlipBook>
-
-                <button className="nav-arrow left" onClick={prevPage}>
-                    ‹
-                </button>
-                <button className="nav-arrow right" onClick={nextPage}>
-                    ›
-                </button>
-            </div>
+            <button className="nav-arrow left" onClick={previousPage} type="button" aria-label="Previous page">
+                ‹
+            </button>
+            <button className="nav-arrow right" onClick={nextPage} type="button" aria-label="Next page">
+                ›
+            </button>
         </div>
-    );
-};
-
-export default Book;
+    )
+}
