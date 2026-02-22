@@ -3,9 +3,27 @@ import { useEffect, useMemo, useState } from 'react'
 function getBookSize() {
   const viewportWidth = window.innerWidth
   const viewportHeight = window.innerHeight
+  const isMobile = viewportWidth <= 768
 
-  const spreadWidth = Math.min(1100, Math.floor(viewportWidth * 0.92))
-  const maxHeight = Math.min(760, Math.floor(viewportHeight * 0.8))
+  if (isMobile) {
+    let width = Math.floor(viewportWidth * 0.88)
+    let height = Math.floor(viewportHeight * 0.7)
+
+    const pageAspect = 0.72
+    if (width / height > pageAspect) {
+      width = Math.floor(height * pageAspect)
+    } else {
+      height = Math.floor(width / pageAspect)
+    }
+
+    width = Math.max(180, Math.min(360, width))
+    height = Math.max(260, Math.min(560, height))
+
+    return { width, height, isMobile }
+  }
+
+  const spreadWidth = Math.min(1320, Math.floor(viewportWidth * 0.96))
+  const maxHeight = Math.min(860, Math.floor(viewportHeight * 0.86))
 
   let width = Math.floor(spreadWidth / 2)
   let height = maxHeight
@@ -17,10 +35,10 @@ function getBookSize() {
     height = Math.floor(width / pageAspect)
   }
 
-  width = Math.max(240, Math.min(520, width))
-  height = Math.max(320, Math.min(760, height))
+  width = Math.max(280, Math.min(640, width))
+  height = Math.max(360, Math.min(860, height))
 
-  return { width, height }
+  return { width, height, isMobile }
 }
 
 export function useBookSize(bookRef) {

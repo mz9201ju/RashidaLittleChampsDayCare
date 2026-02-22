@@ -2,10 +2,29 @@
   .book-shell {
     --tilt-x: 0deg;
     --tilt-y: 0deg;
+    --book-lift: 0px;
+    width: 100%;
+    justify-items: center;
   }
 
   .storybook-content {
     padding: 14px;
+  }
+
+  .book-shell.at-start .daycare-book,
+  .book-shell.at-end .daycare-book {
+    clip-path: none;
+  }
+
+  .book-shell.at-start .daycare-book .stf__item.--left,
+  .book-shell.at-end .daycare-book .stf__item.--right {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .book-spine {
+    display: none;
   }
 
   .book-page-content {

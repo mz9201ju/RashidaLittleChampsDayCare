@@ -100,9 +100,37 @@ body {
   background: linear-gradient(270deg, rgba(0, 0, 0, 0.26), rgba(0, 0, 0, 0));
 }
 
+.book-shell.at-start .daycare-book .stf__item.--left {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.book-shell.at-end .daycare-book .stf__item.--right {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.book-shell.at-start .book-spine::before {
+  opacity: 0;
+}
+
+.book-shell.at-end .book-spine::after {
+  opacity: 0;
+}
+
 .daycare-book {
   border-radius: 24px;
   box-shadow: 0 22px 55px rgba(84, 59, 20, 0.25);
+}
+
+.book-shell.at-start .daycare-book {
+  clip-path: inset(0 0 0 calc(50% - 12px));
+}
+
+.book-shell.at-end .daycare-book {
+  clip-path: inset(0 calc(50% - 12px) 0 0);
 }
 
 .daycare-book .stf__item {

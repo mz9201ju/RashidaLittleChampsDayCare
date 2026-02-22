@@ -1,18 +1,13 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import HTMLFlipBook from 'react-pageflip'
 import { BOOK_PAGES } from './data/storyPages'
 import { useBookSize } from './hooks/useBookSize'
 
-const FLIP_CONFIG = {
+const BASE_FLIP_CONFIG = {
     size: 'fixed',
-    minWidth: 240,
-    maxWidth: 520,
-    minHeight: 320,
-    maxHeight: 760,
     drawShadow: true,
     flippingTime: 1000,
     showCover: true,
-    usePortrait: false,
     startPage: 0,
     startZIndex: 10,
     mobileScrollSupport: false,
@@ -44,7 +39,18 @@ function renderPageContent(page) {
 
 export default function Book() {
     const bookRef = useRef(null)
+    const [currentPage, setCurrentPage] = useState(0)
     const size = useBookSize(bookRef)
+    const isMobile = size.isMobile
+
+    const flipConfig = {
+        ...BASE_FLIP_CONFIG,
+        minWidth: isMobile ? 180 : 280,
+        maxWidth: isMobile ? 360 : 640,
+        minHeight: isMobile ? 260 : 360,
+        maxHeight: isMobile ? 560 : 860,
+        usePortrait: isMobile,
+    }
 
     const nextPage = () => bookRef.current?.pageFlip().flipNext()
     const previousPage = () => bookRef.current?.pageFlip().flipPrev()
@@ -66,14 +72,29 @@ export default function Book() {
         event.currentTarget.style.setProperty('--tilt-y', '0deg')
     }
 
+    const handleFlip = (event) => {
+        const pageIndex = typeof event?.data === 'number' ? event.data : 0
+        setCurrentPage(pageIndex)
+    }
+
+    const shellClasses = [
+        'book-shell',
+        currentPage === 0 ? 'at-start' : '',
+        currentPage === BOOK_PAGES.length - 1 ? 'at-end' : '',
+    ]
+        .filter(Boolean)
+        .join(' ')
+
     return (
-        <div className="book-shell" onMouseMove={handleMouseMove} onMouseLeave={resetTilt}>
+        <div className={shellClasses} onMouseMove={handleMouseMove} onMouseLeave={resetTilt}>
             <HTMLFlipBook
                 ref={bookRef}
                 width={size.width}
                 height={size.height}
                 className="daycare-book"
-                {...FLIP_CONFIG}
+                onInit={handleFlip}
+                onFlip={handleFlip}
+                {...flipConfig}
             >
                 {BOOK_PAGES.map((page) => (
                     <article key={page.id} className={`book-page ${page.variant}`}>
