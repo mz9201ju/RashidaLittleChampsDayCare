@@ -74,6 +74,10 @@
     top: 5%;
   }
 
+  .sun-ring {
+    display: none;
+  }
+
   .cloud {
     width: 110px;
     height: 46px;
@@ -87,6 +91,12 @@
   .cloud-right {
     top: 13%;
     right: 3%;
+  }
+
+  /* Hide birds and butterfly on mobile to preserve GPU budget */
+  .bird,
+  .butterfly {
+    display: none;
   }
 
   .tree {
@@ -108,5 +118,9 @@
   .toy-ball {
     width: 42px;
     height: 42px;
+  }
+
+  .ground-mist {
+    height: 70px;
   }
 }

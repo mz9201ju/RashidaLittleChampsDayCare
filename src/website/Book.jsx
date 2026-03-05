@@ -62,8 +62,8 @@ export default function Book() {
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
         gsap.fromTo(
             shellRef.current,
-            { opacity: 0, y: 40, scale: 0.94 },
-            { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.5)', delay: 0.1 }
+            { opacity: 0, y: 50, scale: 0.92, rotateX: 8 },
+            { opacity: 1, y: 0, scale: 1, rotateX: 0, duration: 0.85, ease: 'back.out(1.4)', delay: 0.1 }
         )
     }, [])
 
@@ -75,8 +75,8 @@ export default function Book() {
         const rect = element.getBoundingClientRect()
         const centerX = rect.left + rect.width / 2
         const centerY = rect.top + rect.height / 2
-        const rotateY = ((event.clientX - centerX) / rect.width) * 6
-        const rotateX = ((centerY - event.clientY) / rect.height) * 4
+        const rotateY = ((event.clientX - centerX) / rect.width) * 8
+        const rotateX = ((centerY - event.clientY) / rect.height) * 5
 
         element.style.setProperty('--tilt-x', `${rotateX.toFixed(2)}deg`)
         element.style.setProperty('--tilt-y', `${rotateY.toFixed(2)}deg`)
