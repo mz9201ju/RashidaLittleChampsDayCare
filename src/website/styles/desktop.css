@@ -9,7 +9,9 @@
   }
 
   .daycare-book .stf__item {
-    box-shadow: 0 14px 28px rgba(84, 59, 20, 0.16);
+    box-shadow:
+      0 14px 28px rgba(84, 59, 20, 0.18),
+      0 4px 10px rgba(84, 59, 20, 0.1);
   }
 
   .daycare-book .stf__item.--left,
@@ -18,11 +20,14 @@
   }
 
   .storybook-content {
-    padding: 24px 64px;
+    padding: 24px 96px;
   }
 
   .book-spine {
     width: 26px;
+    box-shadow:
+      0 0 24px rgba(25, 16, 8, 0.26),
+      inset 0 0 8px rgba(255, 255, 255, 0.38);
   }
 
   .book-spine::before,
@@ -36,5 +41,15 @@
 
   .cloud-right {
     animation-duration: 11s;
+  }
+
+  /* Stronger drop shadow on desktop to simulate resting on a surface */
+  .book-shell::after {
+    bottom: -22px;
+    left: 8%;
+    right: 8%;
+    height: 34px;
+    filter: blur(18px);
+    background: rgba(80, 50, 15, 0.28);
   }
 }

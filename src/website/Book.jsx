@@ -1,7 +1,9 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import HTMLFlipBook from 'react-pageflip'
+import { gsap } from 'gsap'
 import { BOOK_PAGES } from './data/storyPages'
 import { useBookSize } from './hooks/useBookSize'
+import { usePageSound } from './hooks/usePageSound'
 
 const BASE_FLIP_CONFIG = {
     size: 'fixed',
@@ -39,9 +41,11 @@ function renderPageContent(page) {
 
 export default function Book() {
     const bookRef = useRef(null)
+    const shellRef = useRef(null)
     const [currentPage, setCurrentPage] = useState(0)
     const size = useBookSize(bookRef)
     const isMobile = size.isMobile
+    const { playFlip } = usePageSound()
 
     const flipConfig = {
         ...BASE_FLIP_CONFIG,
@@ -51,6 +55,17 @@ export default function Book() {
         maxHeight: isMobile ? 560 : 860,
         usePortrait: isMobile,
     }
+
+    // GSAP entrance animation
+    useEffect(() => {
+        if (!shellRef.current) return
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+        gsap.fromTo(
+            shellRef.current,
+            { opacity: 0, y: 40, scale: 0.94 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.5)', delay: 0.1 }
+        )
+    }, [])
 
     const nextPage = () => bookRef.current?.pageFlip().flipNext()
     const previousPage = () => bookRef.current?.pageFlip().flipPrev()
@@ -75,6 +90,8 @@ export default function Book() {
     const handleFlip = (event) => {
         const pageIndex = typeof event?.data === 'number' ? event.data : 0
         setCurrentPage(pageIndex)
+        playFlip()
+        if (navigator.vibrate) navigator.vibrate(30)
     }
 
     const shellClasses = [
@@ -86,7 +103,7 @@ export default function Book() {
         .join(' ')
 
     return (
-        <div className={shellClasses} onMouseMove={handleMouseMove} onMouseLeave={resetTilt}>
+        <div ref={shellRef} className={shellClasses} onMouseMove={handleMouseMove} onMouseLeave={resetTilt}>
             <HTMLFlipBook
                 ref={bookRef}
                 width={size.width}
