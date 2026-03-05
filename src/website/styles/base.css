@@ -9,6 +9,8 @@
   --text-soft: #7a5738;
   --accent: #ffd45c;
   --line-soft: rgba(90, 59, 34, 0.12);
+  --parallax-x: 0px;
+  --parallax-y: 0px;
 }
 
 * {
@@ -285,6 +287,9 @@ body {
   inset: 0;
   z-index: 1;
   pointer-events: none;
+  transform: translate(calc(var(--parallax-x) * 0.25), calc(var(--parallax-y) * 0.15));
+  will-change: transform;
+  transition: transform 180ms ease-out;
 }
 
 .sky-gradient {
@@ -439,5 +444,62 @@ body {
 
   to {
     box-shadow: 0 0 55px rgba(255, 214, 92, 0.72);
+  }
+}
+
+/* Sparkles overlay canvas */
+.sparkles-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Enhanced book drop-shadow so it looks like a real object on a surface */
+.book-shell::after {
+  content: '';
+  position: absolute;
+  bottom: -18px;
+  left: 10%;
+  right: 10%;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(80, 50, 15, 0.22);
+  filter: blur(14px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Paper texture horizontal lines on inside pages */
+.inside-page .book-page-content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 27px,
+    rgba(90, 59, 34, 0.055) 28px
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Reduced-motion: disable all custom animations */
+@media (prefers-reduced-motion: reduce) {
+  .sun,
+  .cloud,
+  .storybook-backdrop {
+    animation: none;
+    transition: none;
+  }
+
+  .book-shell {
+    transition: none;
+  }
+
+  .nav-arrow {
+    transition: none;
   }
 }

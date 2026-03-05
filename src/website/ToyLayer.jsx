@@ -1,6 +1,9 @@
+import Sparkles from './components/Sparkles'
+
 export default function ToyLayer() {
     return (
         <div className="storybook-backdrop" aria-hidden="true">
+            <Sparkles />
             <div className="sky-gradient" />
             <div className="sun" />
             <div className="cloud cloud-left" />

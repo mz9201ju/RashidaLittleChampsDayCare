@@ -8,7 +8,7 @@
   }
 
   .storybook-content {
-    padding: 14px;
+    padding: 14px clamp(40px, 14vw, 64px);
   }
 
   .book-shell.at-start .daycare-book,
@@ -43,7 +43,18 @@
   }
 
   .nav-arrow {
-    display: none;
+    display: grid;
+    width: 48px;
+    height: 48px;
+    font-size: 1.8rem;
+  }
+
+  .nav-arrow.left {
+    left: -56px;
+  }
+
+  .nav-arrow.right {
+    right: -56px;
   }
 
   .book-spine {
