@@ -10,9 +10,9 @@
 
   .daycare-book .stf__item {
     box-shadow:
-      0 16px 32px rgba(84, 59, 20, 0.22),
-      0 6px 12px rgba(84, 59, 20, 0.12),
-      0 1px 3px rgba(84, 59, 20, 0.08);
+      0 18px 36px rgba(84, 59, 20, 0.24),
+      0 6px 14px rgba(84, 59, 20, 0.14),
+      0 1px 4px rgba(84, 59, 20, 0.08);
   }
 
   .daycare-book .stf__item.--left,
@@ -22,18 +22,6 @@
 
   .storybook-content {
     padding: 24px 96px;
-  }
-
-  .book-spine {
-    width: 28px;
-    box-shadow:
-      0 0 26px rgba(25, 16, 8, 0.28),
-      inset 0 0 9px rgba(255, 255, 255, 0.42);
-  }
-
-  .book-spine::before,
-  .book-spine::after {
-    width: 44px;
   }
 
   .cloud-left {
@@ -49,9 +37,9 @@
     bottom: -24px;
     left: 6%;
     right: 6%;
-    height: 38px;
-    filter: blur(20px);
-    background: rgba(70, 40, 10, 0.32);
+    height: 40px;
+    filter: blur(22px);
+    background: rgba(70, 40, 10, 0.34);
   }
 
   /* Deeper ambient occlusion on desktop */
@@ -61,5 +49,10 @@
 
   .daycare-book .stf__item.--right .inside-page {
     box-shadow: inset 22px 0 28px rgba(34, 24, 12, 0.2), inset 3px 0 6px rgba(34, 24, 12, 0.1);
+  }
+
+  .rainbow {
+    width: 520px;
+    height: 260px;
   }
 }
