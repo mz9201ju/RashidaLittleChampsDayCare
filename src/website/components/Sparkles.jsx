@@ -62,17 +62,30 @@ export default function Sparkles() {
         const canvas = canvasRef.current
         if (!canvas) return
         const ctx = canvas.getContext('2d')
+        if (!ctx) return
         let animId
         let sparkles = []
+        let cssWidth = 0
+        let cssHeight = 0
 
         const resize = () => {
-            canvas.width = canvas.offsetWidth || window.innerWidth
-            canvas.height = canvas.offsetHeight || window.innerHeight
-            sparkles = Array.from({ length: COUNT }, () => new Sparkle(canvas.width, canvas.height))
+            cssWidth = canvas.offsetWidth || window.innerWidth
+            cssHeight = canvas.offsetHeight || window.innerHeight
+            const dpr = window.devicePixelRatio || 1
+
+            canvas.width = cssWidth * dpr
+            canvas.height = cssHeight * dpr
+
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+
+            sparkles = Array.from(
+                { length: COUNT },
+                () => new Sparkle(cssWidth, cssHeight)
+            )
         }
 
         const animate = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            ctx.clearRect(0, 0, cssWidth, cssHeight)
             sparkles.forEach((s) => {
                 s.update()
                 s.draw(ctx)

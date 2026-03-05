@@ -21,7 +21,11 @@ export function usePageSound() {
             }
             const ctx = ctxRef.current
             if (!ctx) return
-            if (ctx.state === 'suspended') ctx.resume()
+            if (ctx.state === 'suspended') {
+                ctx.resume().catch(() => {
+                    // AudioContext.resume() failed (e.g. autoplay policy) – fail silently
+                })
+            }
 
             const now = ctx.currentTime
             const duration = 0.2
