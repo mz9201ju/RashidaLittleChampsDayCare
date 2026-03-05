@@ -1,5 +1,6 @@
 :root {
-  --bg-top: #c8eeff;
+  --bg-top: #a8d8f0;
+  --bg-mid: #c8eeff;
   --bg-bottom: #fff6cf;
   --surface-paper: #fffdf0;
   --surface-paper-alt: #fff7d8;
@@ -33,11 +34,18 @@ body,
 body {
   font-family: 'Poppins', 'Comic Sans MS', sans-serif;
   color: var(--text-primary);
-  background: linear-gradient(180deg, var(--bg-top) 0%, #e8f8ff 40%, var(--bg-bottom) 100%);
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 40%, var(--bg-bottom) 100%);
+  background-size: 100% 200%;
+  animation: skyShift 18s ease-in-out infinite;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+}
+
+@keyframes skyShift {
+  0%, 100% { background-position: 0% 0%; }
+  50% { background-position: 0% 35%; }
 }
 
 .storybook-scene {
@@ -56,6 +64,7 @@ body {
   place-items: center;
 }
 
+/* ── Book shell ── */
 .book-shell {
   position: relative;
   display: grid;
@@ -66,51 +75,17 @@ body {
   transform-style: preserve-3d;
 }
 
-.book-spine {
-  position: absolute;
-  top: 18px;
-  bottom: 18px;
-  left: 50%;
-  width: 22px;
-  transform: translateX(-50%);
-  border-radius: 12px;
-  pointer-events: none;
-  z-index: 7;
-  background: linear-gradient(
-    90deg,
-    rgba(34, 24, 12, 0.42) 0%,
-    rgba(73, 51, 25, 0.22) 20%,
-    rgba(255, 255, 255, 0.58) 48%,
-    rgba(255, 255, 255, 0.72) 50%,
-    rgba(255, 255, 255, 0.58) 52%,
-    rgba(73, 51, 25, 0.22) 80%,
-    rgba(34, 24, 12, 0.42) 100%
-  );
-  box-shadow:
-    0 0 18px rgba(25, 16, 8, 0.2),
-    inset 0 0 7px rgba(255, 255, 255, 0.35);
+/* Gentle floating animation for the book */
+@keyframes bookFloat {
+  0%, 100% { --book-lift: 0px; }
+  50% { --book-lift: -10px; }
 }
 
-.book-spine::before,
-.book-spine::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 34px;
-  pointer-events: none;
+.book-shell {
+  animation: bookFloat 5s ease-in-out infinite;
 }
 
-.book-spine::before {
-  right: 100%;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.08) 60%, rgba(0, 0, 0, 0));
-}
-
-.book-spine::after {
-  left: 100%;
-  background: linear-gradient(270deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.08) 60%, rgba(0, 0, 0, 0));
-}
-
+/* Hide the empty page on cover / last page */
 .book-shell.at-start .daycare-book .stf__item.--left {
   opacity: 0;
   visibility: hidden;
@@ -123,20 +98,14 @@ body {
   pointer-events: none;
 }
 
-.book-shell.at-start .book-spine::before {
-  opacity: 0;
-}
-
-.book-shell.at-end .book-spine::after {
-  opacity: 0;
-}
-
+/* Smooth clip transition so the cover doesn't jump when opening */
 .daycare-book {
   border-radius: 24px;
   box-shadow:
-    0 22px 55px rgba(84, 59, 20, 0.28),
-    0 8px 20px rgba(84, 59, 20, 0.18),
+    0 28px 60px rgba(84, 59, 20, 0.32),
+    0 10px 24px rgba(84, 59, 20, 0.2),
     0 2px 6px rgba(84, 59, 20, 0.12);
+  transition: clip-path 500ms ease;
 }
 
 .book-shell.at-start .daycare-book {
@@ -158,12 +127,14 @@ body {
 
 .daycare-book .stf__block {
   border-radius: 24px;
+  transform-style: preserve-3d;
 }
 
 .daycare-book .stf__page {
   background: transparent;
 }
 
+/* ── Book pages ── */
 .book-page {
   width: 100%;
   height: 100%;
@@ -294,6 +265,7 @@ body {
   gap: 8px;
 }
 
+/* ── Nav arrows ── */
 .nav-arrow {
   position: absolute;
   top: 50%;
@@ -327,6 +299,7 @@ body {
   right: -72px;
 }
 
+/* ── Backdrop ── */
 .storybook-backdrop {
   position: absolute;
   inset: 0;
@@ -337,12 +310,60 @@ body {
   transition: transform 180ms ease-out;
 }
 
+/* ── Sky ── */
 .sky-gradient {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% -10%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 55%);
+  background: radial-gradient(circle at 50% -10%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 55%);
+  animation: skyBreath 10s ease-in-out infinite;
 }
 
+@keyframes skyBreath {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ── Rainbow ── */
+.rainbow {
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 420px;
+  height: 210px;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  animation: rainbowFade 22s ease-in-out infinite 3s;
+}
+
+.rainbow::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -5%;
+  right: -5%;
+  height: 210px;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  background: radial-gradient(
+    ellipse at center bottom,
+    transparent 52%,
+    rgba(255, 0, 60, 0.28) 54%,
+    rgba(255, 130, 0, 0.28) 57%,
+    rgba(255, 230, 0, 0.28) 60%,
+    rgba(60, 200, 60, 0.28) 63%,
+    rgba(0, 120, 255, 0.28) 66%,
+    rgba(120, 0, 220, 0.28) 69%,
+    transparent 71%
+  );
+}
+
+@keyframes rainbowFade {
+  0%, 15%, 85%, 100% { opacity: 0; }
+  30%, 70% { opacity: 1; }
+}
+
+/* ── Sun ── */
 .sun {
   position: absolute;
   top: 4%;
@@ -359,7 +380,6 @@ body {
   overflow: visible;
 }
 
-/* Pulsing light rings emanating from the sun */
 .sun-ring {
   position: absolute;
   top: 50%;
@@ -382,26 +402,65 @@ body {
   animation: sunRingPulse 3.2s ease-out infinite 1.0s;
 }
 
+.sun-ring-3 {
+  width: 280px;
+  height: 280px;
+  animation: sunRingPulse 3.2s ease-out infinite 1.8s;
+}
+
+/* ── Clouds ── */
 .cloud {
   position: absolute;
-  width: 170px;
-  height: 70px;
+  width: 180px;
+  height: 72px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.8);
-  filter: blur(0.4px);
+  background: rgba(255, 255, 255, 0.88);
+  filter: blur(0.3px);
   animation: driftCloud 8s ease-in-out infinite alternate;
 }
 
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 999px;
+}
+
+.cloud::before {
+  width: 100px;
+  height: 80px;
+  top: -30px;
+  left: 28px;
+}
+
+.cloud::after {
+  width: 70px;
+  height: 60px;
+  top: -16px;
+  right: 30px;
+}
+
 .cloud-left {
-  top: 12%;
-  left: 8%;
+  top: 11%;
+  left: 6%;
 }
 
 .cloud-right {
-  top: 16%;
-  right: 10%;
+  top: 15%;
+  right: 8%;
 }
 
+.cloud-mid {
+  top: 6%;
+  left: 38%;
+  width: 130px;
+  height: 52px;
+  opacity: 0.7;
+  animation: driftCloud 12s ease-in-out infinite alternate-reverse;
+}
+
+/* ── Hills ── */
 .hill {
   position: absolute;
   bottom: -45px;
@@ -410,16 +469,25 @@ body {
   border-radius: 50% 50% 0 0;
   background: linear-gradient(180deg, #8fe388 0%, #69c865 40%, #4fb854 100%);
   box-shadow: inset 0 8px 20px rgba(0, 0, 0, 0.08);
+  animation: hillPulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes hillPulse {
+  from { transform: scaleY(1); }
+  to { transform: scaleY(1.03); }
 }
 
 .hill-left {
   left: -8%;
+  animation-delay: 0s;
 }
 
 .hill-right {
   right: -8%;
+  animation-delay: 4s;
 }
 
+/* ── Trees ── */
 .tree {
   position: absolute;
   bottom: 140px;
@@ -456,8 +524,62 @@ body {
   border-radius: 999px;
   background: radial-gradient(circle at 35% 30%, #a8f49f, #52b652 65%, #3e9941);
   box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.1);
+  /* Pivot at base where canopy meets trunk; animation overrides translateX to keep centering */
+  transform-origin: center bottom;
+  animation: treeSway 5s ease-in-out infinite alternate;
 }
 
+.tree-right .canopy {
+  animation-delay: 2.5s;
+}
+
+@keyframes treeSway {
+  from { transform: translateX(-50%) rotate(-3deg); }
+  to   { transform: translateX(-50%) rotate(3deg); }
+}
+
+/* ── Flowers ── */
+.flower {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  pointer-events: none;
+  animation: flowerBob 3.5s ease-in-out infinite alternate;
+}
+
+.flower::before {
+  content: '🌸';
+  font-size: 1.2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.flower-1 {
+  bottom: 155px;
+  left: 17%;
+  animation-delay: 0s;
+}
+
+.flower-2 {
+  bottom: 148px;
+  left: 50%;
+  animation-delay: 1.2s;
+}
+
+.flower-3 {
+  bottom: 158px;
+  right: 18%;
+  animation-delay: 0.6s;
+}
+
+@keyframes flowerBob {
+  from { transform: translateY(0) rotate(-8deg); }
+  to   { transform: translateY(-6px) rotate(8deg); }
+}
+
+/* ── Toy blocks & balls ── */
 .toy-block,
 .toy-ball {
   position: absolute;
@@ -475,14 +597,22 @@ body {
   color: #824e1f;
   background: linear-gradient(145deg, #ffd38a, #ffbc5f);
   border: 3px solid #efac44;
+  animation: blockWobble 4s ease-in-out infinite alternate;
 }
 
 .toy-block-left {
   left: 16%;
+  animation-delay: 0s;
 }
 
 .toy-block-right {
   right: 16%;
+  animation-delay: 2s;
+}
+
+@keyframes blockWobble {
+  from { transform: rotate(-4deg) translateY(0); }
+  to   { transform: rotate(4deg) translateY(-6px); }
 }
 
 .toy-ball {
@@ -490,123 +620,71 @@ body {
   height: 52px;
   border-radius: 999px;
   background: radial-gradient(circle at 30% 30%, #ff99be, #ff5c95 70%);
+  animation: ballBounce 1.8s cubic-bezier(0.36, 0, 0.66, -0.56) infinite;
 }
 
 .toy-ball-left {
   left: 8%;
+  animation-delay: 0s;
 }
 
 .toy-ball-right {
   right: 8%;
+  background: radial-gradient(circle at 30% 30%, #a0cfff, #5098ff 70%);
+  animation-delay: 0.9s;
 }
 
-@keyframes driftCloud {
-  from {
-    transform: translateX(-6px);
-  }
-
-  to {
-    transform: translateX(6px);
-  }
+/* Squash-and-stretch bounce: negative Y2 creates the natural overshoot snap */
+@keyframes ballBounce {
+  0%, 100% { transform: translateY(0) scaleX(1) scaleY(1); }
+  45%       { transform: translateY(-36px) scaleX(1) scaleY(1.06); }
+  50%       { transform: translateY(-38px) scaleX(1) scaleY(1.08); }
+  90%       { transform: translateY(0) scaleX(1.12) scaleY(0.88); }
 }
 
-@keyframes sunGlow {
-  from {
-    box-shadow: 0 0 35px rgba(255, 214, 92, 0.52), 0 0 70px rgba(255, 200, 60, 0.18);
-  }
-
-  to {
-    box-shadow: 0 0 55px rgba(255, 214, 92, 0.72), 0 0 100px rgba(255, 200, 60, 0.28);
-  }
-}
-
-@keyframes sunRingPulse {
-  0% {
-    opacity: 0.6;
-    transform: translate(-50%, -50%) scale(1);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(2.1);
-  }
-}
-
-@keyframes flyBird {
-  from {
-    transform: translateX(-80px) translateY(0);
-  }
-
-  25% {
-    transform: translateX(25vw) translateY(-12px);
-  }
-
-  50% {
-    transform: translateX(50vw) translateY(4px);
-  }
-
-  75% {
-    transform: translateX(75vw) translateY(-8px);
-  }
-
-  to {
-    transform: translateX(calc(100vw + 80px)) translateY(0);
-  }
-}
-
-@keyframes wingFlap {
-  from {
-    transform: scaleY(1);
-  }
-
-  to {
-    transform: scaleY(-0.35);
-  }
-}
-
-@keyframes flyButterfly {
-  0% {
-    transform: translateX(-60px) translateY(0) rotate(0deg);
-  }
-
-  20% {
-    transform: translateX(20vw) translateY(-30px) rotate(8deg);
-  }
-
-  40% {
-    transform: translateX(40vw) translateY(15px) rotate(-5deg);
-  }
-
-  60% {
-    transform: translateX(60vw) translateY(-20px) rotate(10deg);
-  }
-
-  80% {
-    transform: translateX(80vw) translateY(8px) rotate(-4deg);
-  }
-
-  to {
-    transform: translateX(calc(100vw + 60px)) translateY(0) rotate(0deg);
-  }
-}
-
-@keyframes butterflyWing {
-  from {
-    transform: scaleX(1);
-  }
-
-  to {
-    transform: scaleX(0.15);
-  }
-}
-
-/* Sparkles overlay canvas */
-.sparkles-canvas {
+/* ── Balloons ── */
+.balloon {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  width: 38px;
+  height: 48px;
+  border-radius: 50% 50% 48% 48%;
   pointer-events: none;
+}
+
+.balloon::after {
+  content: '';
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1.5px;
+  height: 22px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.balloon-1 {
+  left: 12%;
+  background: radial-gradient(circle at 35% 30%, #ffb8d0, #ff5c95 70%);
+  animation: floatBalloon 16s ease-in-out infinite 0s;
+}
+
+.balloon-2 {
+  left: 78%;
+  background: radial-gradient(circle at 35% 30%, #b8d0ff, #5c80ff 70%);
+  animation: floatBalloon 21s ease-in-out infinite 5s;
+}
+
+.balloon-3 {
+  left: 45%;
+  background: radial-gradient(circle at 35% 30%, #b8ffcc, #3ec870 70%);
+  animation: floatBalloon 26s ease-in-out infinite 11s;
+}
+
+@keyframes floatBalloon {
+  0%   { transform: translateY(105vh) rotate(-6deg); opacity: 0; }
+  6%   { opacity: 0.9; }
+  94%  { opacity: 0.9; }
+  100% { transform: translateY(-18vh) rotate(6deg); opacity: 0; }
 }
 
 /* ── Birds ── */
@@ -658,6 +736,12 @@ body {
   transform: scale(0.62);
 }
 
+.bird-4 {
+  top: 17%;
+  animation: flyBird 34s linear infinite 15s;
+  transform: scale(0.5);
+}
+
 /* ── Butterfly ── */
 .butterfly {
   position: absolute;
@@ -676,7 +760,7 @@ body {
   width: 12px;
   height: 16px;
   border-radius: 80% 20% 20% 80%;
-  background: rgba(255, 140, 200, 0.55);
+  background: rgba(255, 140, 200, 0.6);
   animation: butterflyWing 0.28s ease-in-out infinite alternate;
 }
 
@@ -698,17 +782,17 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 100px;
+  height: 110px;
   background: linear-gradient(
     to top,
-    rgba(220, 245, 230, 0.5) 0%,
-    rgba(230, 248, 235, 0.3) 40%,
+    rgba(200, 240, 215, 0.55) 0%,
+    rgba(220, 248, 228, 0.32) 45%,
     rgba(255, 255, 255, 0) 100%
   );
   pointer-events: none;
 }
 
-/* Enhanced book drop-shadow so it looks like a real object on a surface */
+/* ── Book drop-shadow ── */
 .book-shell::after {
   content: '';
   position: absolute;
@@ -723,7 +807,7 @@ body {
   z-index: -1;
 }
 
-/* Paper texture horizontal and vertical lines on inside pages */
+/* ── Paper texture ── */
 .inside-page .book-page-content::before {
   content: '';
   position: absolute;
@@ -739,19 +823,86 @@ body {
   z-index: 0;
 }
 
-/* Reduced-motion: disable all custom animations */
+/* ── Sparkles canvas ── */
+.sparkles-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ── Keyframes ── */
+@keyframes driftCloud {
+  from { transform: translateX(-8px); }
+  to   { transform: translateX(8px); }
+}
+
+@keyframes sunGlow {
+  from { box-shadow: 0 0 35px rgba(255, 214, 92, 0.52), 0 0 70px rgba(255, 200, 60, 0.18); }
+  to   { box-shadow: 0 0 60px rgba(255, 214, 92, 0.78), 0 0 110px rgba(255, 200, 60, 0.32); }
+}
+
+@keyframes sunRingPulse {
+  0%   { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(2.2); }
+}
+
+@keyframes flyBird {
+  from { transform: translateX(-80px) translateY(0); }
+  25%  { transform: translateX(25vw) translateY(-12px); }
+  50%  { transform: translateX(50vw) translateY(4px); }
+  75%  { transform: translateX(75vw) translateY(-8px); }
+  to   { transform: translateX(calc(100vw + 80px)) translateY(0); }
+}
+
+@keyframes wingFlap {
+  from { transform: scaleY(1); }
+  to   { transform: scaleY(-0.35); }
+}
+
+@keyframes flyButterfly {
+  0%   { transform: translateX(-60px) translateY(0) rotate(0deg); }
+  20%  { transform: translateX(20vw) translateY(-30px) rotate(8deg); }
+  40%  { transform: translateX(40vw) translateY(15px) rotate(-5deg); }
+  60%  { transform: translateX(60vw) translateY(-20px) rotate(10deg); }
+  80%  { transform: translateX(80vw) translateY(8px) rotate(-4deg); }
+  to   { transform: translateX(calc(100vw + 60px)) translateY(0) rotate(0deg); }
+}
+
+@keyframes butterflyWing {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0.15); }
+}
+
+/* ── Reduced-motion ── */
 @media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+  }
+
   .sun,
   .sun-ring,
   .cloud,
   .bird,
   .butterfly,
-  .storybook-backdrop {
+  .storybook-backdrop,
+  .balloon,
+  .canopy,
+  .toy-ball,
+  .toy-block,
+  .flower,
+  .hill {
     animation: none;
     transition: none;
   }
 
   .book-shell {
+    animation: none;
+    transition: none;
+  }
+
+  .daycare-book {
     transition: none;
   }
 

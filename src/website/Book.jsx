@@ -8,7 +8,7 @@ import { usePageSound } from './hooks/usePageSound'
 const BASE_FLIP_CONFIG = {
     size: 'fixed',
     drawShadow: true,
-    flippingTime: 1000,
+    flippingTime: 900,
     showCover: true,
     startPage: 0,
     startZIndex: 10,
@@ -16,7 +16,7 @@ const BASE_FLIP_CONFIG = {
     useMouseEvents: true,
     useTouchEvents: true,
     clickEventForward: false,
-    swipeDistance: 20,
+    swipeDistance: 15,
     showPageCorners: true,
     disableFlipByClick: false,
 }
@@ -42,6 +42,8 @@ function renderPageContent(page) {
 export default function Book() {
     const bookRef = useRef(null)
     const shellRef = useRef(null)
+    const touchRafRef = useRef(null)
+    const shellRectRef = useRef(null)
     const [currentPage, setCurrentPage] = useState(0)
     const size = useBookSize(bookRef)
     const isMobile = size.isMobile
@@ -87,11 +89,40 @@ export default function Book() {
         event.currentTarget.style.setProperty('--tilt-y', '0deg')
     }
 
+    const handleTouchMove = (event) => {
+        if (touchRafRef.current) return
+        const touch = event.touches[0]
+        if (!touch || !shellRef.current) return
+        touchRafRef.current = requestAnimationFrame(() => {
+            const rect = shellRectRef.current || shellRef.current.getBoundingClientRect()
+            const centerX = rect.left + rect.width / 2
+            const centerY = rect.top + rect.height / 2
+            const rotateY = ((touch.clientX - centerX) / rect.width) * 6
+            const rotateX = ((centerY - touch.clientY) / rect.height) * 4
+            shellRef.current.style.setProperty('--tilt-x', `${rotateX.toFixed(2)}deg`)
+            shellRef.current.style.setProperty('--tilt-y', `${rotateY.toFixed(2)}deg`)
+            touchRafRef.current = null
+        })
+    }
+
+    const resetTouchTilt = () => {
+        if (!shellRef.current) return
+        shellRectRef.current = null
+        shellRef.current.style.setProperty('--tilt-x', '0deg')
+        shellRef.current.style.setProperty('--tilt-y', '0deg')
+    }
+
     const handleFlip = (event) => {
         const pageIndex = typeof event?.data === 'number' ? event.data : 0
         setCurrentPage(pageIndex)
         playFlip()
         if (navigator.vibrate) navigator.vibrate(30)
+    }
+
+    const handleTouchStart = () => {
+        if (shellRef.current) {
+            shellRectRef.current = shellRef.current.getBoundingClientRect()
+        }
     }
 
     const shellClasses = [
@@ -103,7 +134,15 @@ export default function Book() {
         .join(' ')
 
     return (
-        <div ref={shellRef} className={shellClasses} onMouseMove={handleMouseMove} onMouseLeave={resetTilt}>
+        <div
+            ref={shellRef}
+            className={shellClasses}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={resetTilt}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={resetTouchTilt}
+        >
             <HTMLFlipBook
                 ref={bookRef}
                 width={size.width}
@@ -123,8 +162,6 @@ export default function Book() {
                     </article>
                 ))}
             </HTMLFlipBook>
-
-            <div className="book-spine" aria-hidden="true" />
 
             <button className="nav-arrow left" onClick={previousPage} type="button" aria-label="Previous page">
                 ‹

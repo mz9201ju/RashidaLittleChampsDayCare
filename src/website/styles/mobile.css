@@ -1,10 +1,13 @@
 @media (max-width: 768px) {
   .book-shell {
-    --tilt-x: 0deg;
-    --tilt-y: 0deg;
-    --book-lift: 0px;
     width: 100%;
     justify-items: center;
+    /* Keep perspective + 3D on mobile for the flip effect */
+    perspective: 1800px;
+  }
+
+  .daycare-book .stf__block {
+    transform-style: preserve-3d;
   }
 
   .storybook-content {
@@ -21,10 +24,6 @@
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-  }
-
-  .book-spine {
-    display: none;
   }
 
   .book-page-content {
@@ -57,30 +56,19 @@
     right: 8px;
   }
 
-  .book-spine {
-    top: 14px;
-    bottom: 14px;
-    width: 14px;
-  }
-
-  .book-spine::before,
-  .book-spine::after {
-    width: 18px;
-  }
-
   .sun {
     width: 94px;
     height: 94px;
     top: 5%;
   }
 
-  .sun-ring {
+  .sun-ring-3 {
     display: none;
   }
 
   .cloud {
-    width: 110px;
-    height: 46px;
+    width: 120px;
+    height: 50px;
   }
 
   .cloud-left {
@@ -93,9 +81,13 @@
     right: 3%;
   }
 
-  /* Hide birds and butterfly on mobile to preserve GPU budget */
-  .bird,
-  .butterfly {
+  .cloud-mid {
+    display: none;
+  }
+
+  /* Show birds and butterfly on mobile for matching feel */
+  .bird-3,
+  .bird-4 {
     display: none;
   }
 
@@ -116,11 +108,21 @@
   }
 
   .toy-ball {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
   }
 
   .ground-mist {
-    height: 70px;
+    height: 80px;
+  }
+
+  .rainbow {
+    width: 280px;
+    height: 140px;
+    top: 8%;
+  }
+
+  .flower-2 {
+    display: none;
   }
 }
