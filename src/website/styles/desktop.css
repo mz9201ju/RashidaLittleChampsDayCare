@@ -1,6 +1,6 @@
 @media (min-width: 769px) {
   .book-shell {
-    --book-lift: 6px;
+    --book-lift: 8px;
     transition: transform 140ms ease;
   }
 
@@ -10,8 +10,9 @@
 
   .daycare-book .stf__item {
     box-shadow:
-      0 14px 28px rgba(84, 59, 20, 0.18),
-      0 4px 10px rgba(84, 59, 20, 0.1);
+      0 16px 32px rgba(84, 59, 20, 0.22),
+      0 6px 12px rgba(84, 59, 20, 0.12),
+      0 1px 3px rgba(84, 59, 20, 0.08);
   }
 
   .daycare-book .stf__item.--left,
@@ -24,15 +25,15 @@
   }
 
   .book-spine {
-    width: 26px;
+    width: 28px;
     box-shadow:
-      0 0 24px rgba(25, 16, 8, 0.26),
-      inset 0 0 8px rgba(255, 255, 255, 0.38);
+      0 0 26px rgba(25, 16, 8, 0.28),
+      inset 0 0 9px rgba(255, 255, 255, 0.42);
   }
 
   .book-spine::before,
   .book-spine::after {
-    width: 40px;
+    width: 44px;
   }
 
   .cloud-left {
@@ -45,11 +46,20 @@
 
   /* Stronger drop shadow on desktop to simulate resting on a surface */
   .book-shell::after {
-    bottom: -22px;
-    left: 8%;
-    right: 8%;
-    height: 34px;
-    filter: blur(18px);
-    background: rgba(80, 50, 15, 0.28);
+    bottom: -24px;
+    left: 6%;
+    right: 6%;
+    height: 38px;
+    filter: blur(20px);
+    background: rgba(70, 40, 10, 0.32);
+  }
+
+  /* Deeper ambient occlusion on desktop */
+  .daycare-book .stf__item.--left .inside-page {
+    box-shadow: inset -22px 0 28px rgba(34, 24, 12, 0.2), inset -3px 0 6px rgba(34, 24, 12, 0.1);
+  }
+
+  .daycare-book .stf__item.--right .inside-page {
+    box-shadow: inset 22px 0 28px rgba(34, 24, 12, 0.2), inset 3px 0 6px rgba(34, 24, 12, 0.1);
   }
 }
