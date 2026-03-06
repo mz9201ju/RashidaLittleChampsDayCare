@@ -7,6 +7,15 @@ export default function SiteLayout() {
       <div className="site-background" aria-hidden="true">
         <div className="scene-motion">
           <div className="bg-gradient" />
+          <div className="night-layer">
+            <div className="night-sky" />
+            <div className="night-moon">
+              <span className="moon-glow" />
+            </div>
+            {Array.from({ length: 12 }).map((_, index) => (
+              <span key={index} className={`night-star star-${index + 1}`} />
+            ))}
+          </div>
           <div className="bg-rainbow">
             <span className="rainbow-band band-1" />
             <span className="rainbow-band band-2" />
