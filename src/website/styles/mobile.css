@@ -11,7 +11,7 @@
   }
 
   .storybook-content {
-    padding: 14px clamp(40px, 14vw, 64px);
+    padding: 14px clamp(40px, 14vw, 64px) 120px;
   }
 
   .book-shell.at-start .daycare-book,
@@ -60,6 +60,7 @@
     width: 94px;
     height: 94px;
     top: 5%;
+    left: 8%;
   }
 
   .sun-ring-3 {
@@ -117,9 +118,8 @@
   }
 
   .rainbow {
-    width: 280px;
-    height: 140px;
-    top: 8%;
+    inset: -12% -24% -6% -24%;
+    opacity: 0.56;
   }
 
   .flower-2 {

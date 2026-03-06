@@ -34,18 +34,12 @@ body,
 body {
   font-family: 'Poppins', 'Comic Sans MS', sans-serif;
   color: var(--text-primary);
-  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 40%, var(--bg-bottom) 100%);
-  background-size: 100% 200%;
-  animation: skyShift 18s ease-in-out infinite;
+  background: linear-gradient(180deg, #b6ecff 0%, #d9f7ff 48%, #f4ffe3 100%);
+  background-size: 100% 100%;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-}
-
-@keyframes skyShift {
-  0%, 100% { background-position: 0% 0%; }
-  50% { background-position: 0% 35%; }
 }
 
 .storybook-scene {
@@ -62,6 +56,12 @@ body {
   height: 100%;
   display: grid;
   place-items: center;
+  padding-bottom: clamp(28px, 6vh, 96px);
+  perspective: 2400px;
+  perspective-origin: 50% 42%;
+  transform-style: preserve-3d;
+  transform: none;
+  transform-origin: 50% 42%;
 }
 
 /* ── Book shell ── */
@@ -70,19 +70,43 @@ body {
   display: grid;
   place-items: center;
   perspective: 2800px;
-  transform: translateY(var(--book-lift, 0px)) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transform:
+    translateX(var(--intro-x, 0px))
+    translateY(calc(var(--intro-y, 0px) + var(--book-lift, 0px)))
+    rotateX(calc(var(--scene-tilt-x, 0deg) + var(--tilt-x, 0deg)))
+    rotateY(calc(var(--scene-tilt-y, 0deg) + var(--tilt-y, 0deg)))
+    rotateZ(var(--scene-tilt-z, 0deg))
+    scale(var(--intro-scale, 1));
   transition: transform 180ms ease;
   transform-style: preserve-3d;
+  will-change: transform;
 }
 
 /* Gentle floating animation for the book */
 @keyframes bookFloat {
   0%, 100% { --book-lift: 0px; }
-  50% { --book-lift: -10px; }
+  50% { --book-lift: -4px; }
 }
 
-.book-shell {
+.book-shell.intro-complete {
   animation: bookFloat 5s ease-in-out infinite;
+}
+
+.book-shell.page-mode {
+  animation: bookFloat 5s ease-in-out infinite;
+}
+
+.book-shell.intro-running {
+  animation: none;
+}
+
+.book-shell.intro-running .daycare-book,
+.book-shell.intro-running .nav-arrow {
+  pointer-events: none;
+}
+
+.book-shell.intro-running .nav-arrow {
+  opacity: 0;
 }
 
 /* Hide the empty page on cover / last page */
@@ -96,6 +120,17 @@ body {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+}
+
+.book-shell.page-mode .daycare-book {
+  clip-path: none;
+}
+
+.book-shell.page-mode .daycare-book .stf__item.--left,
+.book-shell.page-mode .daycare-book .stf__item.--right {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 /* Smooth clip transition so the cover doesn't jump when opening */
@@ -169,7 +204,9 @@ body {
   letter-spacing: 0.01em;
 }
 
-.inside-page {
+.inside-page,
+.cover-front,
+.cover-back {
   background:
     repeating-linear-gradient(
       to bottom,
@@ -188,12 +225,12 @@ body {
   position: relative;
 }
 
-.daycare-book .stf__item.--left .inside-page {
-  box-shadow: inset -18px 0 22px rgba(34, 24, 12, 0.16), inset -2px 0 4px rgba(34, 24, 12, 0.08);
+.daycare-book .stf__item.--left .book-page {
+  box-shadow: inset -14px 0 18px rgba(34, 24, 12, 0.11), inset -1px 0 3px rgba(34, 24, 12, 0.06);
 }
 
-.daycare-book .stf__item.--right .inside-page {
-  box-shadow: inset 18px 0 22px rgba(34, 24, 12, 0.16), inset 2px 0 4px rgba(34, 24, 12, 0.08);
+.daycare-book .stf__item.--right .book-page {
+  box-shadow: inset 14px 0 18px rgba(34, 24, 12, 0.11), inset 1px 0 3px rgba(34, 24, 12, 0.06);
 }
 
 .daycare-book .stf__item .stf__itemBack,
@@ -201,7 +238,9 @@ body {
   backface-visibility: hidden;
 }
 
-.inside-page::after {
+.inside-page::after,
+.cover-front::after,
+.cover-back::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -214,43 +253,17 @@ body {
   pointer-events: none;
 }
 
-.cover-front,
-.cover-back {
-  background:
-    linear-gradient(135deg, var(--cover-sheen) 0%, rgba(255, 255, 255, 0) 55%),
-    repeating-linear-gradient(
-      -45deg,
-      transparent,
-      transparent 5px,
-      rgba(0, 0, 0, 0.018) 5px,
-      rgba(0, 0, 0, 0.018) 6px
-    ),
-    linear-gradient(150deg, var(--cover-start) 0%, var(--cover-mid) 55%, var(--cover-end) 100%);
-  color: #fff;
-  position: relative;
-  box-shadow:
-    inset 0 1px 2px rgba(255, 255, 255, 0.45),
-    inset 0 -1px 3px rgba(0, 0, 0, 0.18);
-}
-
-.cover-front::before,
-.cover-back::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(120deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 55%);
-  pointer-events: none;
-  border-radius: inherit;
-}
-
 .cover-front h2,
 .cover-back h2,
 .cover-front p,
 .cover-back p {
-  color: #fff;
-  text-shadow:
-    0 1px 3px rgba(120, 60, 0, 0.45),
-    0 0 1px rgba(120, 60, 0, 0.2);
+  color: var(--text-primary);
+  text-shadow: none;
+}
+
+.cover-front .book-page-hint,
+.cover-back .book-page-hint {
+  color: var(--text-soft);
 }
 
 .book-page-hint {
@@ -314,8 +327,11 @@ body {
 .sky-gradient {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% -10%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 55%);
-  animation: skyBreath 10s ease-in-out infinite;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0) 42%),
+    radial-gradient(circle at 80% 28%, rgba(255, 255, 255, 0.36), rgba(255, 255, 255, 0) 44%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 65%);
+  animation: skyBreath 8s ease-in-out infinite;
 }
 
 @keyframes skyBreath {
@@ -326,52 +342,56 @@ body {
 /* ── Rainbow ── */
 .rainbow {
   position: absolute;
-  top: 6%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 420px;
-  height: 210px;
-  overflow: hidden;
+  inset: -20% -10% -10% -10%;
   pointer-events: none;
-  opacity: 0;
-  animation: rainbowFade 22s ease-in-out infinite 3s;
+  opacity: 0.62;
+  filter: saturate(112%);
+  background:
+    linear-gradient(
+      120deg,
+      rgba(255, 99, 132, 0.34) 0%,
+      rgba(255, 159, 64, 0.32) 15%,
+      rgba(255, 226, 90, 0.3) 30%,
+      rgba(99, 219, 128, 0.3) 46%,
+      rgba(95, 185, 255, 0.3) 63%,
+      rgba(160, 130, 255, 0.3) 79%,
+      rgba(255, 133, 201, 0.28) 100%
+    );
+  background-size: 220% 220%;
+  mix-blend-mode: screen;
+  animation: rainbowStream 22s linear infinite;
 }
 
 .rainbow::before {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: -5%;
-  right: -5%;
-  height: 210px;
-  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-  background: radial-gradient(
-    ellipse at center bottom,
-    transparent 52%,
-    rgba(255, 0, 60, 0.28) 54%,
-    rgba(255, 130, 0, 0.28) 57%,
-    rgba(255, 230, 0, 0.28) 60%,
-    rgba(60, 200, 60, 0.28) 63%,
-    rgba(0, 120, 255, 0.28) 66%,
-    rgba(120, 0, 220, 0.28) 69%,
-    transparent 71%
-  );
+  inset: 0;
+  background:
+    radial-gradient(120% 70% at 10% 15%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 58%),
+    radial-gradient(120% 70% at 90% 22%, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0) 60%);
+  animation: rainbowHaze 16s ease-in-out infinite;
 }
 
-@keyframes rainbowFade {
-  0%, 15%, 85%, 100% { opacity: 0; }
-  30%, 70% { opacity: 1; }
+@keyframes rainbowStream {
+  0% { background-position: 0% 10%; transform: translate3d(0, 0, 0) scale(1.04); }
+  50% { background-position: 100% 55%; transform: translate3d(-1.5%, 1%, 0) scale(1.07); }
+  100% { background-position: 0% 90%; transform: translate3d(0, 0, 0) scale(1.04); }
+}
+
+@keyframes rainbowHaze {
+  0%, 100% { opacity: 0.75; }
+  50% { opacity: 1; }
 }
 
 /* ── Sun ── */
 .sun {
   position: absolute;
-  top: 4%;
-  left: 50%;
+  top: 5%;
+  left: 11%;
   width: 120px;
   height: 120px;
   border-radius: 999px;
-  transform: translateX(-50%);
+  transform: none;
   background: radial-gradient(circle at 35% 35%, #fff9c0, #ffd54a 55%, #ffb739 90%);
   box-shadow:
     0 0 45px rgba(255, 214, 92, 0.65),
@@ -883,6 +903,8 @@ body {
 
   .sun,
   .sun-ring,
+  .sky-gradient,
+  .rainbow,
   .cloud,
   .bird,
   .butterfly,

@@ -43,16 +43,16 @@
   }
 
   /* Deeper ambient occlusion on desktop */
-  .daycare-book .stf__item.--left .inside-page {
-    box-shadow: inset -22px 0 28px rgba(34, 24, 12, 0.2), inset -3px 0 6px rgba(34, 24, 12, 0.1);
+  .daycare-book .stf__item.--left .book-page {
+    box-shadow: inset -18px 0 24px rgba(34, 24, 12, 0.14), inset -2px 0 5px rgba(34, 24, 12, 0.08);
   }
 
-  .daycare-book .stf__item.--right .inside-page {
-    box-shadow: inset 22px 0 28px rgba(34, 24, 12, 0.2), inset 3px 0 6px rgba(34, 24, 12, 0.1);
+  .daycare-book .stf__item.--right .book-page {
+    box-shadow: inset 18px 0 24px rgba(34, 24, 12, 0.14), inset 2px 0 5px rgba(34, 24, 12, 0.08);
   }
 
   .rainbow {
-    width: 520px;
-    height: 260px;
+    inset: -24% -8% -8% -8%;
+    opacity: 0.68;
   }
 }
