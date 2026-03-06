@@ -916,6 +916,12 @@ body {
   padding: 2px 8px;
 }
 
+.rolling-heart {
+  display: inline-block;
+  transform-origin: 50% 70%;
+  animation: rollingHeart 1.8s ease-in-out infinite;
+}
+
 .site-footer-link:hover {
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -1084,6 +1090,22 @@ body {
   }
   50% {
     transform: scale(1.05);
+  }
+}
+
+@keyframes rollingHeart {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(1px) rotate(120deg);
+  }
+  50% {
+    transform: translateX(2px) rotate(240deg);
+  }
+  75% {
+    transform: translateX(1px) rotate(360deg);
   }
 }
 

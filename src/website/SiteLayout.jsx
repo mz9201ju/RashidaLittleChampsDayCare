@@ -125,7 +125,7 @@ export default function SiteLayout() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Made with ❤️ for happy kiddos.
+          Made with <span className="rolling-heart" aria-hidden="true">❤️</span> for happy kiddos.
         </a>
         <div className="site-footer-copy">
           &copy; {new Date().getFullYear()} Rashida Little Champs Daycare
