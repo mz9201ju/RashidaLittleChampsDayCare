@@ -9,6 +9,11 @@
   --brand: #f49d2f;
   --brand-deep: #da7f17;
   --mint: #8cd885;
+  --google-blue: #4285f4;
+  --google-red: #ea4335;
+  --google-yellow: #fbbc05;
+  --google-green: #34a853;
+  --yelp-red: #d32323;
   --day-night-cycle: 44s;
 }
 
@@ -962,18 +967,148 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
+  padding: 2px;
+}
+
+.contact-review-slider {
+  display: grid;
+  gap: 10px;
+}
+
+.contact-review-viewport {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.contact-review-track {
+  display: flex;
+  transition: transform 420ms ease;
+}
+
+.contact-review-card {
+  min-width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(124, 88, 41, 0.14);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 246, 227, 0.8));
+  padding: 14px;
+}
+
+.contact-review-card[data-source='google'] {
+  border-color: color-mix(in srgb, var(--google-blue) 42%, white);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(231, 240, 255, 0.84));
+}
+
+.contact-review-card[data-source='yelp'] {
+  border-color: color-mix(in srgb, var(--yelp-red) 40%, white);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 235, 235, 0.82));
+}
+
+.contact-review-quote {
+  color: var(--text-soft);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.contact-review-meta {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--text-strong);
+}
+
+.contact-review-meta span {
+  font-size: 0.88rem;
+  color: var(--brand-deep);
+  font-weight: 700;
+}
+
+.contact-review-meta span[data-source='google'] {
+  background: linear-gradient(
+    90deg,
+    var(--google-blue) 0%,
+    var(--google-blue) 25%,
+    var(--google-red) 25%,
+    var(--google-red) 50%,
+    var(--google-yellow) 50%,
+    var(--google-yellow) 75%,
+    var(--google-green) 75%,
+    var(--google-green) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.contact-review-meta span[data-source='yelp'] {
+  color: var(--yelp-red);
+}
+
+.contact-review-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.contact-review-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(124, 88, 41, 0.28);
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--text-strong);
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.contact-review-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-review-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 0;
+  background: rgba(124, 88, 41, 0.32);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.contact-review-dot.is-active {
+  background: var(--brand-deep);
+}
+
+.contact-review-arrow:focus-visible,
+.contact-review-dot:focus-visible,
+.contact-platform-icon:focus-visible {
+  outline: 2px solid var(--brand-deep);
+  outline-offset: 2px;
 }
 
 .contact-platform-icon {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 46px;
   width: 46px;
   height: 46px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.75);
   border: 1px solid rgba(124, 88, 41, 0.2);
   text-decoration: none;
+  transform: none;
+  transition: box-shadow 180ms ease, filter 180ms ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .contact-platform-icon img {
@@ -983,8 +1118,65 @@ body {
 }
 
 .contact-platform-icon:hover {
-  transform: translateY(-1px);
   box-shadow: 0 6px 14px rgba(77, 48, 14, 0.2);
+}
+
+.contact-platform-icon:active {
+  transform: none;
+  filter: brightness(0.98);
+}
+
+.contact-platform-icon-google {
+  position: relative;
+  border-color: transparent;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.98) 62%, rgba(255, 255, 255, 0.86) 100%),
+    conic-gradient(
+      from 30deg,
+      var(--google-blue) 0deg,
+      var(--google-blue) 90deg,
+      var(--google-green) 90deg,
+      var(--google-green) 180deg,
+      var(--google-yellow) 180deg,
+      var(--google-yellow) 270deg,
+      var(--google-red) 270deg,
+      var(--google-red) 360deg
+    );
+}
+
+.contact-platform-icon-google::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.contact-platform-icon-google img {
+  position: relative;
+  z-index: 1;
+  border-radius: 999px;
+}
+
+.contact-platform-icon-google:hover {
+  box-shadow: 0 8px 16px rgba(66, 133, 244, 0.3);
+}
+
+.contact-platform-icon-yelp {
+  border-color: color-mix(in srgb, var(--yelp-red) 58%, white);
+  background: linear-gradient(145deg, rgba(252, 83, 83, 0.2), rgba(211, 35, 35, 0.26));
+}
+
+.contact-platform-icon-yelp:hover {
+  box-shadow: 0 8px 16px rgba(211, 35, 35, 0.32);
+}
+
+@media (hover: none) {
+  .contact-platform-icon:hover,
+  .contact-platform-icon-google:hover,
+  .contact-platform-icon-yelp:hover {
+    box-shadow: none;
+  }
 }
 
 .contact-map-shell {
@@ -1601,6 +1793,10 @@ body {
   .night-stargazer,
   .contact-platform-icon img {
     animation: none;
+  }
+
+  .contact-review-track {
+    transition: none;
   }
 
   .bg-bird::before,

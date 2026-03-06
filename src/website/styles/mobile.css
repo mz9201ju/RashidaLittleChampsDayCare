@@ -50,6 +50,25 @@
     height: 240px;
   }
 
+  .contact-review-card {
+    padding: 12px;
+  }
+
+  .contact-review-quote {
+    font-size: 0.94rem;
+  }
+
+  .contact-review-meta {
+    font-size: 0.9rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .contact-review-controls {
+    gap: 8px;
+  }
+
   .gallery-grid {
     grid-template-columns: 1fr;
     gap: 10px;

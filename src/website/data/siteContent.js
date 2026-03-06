@@ -86,6 +86,26 @@ export const PAGE_CONTENT = {
         href: 'https://www.google.com/search?sca_esv=a2755a786bd8ce70&si=AL3DRZHrmvnFAVQPOO2Bzhf8AX9KZZ6raUI_dT7DG_z0kV2_x4VQL08_tukvdGDlhJvocyn3cWgn3-WCXsSEL3Mhqg6V7Hg6Vf34ij1F1TsY8GxcNKFTzb-vxihQR7HY7C45li0hNL9cMzPKM1Y-Z_JMVAvr4Sw6vg%3D%3D&q=Rashida+Little+Champs+DayCare+Reviews&sa=X&ved=2ahUKEwj_84rcsYqTAxWVEzQIHb8oCosQ0bkNegQIKBAH&biw=1528&bih=698&dpr=1.25',
       },
     ],
+    reviews: [
+      {
+        source: 'Google',
+        author: 'Parent Review',
+        quote:
+          "Rashida and her family all seem very kind and loving to our child, and we're really glad to have him in their care while we work. Our son started at Little Champs when he was 7 months old, and he always smiles when we drop him off and comes home with all of his needs met.",
+      },
+      {
+        source: 'Yelp',
+        author: 'Family Feedback',
+        quote:
+          "My kids have been with her for almost 2 years & she's always there when I need her last minute & even on the weekend. we haven't had any bad experiences so far I would recommend her to other parents.",
+      },
+      {
+        source: 'Google',
+        author: 'Parent Testimonial',
+        quote:
+          "Mrs. Rashida and her family are amazing. I was always skeptical about in home daycares due to the nature of vulnerability of our littles and less accountability on the providers in their homes. But Mrs. Rashida has completely wiped away any fears that I had previously, due to her loving nature and her desire to keep the children and parents happy. I needed an in home daycare due to my sometimes odd work hours and her flexibility. I have a 4 year old and 7 month old that both attend weekly. I could not be happier about the choice to switch and I now see the large benefits of choosing a loving home vs. a big chain daycare center. Thank you Mrs. Rashida!",
+      },
+    ],
   },
   faq: {
     title: 'Frequently Asked Questions',
