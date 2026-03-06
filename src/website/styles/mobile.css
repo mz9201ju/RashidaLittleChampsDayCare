@@ -1,170 +1,113 @@
 @media (max-width: 768px) {
-  .book-shell {
-    width: fit-content;
-    max-width: none;
-    margin-inline: auto;
-    justify-self: center;
-    justify-items: center;
-    /* Keep perspective + 3D on mobile for the flip effect */
-    perspective: 1800px;
+  .site-shell {
+    padding: 12px;
+    gap: 14px;
   }
 
-  .book-shell .daycare-book {
-    margin-inline: auto;
+  .site-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 14px;
   }
 
-  .daycare-book .stf__block {
-    transform-style: preserve-3d;
+  .brand {
+    text-align: center;
   }
 
-  .storybook-content {
-    padding: 14px 0 120px;
+  .site-nav {
+    justify-content: center;
+    gap: 8px;
   }
 
-  .book-shell.at-start .daycare-book,
-  .book-shell.at-end .daycare-book {
-    clip-path: none;
+  .nav-link {
+    padding: 8px 12px;
+    font-size: 0.9rem;
   }
 
-  .book-shell.at-start .daycare-book .stf__item.--left,
-  .book-shell.at-end .daycare-book .stf__item.--right {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
+  .site-main {
+    align-items: start;
   }
 
-  .book-page-content {
-    width: 92%;
-    gap: 10px;
+  .page-panel {
+    border-radius: 18px;
+    padding: 18px 14px;
   }
 
-  .book-page-content h2 {
-    font-size: 1.3rem;
+  .card-grid {
+    grid-template-columns: 1fr;
   }
 
-  .book-page-content p,
-  .storybook-list li {
-    font-size: 0.95rem;
-    line-height: 1.45;
+  .contact-grid {
+    grid-template-columns: 1fr;
   }
 
-  .nav-arrow {
-    display: grid;
-    width: 48px;
-    height: 48px;
-    font-size: 1.8rem;
-  }
-
-  .nav-arrow.left {
-    left: -24px;
-  }
-
-  .nav-arrow.right {
-    right: -24px;
-  }
-
-  .sun {
-    width: 94px;
-    height: 94px;
-    top: 5%;
-    left: 8%;
-  }
-
-  .sun-ring-3 {
+  .cloud-two {
     display: none;
   }
 
-  .cloud {
-    width: 120px;
-    height: 50px;
+  .bg-rainbow {
+    bottom: 96px;
+    width: 235vw;
+    height: 56vh;
+    opacity: 0.76;
   }
 
-  .cloud-left {
-    top: 14%;
-    left: 3%;
+  .rainbow-band {
+    border-top-width: 12px;
+    border-left-width: 12px;
+    border-right-width: 12px;
   }
 
-  .cloud-right {
-    top: 13%;
-    right: 3%;
+  .bg-sun {
+    width: 104px;
+    height: 104px;
+    top: 8%;
+    left: 4%;
   }
 
-  .cloud-mid {
+  .sun-ring-3,
+  .bird-4,
+  .balloon-3,
+  .tree-mid,
+  .turtle-mid {
     display: none;
   }
 
-  /* Show birds and butterfly on mobile for matching feel */
-  .bird-3,
-  .bird-4 {
-    display: none;
+  .cloud-three {
+    left: 50%;
   }
 
-  .tree {
-    bottom: 118px;
-    width: 70px;
-    height: 130px;
+  .bg-tree {
+    bottom: 102px;
+    width: 78px;
+    height: 142px;
   }
 
-  .tree-mid-left {
-    left: 22%;
+  .tree-left {
+    left: 4%;
   }
 
-  .tree-mid-right {
-    right: 22%;
-  }
-
-  .garden-meadow {
-    height: 220px;
-    bottom: -58px;
-  }
-
-  .garden-ridge {
-    bottom: 120px;
-    height: 34px;
-  }
-
-  .ground-animal {
-    bottom: 108px;
-    transform: scale(0.86);
+  .tree-right {
+    right: 4%;
   }
 
   .bunny-left {
-    left: 12%;
+    left: 16%;
+    bottom: 98px;
   }
 
   .fox-right {
-    right: 12%;
+    right: 16%;
+    bottom: 98px;
   }
 
-  .turtle-mid-left {
-    left: 30%;
+  .bg-wave {
+    height: 220px;
+    bottom: -84px;
   }
 
-  .hedgehog-mid-right {
-    right: 30%;
-  }
-
-  .toy-block {
-    width: 56px;
-    height: 56px;
-    font-size: 1.5rem;
-  }
-
-  .toy-ball {
-    width: 44px;
-    height: 44px;
-  }
-
-  .ground-mist {
-    height: 80px;
-  }
-
-  .rainbow {
-    inset: -12% -24% -6% -24%;
-    opacity: 0.56;
-  }
-
-  .flower-2 {
-    display: none;
+  .site-footer {
+    font-size: 0.86rem;
   }
 }
