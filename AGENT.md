@@ -14,6 +14,7 @@ All contributors and AI agents should follow these rules for every change.
 - Keep static content/config in `src/website/data`.
 - Keep styling rules in `src/website/styles`.
 - Do not mix business logic directly inside styling files.
+- Keep the project on the current vanilla CSS pipeline; do not reintroduce Tailwind tooling unless explicitly requested.
 
 ## 3) Mobile/Desktop CSS Isolation
 - Shared styles only in `src/website/styles/base.css`.
@@ -36,3 +37,9 @@ Before finishing any change, verify:
 - Mobile and desktop rules remain separated.
 - New/changed structure is documented in `README.md`.
 - Build and lint pass successfully.
+
+## 6) Windows Command Execution
+- In Windows PowerShell, use `npm.cmd` for all npm commands (for example: `npm.cmd run lint`, `npm.cmd run build`).
+- Apply the same `.cmd` approach to related Node tooling when needed (for example: `npx.cmd`).
+- If plain `npm` must be used, run `powershell -ExecutionPolicy Bypass` first in that terminal session.
+- For validation, run lint and build together in one command sequence: `npm.cmd run lint; npm.cmd run build`.

@@ -16,8 +16,17 @@ A warm, playful daycare website built with React and browser routing.
 ## Tech Stack
 - React + Vite
 - React Router (`react-router-dom`)
-- CSS modules by concern (shared, desktop, mobile)
-- Tailwind directives remain available globally via `src/index.css`
+- CSS by concern (shared, desktop, mobile)
+- Vanilla CSS animation system (no Tailwind runtime dependency)
+
+## Maintenance Updates (Mar 2026)
+- Removed dead Tailwind-related setup and packages:
+  - Deleted `tailwind.config.js`
+  - Removed `@tailwind` directives from `src/index.css`
+  - Removed unused dev dependencies: `tailwindcss`, `postcss`, `autoprefixer`
+- Removed unused type-only dev dependencies in this JS-only project: `@types/react`, `@types/react-dom`
+- Removed dead kite-wire CSS rules no longer referenced by markup.
+- Minor render optimization: precomputed night-star indexes in `src/website/SiteLayout.jsx` to avoid rebuilding the array each render.
 
 ## Project Structure
 ```
@@ -62,17 +71,17 @@ Routes are configured in `src/App.jsx`:
 ## Run Locally
 1. Install dependencies:
    ```bash
-   npm install
+  npm.cmd install
    ```
 2. Start the dev server:
    ```bash
-   npm run dev
+  npm.cmd run dev
    ```
-3. Build for production:
+3. Validate (lint + build in one sequence):
    ```bash
-   npm run build
+  npm.cmd run lint; npm.cmd run build
    ```
-4. Lint:
+4. Preview production build:
    ```bash
-   npm run lint
+  npm.cmd run preview
    ```

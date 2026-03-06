@@ -188,10 +188,6 @@
     left: -52px;
   }
 
-  .runner-kite-string {
-    height: 92px;
-  }
-
   .runner-right {
     --runner-scale: 0.84;
     --runner-ground: 106px;

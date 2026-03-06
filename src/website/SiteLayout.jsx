@@ -2,6 +2,7 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { NAV_LINKS, PAGE_CONTENT } from './data/siteContent'
 
 const NIGHT_STAR_COUNT = 20
+const NIGHT_STAR_INDEXES = Array.from({ length: NIGHT_STAR_COUNT }, (_, index) => index)
 
 function getContactEntry(label) {
   return PAGE_CONTENT.contact.info.find((entry) => entry.label === label)
@@ -21,7 +22,7 @@ export default function SiteLayout() {
             <div className="night-moon">
               <span className="moon-glow" />
             </div>
-            {Array.from({ length: NIGHT_STAR_COUNT }).map((_, index) => (
+            {NIGHT_STAR_INDEXES.map((index) => (
               <span key={index} className={`night-star star-${index + 1}`} />
             ))}
             <div className="night-stargazer gazer-left">

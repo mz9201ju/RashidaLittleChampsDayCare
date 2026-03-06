@@ -15,6 +15,7 @@ The centerpiece is a 3D page-flip book with smooth forward/backward interaction 
   - Desktop-only rules in `src/website/styles/desktop.css`
   - Mobile-only rules in `src/website/styles/mobile.css`
   - Shared rules in `src/website/styles/base.css`
+- Keep the current vanilla CSS approach. Do not introduce Tailwind tooling unless explicitly requested.
 - Do not place mobile and desktop overrides in the same file unless absolutely required.
 - Keep component files focused on rendering and event handling only.
 - Keep feature flow readable: scene shell → decorative background → interactive flipbook.
@@ -35,3 +36,9 @@ The centerpiece is a 3D page-flip book with smooth forward/backward interaction 
 
 ## Documentation
 When changing architecture, folder structure, or behavior, update `README.md` in the same change set.
+
+## Windows Command Execution
+- In Windows PowerShell, prefer `npm.cmd` for npm commands (for example: `npm.cmd run lint`, `npm.cmd run build`).
+- Use `.cmd` variants for related Node tooling as needed (for example: `npx.cmd`).
+- If plain `npm` is required, run `powershell -ExecutionPolicy Bypass` before executing npm commands in that terminal session.
+- For validation, run lint and build together in one command sequence: `npm.cmd run lint; npm.cmd run build`.
