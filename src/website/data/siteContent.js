@@ -9,7 +9,6 @@ export const NAV_LINKS = [
 
 export const PAGE_CONTENT = {
   home: {
-    eyebrow: 'Rashida Little Champs Daycare',
     title: 'A Bright Start For Every Little Learner',
     intro:
       "Rashida Little Champs DayCare is a Day Care Center located in Bellevue, WA. We offer Child Care, Toddler Care, Home Daycare, Child Education, Family Daycare, 24/7 Daycare, Preschool Newborn Daycare, Best Daycare, and other Day Care Center Services. Our home daycare offers a highly flexible schedule with 24-hour availability Monday through Saturday every week so that whatever may come up; you know your child will always have a safe and welcoming place to go. Our staff is highly trained to care for and help develop your kids' creative, physical, and analytical skills. We will treat your children as if they are our own. Contact us today for more information.",

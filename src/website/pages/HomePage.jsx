@@ -5,7 +5,6 @@ export default function HomePage() {
 
   return (
     <section className="page-panel home-panel">
-      <p className="eyebrow">{content.eyebrow}</p>
       <h1>{content.title}</h1>
       <p className="lead">{content.intro}</p>
       <div className="card-grid">

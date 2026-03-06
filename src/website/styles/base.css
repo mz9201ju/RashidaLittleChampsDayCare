@@ -862,15 +862,6 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.62);
 }
 
-.eyebrow {
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--brand-deep);
-  margin-bottom: 8px;
-}
-
 .page-panel h1 {
   font-size: clamp(1.8rem, 3.8vw, 3rem);
   line-height: 1.1;

@@ -120,7 +120,7 @@ export default function SiteLayout() {
       </div>
 
       <header className="site-header">
-        <div className="brand">Little Champs</div>
+        <div className="brand">Rashida Little Champs Daycare</div>
         <nav className="site-nav" aria-label="Main navigation">
           {NAV_LINKS.map((link) => (
             <NavLink
