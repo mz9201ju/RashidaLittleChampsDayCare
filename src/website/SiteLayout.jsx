@@ -1,6 +1,8 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { NAV_LINKS, PAGE_CONTENT } from './data/siteContent'
 
+const NIGHT_STAR_COUNT = 20
+
 function getContactEntry(label) {
   return PAGE_CONTENT.contact.info.find((entry) => entry.label === label)
 }
@@ -19,7 +21,7 @@ export default function SiteLayout() {
             <div className="night-moon">
               <span className="moon-glow" />
             </div>
-            {Array.from({ length: 12 }).map((_, index) => (
+            {Array.from({ length: NIGHT_STAR_COUNT }).map((_, index) => (
               <span key={index} className={`night-star star-${index + 1}`} />
             ))}
           </div>
@@ -97,14 +99,6 @@ export default function SiteLayout() {
       </main>
 
       <footer className="site-footer">
-        <a
-          className="site-footer-link"
-          href="https://www.omerzahid.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Made with ❤️ for happy kiddos.
-        </a>
         <div className="site-footer-contact">
           {phoneEntry ? (
             <a className="site-footer-contact-link" href={phoneEntry.href}>
@@ -122,6 +116,14 @@ export default function SiteLayout() {
             </a>
           ) : null}
         </div>
+        <a
+          className="site-footer-link"
+          href="https://www.omerzahid.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Made with ❤️ for happy kiddos.
+        </a>
         <div className="site-footer-copy">
           &copy; {new Date().getFullYear()} Rashida Little Champs Daycare
         </div>
