@@ -9,7 +9,7 @@ import ServicesPage from './website/pages/ServicesPage'
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<SiteLayout />}>
+      <Route path="/RashidaLittleChampsDayCare" element={<SiteLayout />}>
         <Route index element={<HomePage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="services" element={<ServicesPage />} />
