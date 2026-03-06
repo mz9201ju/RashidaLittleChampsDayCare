@@ -816,9 +816,15 @@ body {
 }
 
 .brand {
+  text-decoration: none;
   font-size: clamp(1.3rem, 3vw, 1.8rem);
   font-weight: 700;
   letter-spacing: 0.03em;
+  color: var(--brand-deep);
+}
+
+.brand:hover,
+.brand:focus-visible {
   color: var(--brand-deep);
 }
 
