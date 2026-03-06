@@ -729,9 +729,14 @@ body {
   gap: 10px;
 }
 
+.contact-item-yelp h2 {
+  text-align: center;
+}
+
 .contact-platform-icons {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
 }
 
@@ -739,12 +744,18 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  width: 46px;
+  height: 46px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.75);
   border: 1px solid rgba(124, 88, 41, 0.2);
   text-decoration: none;
+}
+
+.contact-platform-icon img {
+  width: 28px;
+  height: 28px;
+  animation: platformIconSpin 4s linear infinite;
 }
 
 .contact-platform-icon:hover {
@@ -829,6 +840,11 @@ body {
   width: min(1180px, 96vw);
 }
 
+.gallery-lightbox-inner picture {
+  display: flex;
+  justify-content: center;
+}
+
 .gallery-lightbox-image {
   width: auto;
   max-width: min(88vw, 1100px);
@@ -909,23 +925,49 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .site-footer-contact-link {
   color: #5f503f;
   text-decoration: none;
-  font-size: 0.88rem;
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.62);
-  border: 1px solid rgba(124, 88, 41, 0.14);
-  border-radius: 999px;
-  padding: 4px 10px;
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  min-width: 232px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 248, 233, 0.92));
+  border: 1px solid rgba(124, 88, 41, 0.2);
+  border-radius: 14px;
+  padding: 8px 14px;
+  box-shadow: 0 6px 14px rgba(77, 48, 14, 0.08);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 
 .site-footer-contact-link:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  transform: translateY(-1px);
+  box-shadow: 0 9px 18px rgba(77, 48, 14, 0.14);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 241, 214, 0.95));
+}
+
+.site-footer-contact-link:focus-visible {
+  outline: 2px solid rgba(255, 167, 38, 0.85);
+  outline-offset: 2px;
+}
+
+.site-footer-contact-label {
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #8f6e46;
+  text-transform: uppercase;
+}
+
+.site-footer-contact-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #5a4a38;
+  line-height: 1.2;
+  text-align: center;
 }
 
 .site-footer-copy {
@@ -1175,6 +1217,15 @@ body {
   }
 }
 
+@keyframes platformIconSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .scene-motion,
   .bg-gradient,
@@ -1189,7 +1240,8 @@ body {
   .bg-balloon,
   .bg-wave,
   .bg-tree,
-  .bg-animal {
+  .bg-animal,
+  .contact-platform-icon img {
     animation: none;
   }
 

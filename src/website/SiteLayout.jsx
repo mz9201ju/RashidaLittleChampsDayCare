@@ -101,8 +101,9 @@ export default function SiteLayout() {
       <footer className="site-footer">
         <div className="site-footer-contact">
           {phoneEntry ? (
-            <a className="site-footer-contact-link" href={phoneEntry.href}>
-              {phoneEntry.value}
+            <a className="site-footer-contact-link" href={phoneEntry.href} aria-label={`Call us at ${phoneEntry.value}`}>
+              <span className="site-footer-contact-label">Call Us</span>
+              <span className="site-footer-contact-value">{phoneEntry.value}</span>
             </a>
           ) : null}
           {addressEntry ? (
@@ -111,8 +112,10 @@ export default function SiteLayout() {
               href={addressEntry.href}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Open our daycare address in Google Maps"
             >
-              {addressEntry.value}
+              <span className="site-footer-contact-label">Visit Us</span>
+              <span className="site-footer-contact-value">{addressEntry.value}</span>
             </a>
           ) : null}
         </div>
