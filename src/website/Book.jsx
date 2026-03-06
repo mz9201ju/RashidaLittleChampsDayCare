@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import HTMLFlipBook from 'react-pageflip'
 import { BOOK_PAGES } from './data/storyPages'
 import { useBookSize } from './hooks/useBookSize'
@@ -43,6 +43,9 @@ export default function Book() {
     const size = useBookSize(bookRef)
     const isMobile = size.isMobile
     const { playFlip } = usePageSound()
+    const [currentPage, setCurrentPage] = useState(0)
+
+    const lastPageIndex = BOOK_PAGES.length - 1
 
     const flipConfig = {
         ...BASE_FLIP_CONFIG,
@@ -60,10 +63,39 @@ export default function Book() {
         rootStyle.setProperty('--camera-y', '0px')
     }, [])
 
-    const nextPage = () => bookRef.current?.pageFlip().flipNext()
-    const previousPage = () => bookRef.current?.pageFlip().flipPrev()
+    const nextPage = () => {
+        const pageFlip = bookRef.current?.pageFlip()
+        if (!pageFlip) return
 
-    const handleFlip = () => {
+        const index = pageFlip.getCurrentPageIndex()
+        if (index >= lastPageIndex) return
+
+        if (isMobile) {
+            pageFlip.turnToPage(index + 1)
+            return
+        }
+
+        pageFlip.flipNext()
+    }
+
+    const previousPage = () => {
+        const pageFlip = bookRef.current?.pageFlip()
+        if (!pageFlip) return
+
+        const index = pageFlip.getCurrentPageIndex()
+        if (index <= 0) return
+
+        if (isMobile) {
+            pageFlip.turnToPage(index - 1)
+            return
+        }
+
+        pageFlip.flipPrev()
+    }
+
+    const handleFlip = (event) => {
+        const nextIndex = typeof event?.data === 'number' ? event.data : 0
+        setCurrentPage(nextIndex)
         playFlip()
         if (navigator.vibrate) navigator.vibrate(30)
     }
@@ -92,10 +124,22 @@ export default function Book() {
                 })}
             </HTMLFlipBook>
 
-            <button className="nav-arrow left" onClick={previousPage} type="button" aria-label="Previous page">
+            <button
+                className="nav-arrow left"
+                onClick={previousPage}
+                type="button"
+                aria-label="Previous page"
+                disabled={currentPage <= 0}
+            >
                 ‹
             </button>
-            <button className="nav-arrow right" onClick={nextPage} type="button" aria-label="Next page">
+            <button
+                className="nav-arrow right"
+                onClick={nextPage}
+                type="button"
+                aria-label="Next page"
+                disabled={currentPage >= lastPageIndex}
+            >
                 ›
             </button>
         </div>

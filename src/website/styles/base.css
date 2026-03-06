@@ -304,6 +304,13 @@ body {
   transform: translateY(-50%) scale(1.05);
 }
 
+.nav-arrow:disabled {
+  opacity: 0.45;
+  cursor: default;
+  box-shadow: none;
+  transform: translateY(-50%);
+}
+
 .nav-arrow.left {
   left: -72px;
 }
@@ -480,16 +487,19 @@ body {
   animation: driftCloud 12s ease-in-out infinite alternate-reverse;
 }
 
-/* ── Hills ── */
-.hill {
+/* ── Garden ground ── */
+.garden-meadow {
   position: absolute;
-  bottom: -45px;
-  width: 56%;
-  height: 220px;
+  bottom: -62px;
+  left: -8%;
+  width: 116%;
+  height: 270px;
   border-radius: 50% 50% 0 0;
-  background: linear-gradient(180deg, #8fe388 0%, #69c865 40%, #4fb854 100%);
-  box-shadow: inset 0 8px 20px rgba(0, 0, 0, 0.08);
-  animation: hillPulse 8s ease-in-out infinite alternate;
+  background:
+    radial-gradient(80% 70% at 50% 8%, rgba(187, 245, 164, 0.38), rgba(187, 245, 164, 0) 60%),
+    linear-gradient(180deg, #95e98b 0%, #6fce68 45%, #54bd56 100%);
+  box-shadow: inset 0 12px 24px rgba(0, 0, 0, 0.08);
+  animation: hillPulse 9s ease-in-out infinite alternate;
 }
 
 @keyframes hillPulse {
@@ -497,14 +507,18 @@ body {
   to { transform: scaleY(1.03); }
 }
 
-.hill-left {
-  left: -8%;
-  animation-delay: 0s;
-}
-
-.hill-right {
-  right: -8%;
-  animation-delay: 4s;
+.garden-ridge {
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  bottom: 138px;
+  height: 48px;
+  border-radius: 999px;
+  background:
+    radial-gradient(55% 90% at 18% 50%, rgba(120, 202, 98, 0.72), rgba(120, 202, 98, 0) 70%),
+    radial-gradient(55% 90% at 82% 52%, rgba(120, 202, 98, 0.7), rgba(120, 202, 98, 0) 70%);
+  opacity: 0.72;
+  filter: blur(0.4px);
 }
 
 /* ── Trees ── */
@@ -521,6 +535,14 @@ body {
 
 .tree-right {
   right: 7%;
+}
+
+.tree-mid-left {
+  left: 24%;
+}
+
+.tree-mid-right {
+  right: 24%;
 }
 
 .trunk {
@@ -553,9 +575,217 @@ body {
   animation-delay: 2.5s;
 }
 
+.tree-mid-left .canopy {
+  animation-delay: 0.9s;
+}
+
+.tree-mid-right .canopy {
+  animation-delay: 1.6s;
+}
+
 @keyframes treeSway {
   from { transform: translateX(-50%) rotate(-3deg); }
   to   { transform: translateX(-50%) rotate(3deg); }
+}
+
+/* ── Ground animals ── */
+.ground-animal {
+  position: absolute;
+  bottom: 128px;
+  width: 56px;
+  height: 34px;
+  border-radius: 26px;
+  pointer-events: none;
+  animation: critterHop 4.2s ease-in-out infinite alternate;
+}
+
+.ground-animal .ear {
+  position: absolute;
+  top: -12px;
+  width: 12px;
+  height: 18px;
+  border-radius: 999px;
+}
+
+.ground-animal .ear-left {
+  left: 10px;
+  transform: rotate(-10deg);
+}
+
+.ground-animal .ear-right {
+  left: 24px;
+  transform: rotate(12deg);
+}
+
+.ground-animal .tail {
+  position: absolute;
+  right: -8px;
+  bottom: 7px;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+}
+
+.bunny {
+  background: linear-gradient(180deg, #fff9ee, #f2e7da);
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.06), 0 5px 10px rgba(0, 0, 0, 0.12);
+}
+
+.bunny .ear {
+  background: linear-gradient(180deg, #fff9ee, #f1dfd0);
+}
+
+.bunny .tail {
+  background: #ffffff;
+}
+
+.bunny-left {
+  left: 19%;
+  animation-delay: 0.2s;
+}
+
+.fox {
+  width: 62px;
+  background: linear-gradient(180deg, #ffca85, #e99341);
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.08), 0 5px 10px rgba(0, 0, 0, 0.12);
+}
+
+.fox .ear {
+  background: linear-gradient(180deg, #ffc988, #ea9447);
+}
+
+.fox .tail {
+  width: 18px;
+  height: 12px;
+  right: -10px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #ea9646 0%, #fff4db 100%);
+}
+
+.fox-right {
+  right: 19%;
+  animation-delay: 1.5s;
+}
+
+.turtle {
+  width: 64px;
+  height: 30px;
+  background: #79bc6f;
+  border-radius: 18px;
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.07), 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.turtle .shell {
+  position: absolute;
+  left: 8px;
+  right: 10px;
+  top: -7px;
+  height: 24px;
+  border-radius: 999px 999px 12px 12px;
+  background:
+    radial-gradient(circle at 24% 40%, rgba(166, 221, 128, 0.65), rgba(166, 221, 128, 0) 36%),
+    linear-gradient(180deg, #8fd175, #5da450);
+}
+
+.turtle .head {
+  position: absolute;
+  right: -10px;
+  top: 4px;
+  width: 16px;
+  height: 14px;
+  border-radius: 999px;
+  background: #88cb7c;
+}
+
+.turtle .leg {
+  position: absolute;
+  bottom: -4px;
+  width: 10px;
+  height: 8px;
+  border-radius: 999px;
+  background: #6eaf64;
+}
+
+.turtle .leg-1 {
+  left: 10px;
+}
+
+.turtle .leg-2 {
+  left: 24px;
+}
+
+.turtle .leg-3 {
+  right: 20px;
+}
+
+.turtle .leg-4 {
+  right: 6px;
+}
+
+.turtle-mid-left {
+  left: 36%;
+  animation-delay: 0.9s;
+}
+
+.hedgehog {
+  width: 60px;
+  height: 28px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #f3d7b1, #e1b985);
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.08), 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.hedgehog .spines {
+  position: absolute;
+  left: 3px;
+  right: 12px;
+  top: -10px;
+  height: 20px;
+  border-radius: 16px 16px 10px 10px;
+  background: repeating-linear-gradient(
+    110deg,
+    #8f5f3c,
+    #8f5f3c 6px,
+    #7e5335 6px,
+    #7e5335 10px
+  );
+}
+
+.hedgehog .nose {
+  position: absolute;
+  right: -5px;
+  top: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #6c4930;
+}
+
+.hedgehog .foot {
+  position: absolute;
+  bottom: -3px;
+  width: 8px;
+  height: 6px;
+  border-radius: 999px;
+  background: #d3a977;
+}
+
+.hedgehog .foot-left {
+  left: 14px;
+}
+
+.hedgehog .foot-right {
+  left: 30px;
+}
+
+.hedgehog-mid-right {
+  right: 36%;
+  animation-delay: 2.3s;
+}
+
+@keyframes critterHop {
+  from { transform: translateY(0); }
+  to { transform: translateY(-5px); }
 }
 
 /* ── Flowers ── */
@@ -914,7 +1144,8 @@ body {
   .toy-ball,
   .toy-block,
   .flower,
-  .hill {
+  .garden-meadow,
+  .ground-animal {
     animation: none;
     transition: none;
   }

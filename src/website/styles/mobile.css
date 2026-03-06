@@ -1,9 +1,16 @@
 @media (max-width: 768px) {
   .book-shell {
-    width: 100%;
+    width: fit-content;
+    max-width: none;
+    margin-inline: auto;
+    justify-self: center;
     justify-items: center;
     /* Keep perspective + 3D on mobile for the flip effect */
     perspective: 1800px;
+  }
+
+  .book-shell .daycare-book {
+    margin-inline: auto;
   }
 
   .daycare-book .stf__block {
@@ -11,7 +18,7 @@
   }
 
   .storybook-content {
-    padding: 14px clamp(40px, 14vw, 64px) 120px;
+    padding: 14px 0 120px;
   }
 
   .book-shell.at-start .daycare-book,
@@ -49,11 +56,11 @@
   }
 
   .nav-arrow.left {
-    left: 8px;
+    left: -24px;
   }
 
   .nav-arrow.right {
-    right: 8px;
+    right: -24px;
   }
 
   .sun {
@@ -98,8 +105,43 @@
     height: 130px;
   }
 
-  .hill {
-    height: 180px;
+  .tree-mid-left {
+    left: 22%;
+  }
+
+  .tree-mid-right {
+    right: 22%;
+  }
+
+  .garden-meadow {
+    height: 220px;
+    bottom: -58px;
+  }
+
+  .garden-ridge {
+    bottom: 120px;
+    height: 34px;
+  }
+
+  .ground-animal {
+    bottom: 108px;
+    transform: scale(0.86);
+  }
+
+  .bunny-left {
+    left: 12%;
+  }
+
+  .fox-right {
+    right: 12%;
+  }
+
+  .turtle-mid-left {
+    left: 30%;
+  }
+
+  .hedgehog-mid-right {
+    right: 30%;
   }
 
   .toy-block {
