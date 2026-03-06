@@ -74,7 +74,7 @@ export const PAGE_CONTENT = {
       {
         label: 'Address',
         value: '16331 SE 40th St, Bellevue, WA 98006',
-        href: 'https://share.google/saB66yvuXtsgdUIi3',
+        href: 'https://www.google.com/maps?sca_esv=a2755a786bd8ce70&biw=1528&bih=698&kgmid=/g/1tfkkwtm&shem=dlvs1,shrtsdl&shndl=30&kgs=9522963d063846ff&um=1&ie=UTF-8&fb=1&gl=us&sa=X&geocode=Kf-74U2UbpBUMX7eZDU5jbsh&daddr=16331+SE+40th+St,+Bellevue,+WA+98006',
       },
       {
         label: 'Yelp',

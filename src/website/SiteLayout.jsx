@@ -1,7 +1,14 @@
 import { NavLink, Outlet } from 'react-router-dom'
-import { NAV_LINKS } from './data/siteContent'
+import { NAV_LINKS, PAGE_CONTENT } from './data/siteContent'
+
+function getContactEntry(label) {
+  return PAGE_CONTENT.contact.info.find((entry) => entry.label === label)
+}
 
 export default function SiteLayout() {
+  const phoneEntry = getContactEntry('Phone')
+  const addressEntry = getContactEntry('Address')
+
   return (
     <div className="site-shell">
       <div className="site-background" aria-hidden="true">
@@ -89,7 +96,36 @@ export default function SiteLayout() {
         <Outlet />
       </main>
 
-      <footer className="site-footer">Rashida Little Champs Daycare</footer>
+      <footer className="site-footer">
+        <a
+          className="site-footer-link"
+          href="https://www.omerzahid.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Made with ❤️ for happy kiddos.
+        </a>
+        <div className="site-footer-contact">
+          {phoneEntry ? (
+            <a className="site-footer-contact-link" href={phoneEntry.href}>
+              {phoneEntry.value}
+            </a>
+          ) : null}
+          {addressEntry ? (
+            <a
+              className="site-footer-contact-link"
+              href={addressEntry.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {addressEntry.value}
+            </a>
+          ) : null}
+        </div>
+        <div className="site-footer-copy">
+          &copy; {new Date().getFullYear()} Rashida Little Champs Daycare
+        </div>
+      </footer>
     </div>
   )
 }

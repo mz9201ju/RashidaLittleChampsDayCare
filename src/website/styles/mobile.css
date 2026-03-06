@@ -162,4 +162,15 @@
   .site-footer {
     font-size: 0.86rem;
   }
+
+  .site-footer-contact {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 6px;
+  }
+
+  .site-footer-contact-link {
+    text-align: center;
+  }
 }
