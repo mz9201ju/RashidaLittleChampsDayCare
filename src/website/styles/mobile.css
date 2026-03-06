@@ -175,6 +175,41 @@
     bottom: 98px;
   }
 
+  .day-runner {
+    --runner-scale: 0.88;
+  }
+
+  .runner-left {
+    --runner-ground: 100px;
+  }
+
+  .runner-kite {
+    top: -92px;
+    left: -52px;
+  }
+
+  .runner-kite-string {
+    height: 92px;
+  }
+
+  .runner-right {
+    --runner-scale: 0.84;
+    --runner-ground: 106px;
+  }
+
+  .night-stargazer {
+    bottom: 94px;
+    --gazer-scale: 0.86;
+  }
+
+  .gazer-left {
+    left: 8%;
+  }
+
+  .gazer-right {
+    display: none;
+  }
+
   .fox-right {
     right: 16%;
     bottom: 98px;

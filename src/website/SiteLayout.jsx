@@ -24,6 +24,24 @@ export default function SiteLayout() {
             {Array.from({ length: NIGHT_STAR_COUNT }).map((_, index) => (
               <span key={index} className={`night-star star-${index + 1}`} />
             ))}
+            <div className="night-stargazer gazer-left">
+              <span className="gazer-head" />
+              <span className="gazer-body" />
+              <span className="gazer-arm" />
+              <span className="gazer-telescope" />
+              <span className="gazer-tripod gazer-leg-one" />
+              <span className="gazer-tripod gazer-leg-two" />
+              <span className="gazer-tripod gazer-leg-three" />
+            </div>
+            <div className="night-stargazer gazer-right">
+              <span className="gazer-head" />
+              <span className="gazer-body" />
+              <span className="gazer-arm" />
+              <span className="gazer-telescope" />
+              <span className="gazer-tripod gazer-leg-one" />
+              <span className="gazer-tripod gazer-leg-two" />
+              <span className="gazer-tripod gazer-leg-three" />
+            </div>
           </div>
           <div className="bg-rainbow">
             <span className="rainbow-band band-1" />
@@ -48,6 +66,28 @@ export default function SiteLayout() {
           <div className="bg-balloon balloon-1" />
           <div className="bg-balloon balloon-2" />
           <div className="bg-balloon balloon-3" />
+          <div className="day-runner runner-left">
+            <span className="runner-head" />
+            <span className="runner-body" />
+            <span className="runner-arm arm-front" />
+            <span className="runner-arm arm-back" />
+            <span className="runner-leg leg-front" />
+            <span className="runner-leg leg-back" />
+            <span className="runner-kite" />
+            <span className="runner-kite-tail tail-1" />
+            <span className="runner-kite-tail tail-2" />
+          </div>
+          <div className="day-runner runner-right">
+            <span className="runner-head" />
+            <span className="runner-body" />
+            <span className="runner-arm arm-front" />
+            <span className="runner-arm arm-back" />
+            <span className="runner-leg leg-front" />
+            <span className="runner-leg leg-back" />
+            <span className="runner-kite" />
+            <span className="runner-kite-tail tail-1" />
+            <span className="runner-kite-tail tail-2" />
+          </div>
           <div className="bg-animal bunny-left">
             <span className="animal-ear ear-left" />
             <span className="animal-ear ear-right" />
