@@ -2,6 +2,7 @@ export const NAV_LINKS = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
   { to: '/services', label: 'Services' },
+  { to: '/gallery', label: 'Gallery' },
   { to: '/contact', label: 'Contact' },
   { to: '/faq', label: 'FAQ' },
 ]
@@ -11,7 +12,7 @@ export const PAGE_CONTENT = {
     eyebrow: 'Rashida Little Champs Daycare',
     title: 'A Bright Start For Every Little Learner',
     intro:
-      'We create a safe, playful space where children build confidence, curiosity, and joyful routines every day.',
+      "Rashida Little Champs DayCare is a Day Care Center located in Bellevue, WA. We offer Child Care, Toddler Care, Home Daycare, Child Education, Family Daycare, 24/7 Daycare, Preschool Newborn Daycare, Best Daycare, and other Day Care Center Services. Our home daycare offers a highly flexible schedule with 24-hour availability Monday through Saturday every week so that whatever may come up; you know your child will always have a safe and welcoming place to go. Our staff is highly trained to care for and help develop your kids' creative, physical, and analytical skills. We will treat your children as if they are our own. Contact us today for more information.",
     cards: [
       {
         title: 'Warm Classrooms',
@@ -48,15 +49,43 @@ export const PAGE_CONTENT = {
       'Nutritious snack and meal guidance',
     ],
   },
+  gallery: {
+    title: 'Gallery',
+    intro:
+      'A quick peek at our bright classrooms, happy moments, and playful learning spaces.',
+    items: [
+      { id: '1', alt: 'Children exploring colorful classroom activities.' },
+      { id: '2', alt: 'Kids participating in a guided learning session.' },
+      { id: '3', alt: 'Play area with toys and hands-on learning materials.' },
+      { id: '4', alt: 'Little champs enjoying group story time.' },
+      { id: '5', alt: 'Creative arts and crafts table setup for children.' },
+      { id: '6', alt: 'Outdoor play and movement time for daycare kids.' },
+      { id: '7', alt: 'Warm daycare environment with engaging activities.' },
+    ],
+  },
   contact: {
     title: 'Contact',
     intro:
       'We would love to meet your family and answer your questions. Reach out anytime to schedule a tour.',
     info: [
-      { label: 'Phone', value: '(555) 123-4567' },
+      { label: 'Phone', value: '(425) 614-0747', href: 'tel:+14256140747' },
       { label: 'Email', value: 'hello@littlechampsdaycare.com' },
-      { label: 'Hours', value: 'Mon-Fri, 7:30 AM - 5:30 PM' },
-      { label: 'Address', value: '123 Sunshine Lane, Your City, ST 00000' },
+      { label: 'Hours', value: 'Open 24/7' },
+      {
+        label: 'Address',
+        value: '16331 SE 40th St, Bellevue, WA 98006',
+        href: 'https://share.google/saB66yvuXtsgdUIi3',
+      },
+      {
+        label: 'Yelp',
+        value: 'View us on Yelp',
+        href: 'https://www.yelp.com/biz/little-champs-daycare-bellevue',
+      },
+      {
+        label: 'Google',
+        value: 'Google Reviews',
+        href: 'https://www.google.com/search?sca_esv=a2755a786bd8ce70&si=AL3DRZHrmvnFAVQPOO2Bzhf8AX9KZZ6raUI_dT7DG_z0kV2_x4VQL08_tukvdGDlhJvocyn3cWgn3-WCXsSEL3Mhqg6V7Hg6Vf34ij1F1TsY8GxcNKFTzb-vxihQR7HY7C45li0hNL9cMzPKM1Y-Z_JMVAvr4Sw6vg%3D%3D&q=Rashida+Little+Champs+DayCare+Reviews&sa=X&ved=2ahUKEwj_84rcsYqTAxWVEzQIHb8oCosQ0bkNegQIKBAH&biw=1528&bih=698&dpr=1.25',
+      },
     ],
   },
   faq: {
