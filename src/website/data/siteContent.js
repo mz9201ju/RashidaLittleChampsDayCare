@@ -68,8 +68,18 @@ export const PAGE_CONTENT = {
       'We would love to meet your family and answer your questions. Reach out anytime to schedule a tour.',
     info: [
       { label: 'Phone', value: '(425) 614-0747', href: 'tel:+14256140747' },
-      { label: 'Email', value: 'hello@littlechampsdaycare.com' },
-      { label: 'Hours', value: 'Open 24/7' },
+      {
+        label: 'Email',
+        value: 'Littlechampsdaycare.16331@gmail.com',
+        href: 'mailto:Littlechampsdaycare.16331@gmail.com',
+      },
+      {
+        label: 'Hours',
+        details: [
+          { days: 'Monday - Saturday', time: 'Open 24 Hours' },
+          { days: 'Sunday', time: 'Closed' },
+        ],
+      },
       {
         label: 'Address',
         value: '16331 SE 40th St, Bellevue, WA 98006',

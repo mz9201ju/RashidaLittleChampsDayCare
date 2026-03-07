@@ -47,6 +47,33 @@ function renderValue(entry) {
   )
 }
 
+function renderHours(entry) {
+  if (!entry) {
+    return null
+  }
+
+  const details = Array.isArray(entry.details) ? entry.details : []
+
+  return (
+    <div className="contact-hours" aria-label="Daycare hours">
+      {details.length ? (
+        <ul className="contact-hours-list">
+          {details.map((item) => {
+            const isClosed = String(item.time || '').toLowerCase() === 'closed'
+
+            return (
+              <li key={`${item.days}-${item.time}`} className="contact-hours-row">
+                <span className="contact-hours-days">{item.days}</span>
+                <span className={`contact-hours-time${isClosed ? ' is-closed' : ''}`}>{item.time}</span>
+              </li>
+            )
+          })}
+        </ul>
+      ) : null}
+    </div>
+  )
+}
+
 export default function ContactPage() {
   const content = PAGE_CONTENT.contact
   const entries = getEntryMap(content.info)
@@ -114,7 +141,7 @@ export default function ContactPage() {
           <h2>Email</h2>
           {renderValue(email)}
           <h2>Hours</h2>
-          {renderValue(hours)}
+          {renderHours(hours)}
         </article>
 
         <article className="contact-item contact-item-map">

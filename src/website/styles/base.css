@@ -943,6 +943,50 @@ body {
   color: var(--text-soft);
 }
 
+.contact-hours {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.contact-hours-list {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.contact-hours-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid rgba(124, 88, 41, 0.14);
+}
+
+.contact-hours-days {
+  color: var(--text-strong);
+  font-weight: 700;
+}
+
+.contact-hours-time {
+  font-size: 0.9rem;
+  color: var(--brand-deep);
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(140, 216, 133, 0.25);
+  border: 1px solid rgba(140, 216, 133, 0.35);
+}
+
+.contact-hours-time.is-closed {
+  color: #8e2f2f;
+  background: rgba(211, 35, 35, 0.14);
+  border-color: rgba(211, 35, 35, 0.32);
+}
+
 .contact-item a {
   color: var(--brand-deep);
   font-weight: 700;

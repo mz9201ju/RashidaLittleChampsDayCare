@@ -69,6 +69,15 @@
     gap: 8px;
   }
 
+  .contact-hours-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .contact-hours-time {
+    justify-self: flex-start;
+  }
+
   .gallery-grid {
     grid-template-columns: 1fr;
     gap: 10px;
