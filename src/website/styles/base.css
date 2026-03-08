@@ -14,7 +14,7 @@
   --google-yellow: #fbbc05;
   --google-green: #34a853;
   --yelp-red: #d32323;
-  --day-night-cycle: 44s;
+  --day-night-cycle: 100s;
 }
 
 * {
@@ -62,7 +62,7 @@ body {
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
-  animation: backgroundTilt 12s ease-in-out infinite alternate;
+  animation: backgroundTilt 60s ease-in-out infinite alternate;
 }
 
 .bg-gradient {
@@ -71,7 +71,7 @@ body {
   background:
     radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 40%),
     radial-gradient(circle at 84% 20%, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0) 44%);
-  animation: skyPulse 10s ease-in-out infinite;
+  animation: skyPulse 40s ease-in-out infinite;
 }
 
 .night-layer {
@@ -156,7 +156,7 @@ body {
   clip-path: inset(0 100% 0 0);
   will-change: clip-path, opacity, transform;
   animation:
-    rainbowCycle 14s ease-in-out infinite,
+    rainbowCycle 40s ease-in-out infinite,
     dayElementCycle var(--day-night-cycle) ease-in-out infinite;
 }
 
@@ -299,13 +299,13 @@ body {
 .cloud-one {
   top: 14%;
   left: -240px;
-  animation: driftCloud 34s linear infinite;
+  animation: driftCloud 100s linear infinite;
 }
 
 .cloud-two {
   top: 20%;
   left: -320px;
-  animation: driftCloud 42s linear infinite 8s;
+  animation: driftCloud 120s linear infinite 8s;
 }
 
 .cloud-three {
@@ -314,7 +314,7 @@ body {
   width: 140px;
   height: 56px;
   opacity: 0.72;
-  animation: driftCloud 28s linear infinite 15s;
+  animation: driftCloud 100s linear infinite 15s;
 }
 
 .bg-bird {
@@ -350,25 +350,25 @@ body {
 
 .bird-1 {
   top: 12%;
-  animation: flyBird 15s linear infinite;
+  animation: flyBird 60s linear infinite;
 }
 
 .bird-2 {
   top: 18%;
   transform: scale(0.82);
-  animation: flyBird 19s linear infinite 3s;
+  animation: flyBird 40s linear infinite 3s;
 }
 
 .bird-3 {
   top: 15%;
   transform: scale(0.64);
-  animation: flyBird 24s linear infinite 8s;
+  animation: flyBird 90s linear infinite 8s;
 }
 
 .bird-4 {
   top: 20%;
   transform: scale(0.54);
-  animation: flyBird 29s linear infinite 11s;
+  animation: flyBird 99s linear infinite 11s;
 }
 
 .bg-balloon {
@@ -403,7 +403,7 @@ body {
   --runner-shirt-top: #ff9d6b;
   --runner-shirt-bottom: #ef6c47;
   --runner-shorts: #5d4f87;
-  animation-duration: 17s, var(--day-night-cycle);
+  animation-duration: 70s, var(--day-night-cycle);
   animation-delay: -1.2s, 0s;
 }
 
@@ -414,7 +414,7 @@ body {
   --runner-shirt-bottom: #46ab63;
   --runner-shorts: #4f6f9f;
   animation-name: runnerTraverseLeft, dayCharacterCycle;
-  animation-duration: 19s, var(--day-night-cycle);
+  animation-duration: 80s, var(--day-night-cycle);
   animation-delay: -5.8s, 0s;
 }
 
@@ -626,19 +626,19 @@ body {
 .balloon-1 {
   left: 18%;
   background: radial-gradient(circle at 35% 30%, #ffb8d5, #ff609f 70%);
-  animation: floatBalloon 18s ease-in-out infinite;
+  animation: floatBalloon 70s ease-in-out infinite;
 }
 
 .balloon-2 {
   left: 76%;
   background: radial-gradient(circle at 35% 30%, #bfd7ff, #6389ff 70%);
-  animation: floatBalloon 24s ease-in-out infinite 5s;
+  animation: floatBalloon 80s ease-in-out infinite 5s;
 }
 
 .balloon-3 {
   left: 48%;
   background: radial-gradient(circle at 35% 30%, #bfffd6, #4ece82 70%);
-  animation: floatBalloon 30s ease-in-out infinite 10s;
+  animation: floatBalloon 90s ease-in-out infinite 10s;
 }
 
 .bg-wave {
@@ -709,7 +709,7 @@ body {
   height: 34px;
   border-radius: 24px;
   animation:
-    critterWander 7.5s ease-in-out infinite alternate,
+    critterWander 30s ease-in-out infinite alternate,
     animalNightGlow var(--day-night-cycle) ease-in-out infinite;
 }
 
