@@ -1,3 +1,14 @@
+.rates-panel {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+  margin-bottom: 2rem;
+  background: rgba(255, 250, 236, 0.68);
+  border-radius: 18px;
+  border: 1px solid var(--panel-border);
+  box-shadow: 0 8px 24px rgba(77, 48, 14, 0.10);
+  padding: 2rem 1.5rem;
+}
 /* Service page Q&A styling */
 .service-list {
   display: flex;
@@ -11,14 +22,7 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(255, 179, 47, 0.08);
   padding: 1.5rem 1.2rem;
-  border-left: 6px solid #ffb32f;
-}
-
-.service-item h2 {
-  color: #ffb32f;
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-}
+  }
 
 .service-item p {
   font-size: 1.05rem;
@@ -842,7 +846,7 @@ body {
   gap: 24px;
   padding: 16px 20px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.46);
+  background: rgba(255, 250, 236, 0.68);
   border: 1px solid rgba(255, 255, 255, 0.75);
   box-shadow: 0 10px 24px rgba(59, 38, 11, 0.12);
   backdrop-filter: blur(6px);

@@ -19,6 +19,20 @@ export default function ServicesPage() {
           </article>
         ))}
       </div>
+        {content.rates && (
+          <div className="rates-panel">
+            <section className="rates-section">
+              <h2 className="rates-title">Rates & Pricing</h2>
+              <ul className="rates-list">
+                {content.rates.map((rate) => (
+                  <li key={rate.label} className="rate-item">
+                    <strong>{rate.label}:</strong> {rate.detail}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </div>
+        )}
     </section>
   )
 }

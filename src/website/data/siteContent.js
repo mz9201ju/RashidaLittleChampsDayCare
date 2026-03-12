@@ -45,8 +45,16 @@ export const PAGE_CONTENT = {
         a: 'We provide fresh, home cooked meals every day including breakfast, lunch, and dinner. Each meal includes healthy options such as fruits, vegetables, and hydration like water, milk, or juice.'
       },
       {
-        q: 'Example Meals',
-        a: 'Breakfast: Scrambled eggs, whole-grain toast, fresh fruit, and milk.\nLunch: Homemade chicken and rice with steamed vegetables, fresh fruit, and water or milk.\nDinner: Whole-grain pasta with homemade sauce, vegetables on the side, fruit, and milk.'
+        q: 'Breakfast',
+        a: 'Scrambled eggs, whole-grain toast, fresh fruit, and milk.'
+      },
+      {
+        q: 'Lunch',
+        a: 'Homemade chicken and rice with steamed vegetables, fresh fruit, and water or milk.'
+      },
+      {
+        q: 'Dinner',
+        a: 'Whole-grain pasta with homemade sauce, vegetables on the side, fruit, and milk.'
       },
       {
         q: 'Overnight Care (Starting at 8 PM)',
@@ -71,6 +79,24 @@ export const PAGE_CONTENT = {
       {
         q: 'Tours & Visits',
         a: 'Parents are welcome to schedule daycare tours. Tours are typically held in the evenings after most children have gone home so we can give families our full attention and answer any questions.'
+      },
+    ],
+    rates: [
+      {
+        label: 'Full-Time Care',
+        detail: '$2,300 per month (2026 rate) for up to 10 hours per day, 5 days per week'
+      },
+      {
+        label: 'Part-Time Care',
+        detail: '$20 per hour for schedules less than 3 days per week and under 5 hours per day'
+      },
+      {
+        label: 'Drop-In Care',
+        detail: '$20 per hour with 24-hour notice, based on availability'
+      },
+      {
+        label: 'Washington State childcare subsidy',
+        detail: 'Accepted'
       },
     ],
   },
