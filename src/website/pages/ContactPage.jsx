@@ -131,7 +131,7 @@ export default function ContactPage() {
 
   return (
     <section className="page-panel">
-      <h1>{content.title}</h1>
+      <h1 className="sun-title">{content.title}</h1>
       <p className="lead">{content.intro}</p>
 
       <div className="contact-grid">

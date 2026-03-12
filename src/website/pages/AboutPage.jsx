@@ -5,7 +5,7 @@ export default function AboutPage() {
 
   return (
     <section className="page-panel">
-      <h1>{content.title}</h1>
+      <h1 className="sun-title">{content.title}</h1>
       {content.intro.split('\n\n').map((para, idx) => (
         <p className="lead" key={idx}>{para}</p>
       ))}

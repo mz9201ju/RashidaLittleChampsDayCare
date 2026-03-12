@@ -5,7 +5,7 @@ export default function HomePage() {
 
   return (
     <section className="page-panel home-panel">
-      <h1>{content.title}</h1>
+      <h1 className="sun-title">{content.title}</h1>
       <p className="lead">{content.intro}</p>
       <div className="card-grid">
         {content.cards.map((card) => (

@@ -5,7 +5,7 @@ export default function FaqPage() {
 
   return (
     <section className="page-panel">
-      <h1>{content.title}</h1>
+      <h1 className="sun-title">{content.title}</h1>
       <div className="faq-list">
         {content.items.map((item) => (
           <article key={item.q} className="faq-item">

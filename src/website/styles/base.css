@@ -1,3 +1,7 @@
+/* Sun color for title */
+.sun-title {
+  color: #de9311;
+}
 :root {
   --sky-1: #a9e7ff;
   --sky-2: #d5f6ff;
