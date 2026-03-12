@@ -24,9 +24,16 @@ export default function ServicesPage() {
             <section className="rates-section">
               <h2 className="rates-title">Rates & Pricing</h2>
               <ul className="rates-list">
-                {content.rates.map((rate) => (
-                  <li key={rate.label} className="rate-item">
-                    <strong>{rate.label}:</strong> {rate.detail}
+                {content.rates.map((rate, idx) => (
+                  <li key={rate.label} className="rate-item" style={{ display: 'flex', alignItems: 'center', gap: '0.7em', padding: '1em 1.2em', borderLeft: '4px solid #ffb32f', background: '#fffbe9', borderRadius: '8px', marginBottom: '0.5em', boxShadow: '0 1px 4px rgba(255, 179, 47, 0.07)' }}>
+                    <span style={{ fontSize: '1.3em', color: '#de9311', marginRight: '0.4em', fontWeight: 700 }}>
+                      {idx === 0 && '🌞'}
+                      {idx === 1 && '⏰'}
+                      {idx === 2 && '🕒'}
+                      {idx === 3 && '💸'}
+                    </span>
+                    <span style={{ color: '#ffb32f', fontWeight: 700, fontSize: '1.08em', minWidth: '120px', display: 'inline-block' }}>{rate.label}:</span>
+                    <span style={{ color: '#76573b', fontSize: '1em' }}>{rate.detail}</span>
                   </li>
                 ))}
               </ul>
