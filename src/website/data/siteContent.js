@@ -35,9 +35,18 @@ export const PAGE_CONTENT = {
       {
         label: 'Experienced early childhood educators',
         points: [
-          'Rashida – Main Provider & Owner: Rashida is the main provider at Little Champs Daycare and is passionate about creating a loving, structured environment where children feel safe, supported, and encouraged to learn and grow.',
-          'Namrah – Lead Teacher: Namrah helps lead daily activities and learning experiences for the children. She focuses on creating engaging activities such as arts and crafts, play-based learning, and helping children stay active and curious throughout the day.',
-          'Ayesha – Assistant Caregiver: Ayesha supports the daycare by assisting with daily routines, activities, meals, and ensuring children are comfortable and well cared for throughout the day.'
+          {
+            text: 'Rashida – Main Provider & Owner: Rashida is the main provider at Little Champs Daycare and is passionate about creating a loving, structured environment where children feel safe, supported, and encouraged to learn and grow.',
+            image: '/gallery/Rashida.jpg'
+          },
+          {
+            text: 'Namrah – Lead Teacher: Namrah helps lead daily activities and learning experiences for the children. She focuses on creating engaging activities such as arts and crafts, play-based learning, and helping children stay active and curious throughout the day.',
+            image: '/gallery/Namrah.jpg'
+          },
+          {
+            text: 'Ayesha – Assistant Caregiver: Ayesha supports the daycare by assisting with daily routines, activities, meals, and ensuring children are comfortable and well cared for throughout the day.',
+            image: '/gallery/Ayesha.jpg'
+          }
         ]
       }
     ],
