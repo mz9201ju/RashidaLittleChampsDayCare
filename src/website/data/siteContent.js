@@ -39,13 +39,39 @@ export const PAGE_CONTENT = {
   },
   services: {
     title: 'Services',
-    intro:
-      'Our programs support children throughout the day with learning, movement, and care balanced in a fun, child-friendly rhythm.',
-    bullets: [
-      'Full-day and half-day childcare options',
-      'Early learning activities and guided play',
-      'Story time, music, arts, and movement',
-      'Nutritious snack and meal guidance',
+    items: [
+      {
+        q: 'Homemade Meal Plan',
+        a: 'We provide fresh, home cooked meals every day including breakfast, lunch, and dinner. Each meal includes healthy options such as fruits, vegetables, and hydration like water, milk, or juice.'
+      },
+      {
+        q: 'Example Meals',
+        a: 'Breakfast: Scrambled eggs, whole-grain toast, fresh fruit, and milk.\nLunch: Homemade chicken and rice with steamed vegetables, fresh fruit, and water or milk.\nDinner: Whole-grain pasta with homemade sauce, vegetables on the side, fruit, and milk.'
+      },
+      {
+        q: 'Overnight Care (Starting at 8 PM)',
+        a: 'We offer overnight childcare for families who need extended care. Children receive a light bedtime snack and are provided with comfortable mattresses and blankets to ensure a safe and restful night.'
+      },
+      {
+        q: 'Daily Activities & Learning',
+        a: 'Children participate in age-appropriate activities including arts and crafts, story time, music, sensory play for babies and toddlers, outdoor play, group games, and exercise time to keep kids active and engaged.'
+      },
+      {
+        q: 'School Bus Service',
+        a: 'We work with the Sunset Elementary school bus that picks up and drops off students near the daycare, making school transportation easy for families.'
+      },
+      {
+        q: 'Pick-Up & Drop-Off Services',
+        a: 'Transportation may be available depending on distance. We typically provide pick-up and drop-off within approximately 10–15 minutes from the daycare location.'
+      },
+      {
+        q: 'Homework Support',
+        a: 'School-age children are encouraged to complete homework independently. If help is needed, our caregivers are available to assist.'
+      },
+      {
+        q: 'Tours & Visits',
+        a: 'Parents are welcome to schedule daycare tours. Tours are typically held in the evenings after most children have gone home so we can give families our full attention and answer any questions.'
+      },
     ],
   },
   gallery: {

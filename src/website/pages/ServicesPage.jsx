@@ -6,12 +6,19 @@ export default function ServicesPage() {
   return (
     <section className="page-panel">
       <h1 className="sun-title">{content.title}</h1>
-      <p className="lead">{content.intro}</p>
-      <ul className="bullet-list">
-        {content.bullets.map((item) => (
-          <li key={item}>{item}</li>
+      <div className="service-list">
+        {content.items && content.items.map((item) => (
+          <article key={item.q} className="service-item">
+            <h2>{item.q}</h2>
+            <p>{item.a.split('\n').map((line, idx) => (
+              <span key={idx}>
+                {line}
+                {idx < item.a.split('\n').length - 1 ? <br /> : null}
+              </span>
+            ))}</p>
+          </article>
         ))}
-      </ul>
+      </div>
     </section>
   )
 }

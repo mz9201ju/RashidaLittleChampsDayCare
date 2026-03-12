@@ -1,3 +1,32 @@
+/* Service page Q&A styling */
+.service-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.service-item {
+  background: #fffbe9;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(255, 179, 47, 0.08);
+  padding: 1.5rem 1.2rem;
+  border-left: 6px solid #ffb32f;
+}
+
+.service-item h2 {
+  color: #ffb32f;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.service-item p {
+  font-size: 1.05rem;
+  color: #444;
+  margin: 0;
+  line-height: 1.7;
+  white-space: pre-line;
+}
 /* Sun color for title */
 .sun-title {
   color: #de9311;
