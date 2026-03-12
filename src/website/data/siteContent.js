@@ -15,22 +15,22 @@ export const PAGE_CONTENT = {
     cards: [
       {
         title: 'Warm Classrooms',
-        text: 'Caring teachers and small groups that help each child feel seen and supported.',
+        text: 'Our daycare provides a warm, home based environment where children feel safe, supported, and cared for. With small group sizes and attentive caregivers, each child receives the attention they need to grow socially and emotionally in a nurturing setting.',
       },
       {
         title: 'Creative Learning',
-        text: 'Hands-on activities, songs, stories, and discovery centers designed for growing minds.',
+        text: 'Children enjoy hands-on learning through age-appropriate activities designed for babies, toddlers, and school-age children. Activities include arts and crafts, story time, music, outdoor play, exercise time, and sensory play that encourages creativity and early development.',
       },
       {
         title: 'Family Partnership',
-        text: 'Clear updates and open communication so families always feel connected.',
+        text: 'We believe strong communication with families is key. Parents receive regular updates about their child’s day, and we work together to support each child’s learning, comfort, and growth in a safe and welcoming environment.',
       },
     ],
   },
   about: {
     title: 'About Us',
     intro:
-      'Rashida Little Champs Daycare is built on kindness, structure, and joyful learning. Our team nurtures social growth, language development, and healthy routines in a welcoming environment.',
+      "Little Champs Daycare, run by Rashida Anjum, is a warm and welcoming home-based childcare program dedicated to providing a safe, structured, and nurturing environment for children. Our goal is to help children grow socially, emotionally, and academically through daily routines, creative play, and healthy habits.\n\nIn 2024, the daycare was remodeled, including updates to the main playroom to create a more open, safe, and engaging space for children. We also added a new learning room where children can focus on activities such as reading, arts and crafts, and early learning exercises. The daycare environment is clean, organized, and designed with children’s comfort and development in mind.\n\nOur home daycare follows Washington State childcare safety guidelines, ensuring the space is properly maintained and up to code so parents can feel confident that their children are in a secure and caring environment.",
     bullets: [
       'Experienced early childhood educators',
       'Age-appropriate daily schedules',
@@ -118,24 +118,64 @@ export const PAGE_CONTENT = {
     ],
   },
   faq: {
-    title: 'Frequently Asked Questions',
-    items: [
-      {
-        q: 'What ages do you accept?',
-        a: 'We welcome infants, toddlers, and preschool-age children. Contact us for current classroom availability.',
-      },
-      {
-        q: 'Do you provide meals?',
-        a: 'We provide guidance and support for healthy meals and snacks, with allergy-aware policies in place.',
-      },
-      {
-        q: 'How do I schedule a tour?',
-        a: 'Call or email us and we will set up a visit at a convenient time for your family.',
-      },
-      {
-        q: 'How do you share daily updates?',
-        a: 'Families receive regular updates about activities, learning moments, and classroom highlights.',
-      },
-    ],
+      title: 'Frequently Asked Questions',
+      items: [
+        {
+          q: 'What kind of meal plan do you provide?',
+          a: 'All meals are homemade. We offer both spicy and non-spicy options to accommodate different taste preferences.',
+        },
+        {
+          q: 'How do nap times work?',
+          a: 'Children are never forced to sleep. If a child does not want to nap, they may participate in quiet activities during rest time.',
+        },
+        {
+          q: 'How much outdoor play time do children get?',
+          a: 'Children enjoy at least 60 minutes of outdoor play each day. We also go outside in the rain when appropriate, so please ensure your child has suitable clothing.',
+        },
+        {
+          q: 'Do you offer pick-up and drop-off services?',
+          a: 'Yes, pick-up and drop-off are available for families within a 10-minute commute. Gas costs will need to be compensated.',
+        },
+        {
+          q: 'What is your policy on screen time?',
+          a: 'We keep screen time limited. At most, children may have up to 45 minutes of screen time per day, depending on the day’s activities and schedule.',
+        },
+        {
+          q: 'Do you provide school transportation?',
+          a: 'Yes, we provide transportation for students attending Sunset Elementary.',
+        },
+        {
+          q: 'Do you offer homework help?',
+          a: 'Yes, we provide tutoring and homework help for children in Kindergarten through 5th grade.',
+        },
+        {
+          q: 'What ages do you accept?',
+          a: 'We welcome children from newborn to 13 years old.',
+        },
+        {
+          q: 'How do you handle allergies?',
+          a: "Parents must provide detailed allergy information and any necessary alternative foods or care plans. Allergy alerts are displayed with the child’s picture and allergen listed on our board for staff awareness. We are a nut-free facility.",
+        },
+        {
+          q: 'What is your policy on illness and medication?',
+          a: 'If your child has diarrhea, vomiting, a high fever, or persistent coughing, they will need to stay home that day. This helps ensure the health and safety of all children in our care.',
+        },
+        {
+          q: 'What should my child bring each day?',
+          a: 'Parents should send a backpack with essentials such as extra clothes, weather-appropriate gear, diapers or wipes (if needed), and any personal comfort items.',
+        },
+        {
+          q: 'Do children need to be potty trained?',
+          a: 'No. We welcome children at different developmental stages and work with families on potty training when children are ready.',
+        },
+        {
+          q: 'What happens during bad weather?',
+          a: 'We still prioritize outdoor play when it is safe to do so. Please send children with proper rain jackets, boots, or warm clothing depending on the weather.',
+        },
+        {
+          q: 'How do I enroll my child?',
+          a: 'Contact us to schedule a meeting or tour. We’ll discuss availability, your child’s needs, and the enrollment process.',
+        },
+      ],
   },
 }

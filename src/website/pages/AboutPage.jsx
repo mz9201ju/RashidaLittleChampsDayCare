@@ -6,7 +6,9 @@ export default function AboutPage() {
   return (
     <section className="page-panel">
       <h1>{content.title}</h1>
-      <p className="lead">{content.intro}</p>
+      {content.intro.split('\n\n').map((para, idx) => (
+        <p className="lead" key={idx}>{para}</p>
+      ))}
       <ul className="bullet-list">
         {content.bullets.map((item) => (
           <li key={item}>{item}</li>
