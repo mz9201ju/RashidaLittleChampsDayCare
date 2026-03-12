@@ -32,13 +32,19 @@ export const PAGE_CONTENT = {
     intro:
       "Little Champs Daycare, run by Rashida Anjum, is a warm and welcoming home-based childcare program dedicated to providing a safe, structured, and nurturing environment for children. Our goal is to help children grow socially, emotionally, and academically through daily routines, creative play, and healthy habits.\n\nIn 2024, the daycare was remodeled, including updates to the main playroom to create a more open, safe, and engaging space for children. We also added a new learning room where children can focus on activities such as reading, arts and crafts, and early learning exercises. The daycare environment is clean, organized, and designed with children’s comfort and development in mind.\n\nOur home daycare follows Washington State childcare safety guidelines, ensuring the space is properly maintained and up to code so parents can feel confident that their children are in a secure and caring environment.",
     bullets: [
-      'Experienced early childhood educators',
-      'Age-appropriate daily schedules',
-      'A values-driven, inclusive environment',
+      {
+        label: 'Experienced early childhood educators',
+        points: [
+          'Rashida – Main Provider & Owner: Rashida is the main provider at Little Champs Daycare and is passionate about creating a loving, structured environment where children feel safe, supported, and encouraged to learn and grow.',
+          'Namrah – Lead Teacher: Namrah helps lead daily activities and learning experiences for the children. She focuses on creating engaging activities such as arts and crafts, play-based learning, and helping children stay active and curious throughout the day.',
+          'Ayesha – Assistant Caregiver: Ayesha supports the daycare by assisting with daily routines, activities, meals, and ensuring children are comfortable and well cared for throughout the day.'
+        ]
+      }
     ],
   },
   services: {
     title: 'Services',
+    caption: 'At Little Champs Daycare, we treat every child like family by providing a safe, nurturing environment where children can learn, play, and grow with confidence.',
     items: [
       {
         q: 'Homemade Meal Plan',
