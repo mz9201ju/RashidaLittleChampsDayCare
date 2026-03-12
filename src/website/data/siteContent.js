@@ -86,6 +86,9 @@ export const PAGE_CONTENT = {
       { id: '5', alt: 'Creative arts and crafts table setup for children.' },
       { id: '6', alt: 'Outdoor play and movement time for daycare kids.' },
       { id: '7', alt: 'Warm daycare environment with engaging activities.' },
+      { id: '8', alt: 'Children sharing and playing together in a cozy corner.' },
+      { id: '9', alt: 'Kids enjoying a creative group art project.' },
+      { id: '10', alt: 'Children relaxing during quiet story time.' },
     ],
   },
   contact: {
