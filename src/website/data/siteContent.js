@@ -53,7 +53,15 @@ export const PAGE_CONTENT = {
   },
   services: {
     title: 'Services',
-    caption: 'At Little Champs Daycare, we treat every child like family by providing a safe, nurturing environment where children can learn, play, and grow with confidence.',
+        caption: `We believe children learn best through play, creativity, and hands-on activities. Our program encourages:
+
+                    • Social interaction and teamwork
+                    • Creative arts and crafts
+                    • Story time and language development
+                    • Physical activity and outdoor play
+                    • Early learning activities for toddlers and school-age children
+
+                    Our goal is to help every child feel confident, supported, and excited to learn.`,
     items: [
       {
         q: 'Homemade Meal Plan',

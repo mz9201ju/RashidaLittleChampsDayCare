@@ -6,6 +6,16 @@ export default function ServicesPage() {
   return (
     <section className="page-panel">
       <h1 className="sun-title">{content.title}</h1>
+      {content.caption && (
+        <div className="service-caption" >
+          {content.caption.split('\n').map((line, idx) => (
+            <span key={idx}>
+              {line.trim()}
+              {idx < content.caption.split('\n').length - 1 ? <br /> : null}
+            </span>
+          ))}
+        </div>
+      )}
       <div className="service-list">
         {content.items && content.items.map((item) => (
           <article key={item.q} className="service-item">
