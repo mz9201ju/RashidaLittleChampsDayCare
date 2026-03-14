@@ -294,7 +294,7 @@ body {
   left: 50%;
   bottom: 118px;
   width: min(1440px, 180vw);
-  height: min(720px, 78vh);
+  height: min(1720px, 140vh);
   transform: translateX(-50%) translateZ(8px);
   transform-style: preserve-3d;
   opacity: 0.9;
