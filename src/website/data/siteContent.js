@@ -162,8 +162,8 @@ export const PAGE_CONTENT = {
       { label: 'Phone', value: '(425) 614-0747', href: 'tel:+14256140747' },
       {
         label: 'Email',
-        value: 'Littlechampsdaycare.16331@gmail.com',
-        href: 'mailto:Littlechampsdaycare.16331@gmail.com',
+        value: 'info@lilchampsbellevue.com',
+        href: 'mailto:info@lilchampsbellevue.com',
       },
       {
         label: 'Hours',
