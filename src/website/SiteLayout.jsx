@@ -170,6 +170,18 @@ export default function SiteLayout() {
         >
           Made with <span className="rolling-heart" aria-hidden="true">❤️</span> for happy kiddos.
         </a>
+
+        <div className="site-footer-award" style={{ display: 'flex', justifyContent: 'center', margin: '10px 0' }}>
+          <a
+            href="https://businessrate.com/awards/presentation/v2?cc=BKEQBB"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View our award presentation on BusinessRate"
+          >
+            <img src="/Award.png" alt="Award certificate for Rashida Little Champs Daycare" className="footer-award-img" style={{ maxWidth: '180px', width: '100%', borderRadius: '12px' }} />
+          </a>
+        </div>
+
         <div className="site-footer-copy">
           &copy; {new Date().getFullYear()} Rashida Little Champs Daycare
         </div>
