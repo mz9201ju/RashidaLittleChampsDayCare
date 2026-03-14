@@ -44,7 +44,7 @@ export const PAGE_CONTENT = {
             image: '/gallery/Namrah.jpg'
           },
           {
-            text: 'Ayesha – Assistant Caregiver: Ayesha supports the daycare by assisting with daily routines, activities, meals, and ensuring children are comfortable and well cared for throughout the day.',
+            text: 'Ayesha – Lead Teacher: Ayesha supports the daycare by assisting with daily routines, activities, meals, and ensuring children are comfortable and well cared for throughout the day.',
             image: '/gallery/Ayesha.jpg'
           }
         ]
