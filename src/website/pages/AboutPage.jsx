@@ -14,7 +14,7 @@ export default function AboutPage() {
           if (typeof item === 'string') {
             return (
               <li key={item} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <img src="/gallery/bullet-icon.png" alt="Bullet" style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
+                <img src="/gallery/bullet-icon.png" alt="Bullet" style={{ width: '32px', height: '32px', objectFit: 'contain' }} loading="lazy" />
                 <span>{item}</span>
               </li>
             );
@@ -42,7 +42,7 @@ export default function AboutPage() {
                     }
                     return (
                       <li key={pidx} style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '1rem', color: '#76573b' }}>
-                        <img src={pointImage} alt="Bullet" style={{ width: '70px', height: '70px', objectFit: 'contain' }} />
+                        <img src={pointImage} alt="Bullet" style={{ width: '70px', height: '70px', objectFit: 'contain' }} loading="lazy" />
                         <span>
                           {name && <span style={{ color: '#de9311', fontWeight: 700 }}>{name} </span>}
                           {desc}

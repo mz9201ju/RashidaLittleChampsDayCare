@@ -178,7 +178,7 @@ export default function SiteLayout() {
             rel="noopener noreferrer"
             aria-label="View our award presentation on BusinessRate"
           >
-            <img src="/Award.png" alt="Award certificate for Rashida Little Champs Daycare" className="footer-award-img" style={{ maxWidth: '180px', width: '100%', borderRadius: '12px' }} />
+            <img src="/Award.png" alt="Award certificate for Rashida Little Champs Daycare" className="footer-award-img" style={{ maxWidth: '180px', width: '100%', borderRadius: '12px' }} loading="lazy" />
           </a>
         </div>
 

@@ -100,6 +100,7 @@ export default function GalleryPage() {
                 decoding="async"
                 width="1280"
                 height="960"
+                loading="lazy"
               />
             </picture>
             <button
